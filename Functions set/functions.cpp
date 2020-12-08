@@ -415,9 +415,6 @@ GetBinaryDataFromCommand(buf[], const bufSize)
 buf массив-приемник
 bufSize размер массива-приемника*/
 
-DDDErase()
-/*стереть секцию DDD*/
-
 DDDRead(buf[], const bufSize, const offset)
 /*получить данные из секции DDD
 buf массив

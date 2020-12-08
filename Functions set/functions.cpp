@@ -415,18 +415,6 @@ GetBinaryDataFromCommand(buf[], const bufSize)
 buf массив-приемник
 bufSize размер массива-приемника*/
 
-DDDRead(buf[], const bufSize, const offset)
-/*получить данные из секции DDD
-buf массив
-bufSize размер вычитываемых данных
-offset смещение внутри секции*/
-
-DDDWrite(buf[], const bufSize, const offset)
-/*записать данные в секцию DDD
-buf массив
-bufSize размер записываемых данных
-offset смещение внутри секции*/
-
 SocketOpen(const address[], const port, const timeout)
 /*Открыть сокет и подключиться к серверу
 const address[]

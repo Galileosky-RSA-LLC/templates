@@ -2,451 +2,442 @@
 GS7 порт 21423 
 BB  порт 21177
 
-"Теги Виалон (Идентификаторы пользовательского массива):"
-0x01 зарезервирован
-0x02 данные счетчика Меркурий
-0x03 данные тахографа
-0x04 устройство СЕНС
-0x05 устройство СКВТ-М (в разработке)
-0x06 Система измерения давления в шинах (TPMS) датчик TD5300A-X-04
-0x07 Расходомер Eurosens Delta
-0x08 Частота с ДУТ
-0x09 данные с электросчетчиков
-0x0A датчики пассажиропотока
-0x0B адаптер ЛИН-RS485 для устройств СЕНС
-0x0C Информация от VIMS
-0x0D Maple (ответы на команды)
-0x0E зарезервирован
-0x0F зарезервирован
-0xEE Текстовые данные
+/*! Теги Виалон (Идентификаторы пользовательского массива):"
+    0x01 зарезервирован
+    0x02 данные счетчика Меркурий
+    0x03 данные тахографа
+    0x04 устройство СЕНС
+    0x05 устройство СКВТ-М (в разработке)
+    0x06 Система измерения давления в шинах (TPMS) датчик TD5300A-X-04
+    0x07 Расходомер Eurosens Delta
+    0x08 Частота с ДУТ
+    0x09 данные с электросчетчиков
+    0x0A датчики пассажиропотока
+    0x0B адаптер ЛИН-RS485 для устройств СЕНС
+    0x0C Информация от VIMS
+    0x0D Maple (ответы на команды)
+    0x0E зарезервирован
+    0x0F зарезервирован
+    0xEE Текстовые данные
+    */
 
-номера ошибок в ИЗИ ЛОДЖИК
-enum {
-  AMX_ERR_NONE,
-  /* reserve the first 15 error codes for exit codes of the abstract machine */
-  AMX_ERR_EXIT,         // forced exit /
-  AMX_ERR_ASSERT,       // assertion failed /
-  AMX_ERR_STACKERR,     // stack/heap collision /
-  AMX_ERR_BOUNDS,       // index out of bounds /
-  AMX_ERR_MEMACCESS,    // invalid memory access /
-  AMX_ERR_INVINSTR,     // invalid instruction /
-  AMX_ERR_STACKLOW,     // stack underflow /
-  AMX_ERR_HEAPLOW,      // heap underflow /
-  AMX_ERR_CALLBACK,     // no callback, or invalid callback /
-  AMX_ERR_NATIVE,       // native function failed /
-  AMX_ERR_DIVIDE,       // divide by zero /
-  AMX_ERR_SLEEP,        // go into sleepmode - code can be restarted /
-  AMX_ERR_INVSTATE,     // no implementation for this state, no fall-back /
+/*! номера ошибок в ИЗИ ЛОДЖИК
+    AMX_ERR_NONE,
+    // reserve the first 15 error codes for exit codes of the abstract machine
+    AMX_ERR_EXIT,         // forced exit /
+    AMX_ERR_ASSERT,       // assertion failed /
+    AMX_ERR_STACKERR,     // stack/heap collision /
+    AMX_ERR_BOUNDS,       // index out of bounds /
+    AMX_ERR_MEMACCESS,    // invalid memory access /
+    AMX_ERR_INVINSTR,     // invalid instruction /
+    AMX_ERR_STACKLOW,     // stack underflow /
+    AMX_ERR_HEAPLOW,      // heap underflow /
+    AMX_ERR_CALLBACK,     // no callback, or invalid callback /
+    AMX_ERR_NATIVE,       // native function failed /
+    AMX_ERR_DIVIDE,       // divide by zero /
+    AMX_ERR_SLEEP,        // go into sleepmode - code can be restarted /
+    AMX_ERR_INVSTATE,     // no implementation for this state, no fall-back /
 
-  AMX_ERR_MEMORY = 16,  // out of memory /
-  AMX_ERR_FORMAT,       // invalid file format /
-  AMX_ERR_VERSION,      // file is for a newer version of the AMX /
-  AMX_ERR_NOTFOUND,     // function not found /
-  AMX_ERR_INDEX,        // invalid index parameter (bad entry point) /
-  AMX_ERR_DEBUG,        // debugger cannot run /
-  AMX_ERR_INIT,         // AMX not initialized (or doubly initialized) /
-  AMX_ERR_USERDATA,     // unable to set user data field (table full) /
-  AMX_ERR_INIT_JIT,     // cannot initialize the JIT /
-  AMX_ERR_PARAMS,       // parameter error /
-  AMX_ERR_DOMAIN,       // domain error, expression result does not fit in range /
-  AMX_ERR_GENERAL,      // general error (unknown or unspecific error) /
-  AMX_ERR_OVERLAY,      // overlays are unsupported (JIT) or uninitialized */
-};
+    AMX_ERR_MEMORY = 16,  // out of memory /
+    AMX_ERR_FORMAT,       // invalid file format /
+    AMX_ERR_VERSION,      // file is for a newer version of the AMX /
+    AMX_ERR_NOTFOUND,     // function not found /
+    AMX_ERR_INDEX,        // invalid index parameter (bad entry point) /
+    AMX_ERR_DEBUG,        // debugger cannot run /
+    AMX_ERR_INIT,         // AMX not initialized (or doubly initialized) /
+    AMX_ERR_USERDATA,     // unable to set user data field (table full) /
+    AMX_ERR_INIT_JIT,     // cannot initialize the JIT /
+    AMX_ERR_PARAMS,       // parameter error /
+    AMX_ERR_DOMAIN,       // domain error, expression result does not fit in range /
+    AMX_ERR_GENERAL,      // general error (unknown or unspecific error) /
+    AMX_ERR_OVERLAY,      // overlays are unsupported (JIT) or uninitialized
+    */
 
+/*! Частые команды:
+    fslist /Pic
 
-Частые команды:
-"fslist /Pic
+    reset
 
-reset
+    clearscript
+    clearscript MOD_CAM1
+    clearscript Camera_JC029F-Y01
 
-clearscript
-clearscript MOD_CAM1
-clearscript Camera_JC029F-Y01
+    script
+    script PBscaleRequest
 
-script
-script PBscaleRequest
+    upgrade 23
 
-upgrade 23
+    makephoto 0
+    CLEANPHOTOQUEUE
 
-makephoto 0
-CLEANPHOTOQUEUE
+    status
+    imei
 
-status
-imei
-
-erasecfg
-"
-
+    erasecfg
+    */
 
 //=============================================
 //============== тэги для записи ==============
 //=============================================
-// CAN 8 BIT R ..
-#define CAN8BITR_0 0x02
-#define CAN8BITR_1 0x03
-#define CAN8BITR_2 0x04
-#define CAN8BITR_3 0x05
-#define CAN8BITR_4 0x06
-#define CAN8BITR_5 0x07
-#define CAN8BITR_6 0x08
-#define CAN8BITR_7 0x09
-#define CAN8BITR_8 0x0A
-#define CAN8BITR_9 0x0B
-#define CAN8BITR_10 0x0C
-#define CAN8BITR_11 0x0D
-#define CAN8BITR_12 0x0E
-#define CAN8BITR_13 0x0F
-#define CAN8BITR_14 0x10
-#define CAN8BITR_15 0x3D
-#define CAN8BITR_16 0x3E
-#define CAN8BITR_17 0x3F
-#define CAN8BITR_18 0x40
-#define CAN8BITR_19 0x41
-#define CAN8BITR_20 0x42
-#define CAN8BITR_21 0x43
-#define CAN8BITR_22 0x44
-#define CAN8BITR_23 0x45
-#define CAN8BITR_24 0x46
-#define CAN8BITR_25 0x47
-#define CAN8BITR_26 0x48
-#define CAN8BITR_27 0x49
-#define CAN8BITR_28 0x4A
-#define CAN8BITR_29 0x4B
-#define CAN8BITR_30 0x4C
+    // CAN 8 BIT R ..
+    #define CAN8BITR_0 0x02
+    #define CAN8BITR_1 0x03
+    #define CAN8BITR_2 0x04
+    #define CAN8BITR_3 0x05
+    #define CAN8BITR_4 0x06
+    #define CAN8BITR_5 0x07
+    #define CAN8BITR_6 0x08
+    #define CAN8BITR_7 0x09
+    #define CAN8BITR_8 0x0A
+    #define CAN8BITR_9 0x0B
+    #define CAN8BITR_10 0x0C
+    #define CAN8BITR_11 0x0D
+    #define CAN8BITR_12 0x0E
+    #define CAN8BITR_13 0x0F
+    #define CAN8BITR_14 0x10
+    #define CAN8BITR_15 0x3D
+    #define CAN8BITR_16 0x3E
+    #define CAN8BITR_17 0x3F
+    #define CAN8BITR_18 0x40
+    #define CAN8BITR_19 0x41
+    #define CAN8BITR_20 0x42
+    #define CAN8BITR_21 0x43
+    #define CAN8BITR_22 0x44
+    #define CAN8BITR_23 0x45
+    #define CAN8BITR_24 0x46
+    #define CAN8BITR_25 0x47
+    #define CAN8BITR_26 0x48
+    #define CAN8BITR_27 0x49
+    #define CAN8BITR_28 0x4A
+    #define CAN8BITR_29 0x4B
+    #define CAN8BITR_30 0x4C
 
-// CAN 16 BIT R ..
-#define CAN16BITR_0 0x11
-#define CAN16BITR_1 0x12
-#define CAN16BITR_2 0x13
-#define CAN16BITR_3 0x14
-#define CAN16BITR_4 0x15
-#define CAN16BITR_5 0x4D
-#define CAN16BITR_6 0x4E
-#define CAN16BITR_7 0x4F
-#define CAN16BITR_8 0x50
-#define CAN16BITR_9 0x51
-#define CAN16BITR_10 0x52
-#define CAN16BITR_11 0x53
-#define CAN16BITR_12 0x54
-#define CAN16BITR_13 0x55
-#define CAN16BITR_14 0x56
+    // CAN 16 BIT R ..
+    #define CAN16BITR_0 0x11
+    #define CAN16BITR_1 0x12
+    #define CAN16BITR_2 0x13
+    #define CAN16BITR_3 0x14
+    #define CAN16BITR_4 0x15
+    #define CAN16BITR_5 0x4D
+    #define CAN16BITR_6 0x4E
+    #define CAN16BITR_7 0x4F
+    #define CAN16BITR_8 0x50
+    #define CAN16BITR_9 0x51
+    #define CAN16BITR_10 0x52
+    #define CAN16BITR_11 0x53
+    #define CAN16BITR_12 0x54
+    #define CAN16BITR_13 0x55
+    #define CAN16BITR_14 0x56
 
-// CAN 32 BIT R ..
-#define CAN32BITR_0 0x16
-#define CAN32BITR_1 0x17
-#define CAN32BITR_2 0x18
-#define CAN32BITR_3 0x19
-#define CAN32BITR_4 0x1A
-#define CAN32BITR_5 0x57
-#define CAN32BITR_6 0x58
-#define CAN32BITR_7 0x59
-#define CAN32BITR_8 0x5A
-#define CAN32BITR_9 0x5B
-#define CAN32BITR_10 0x5C
-#define CAN32BITR_11 0x5D
-#define CAN32BITR_12 0x5E
-#define CAN32BITR_13 0x5F
-#define CAN32BITR_14 0x60
-
-
-// Users Tags
-#define UserTag_0 0x62
-#define UserTag_1 0x63
-#define UserTag_2 0x64
-#define UserTag_3 0x65
-#define UserTag_4 0x66
-#define UserTag_5 0x67
-#define UserTag_6 0x68
-#define UserTag_7 0x69
-
-#define UserArray 0x6A
+    // CAN 32 BIT R ..
+    #define CAN32BITR_0 0x16
+    #define CAN32BITR_1 0x17
+    #define CAN32BITR_2 0x18
+    #define CAN32BITR_3 0x19
+    #define CAN32BITR_4 0x1A
+    #define CAN32BITR_5 0x57
+    #define CAN32BITR_6 0x58
+    #define CAN32BITR_7 0x59
+    #define CAN32BITR_8 0x5A
+    #define CAN32BITR_9 0x5B
+    #define CAN32BITR_10 0x5C
+    #define CAN32BITR_11 0x5D
+    #define CAN32BITR_12 0x5E
+    #define CAN32BITR_13 0x5F
+    #define CAN32BITR_14 0x60
 
 
-#define CAN_A_0 0x6C
-#define CAN_A_1 0x6D
-#define CAN_B_0 0x6E
-#define CAN_B_1 0x6F
-//=============================================
-//=============================================
+    // Users Tags
+    #define UserTag_0 0x62
+    #define UserTag_1 0x63
+    #define UserTag_2 0x64
+    #define UserTag_3 0x65
+    #define UserTag_4 0x66
+    #define UserTag_5 0x67
+    #define UserTag_6 0x68
+    #define UserTag_7 0x69
+
+    #define UserArray 0x6A
 
 
+    #define CAN_A_0 0x6C
+    #define CAN_A_1 0x6D
+    #define CAN_B_0 0x6E
+    #define CAN_B_1 0x6F
 
 //=============================================
 //============== тэги для чтения ==============
 //=============================================
-// USER_TAG0
-// USER_TAG1
-// USER_TAG2
-// USER_TAG3
-// USER_TAG4
-// USER_TAG5
-// USER_TAG6
-// USER_TAG7
-// USER_ARRAY
+    // USER_TAG0
+    // USER_TAG1
+    // USER_TAG2
+    // USER_TAG3
+    // USER_TAG4
+    // USER_TAG5
+    // USER_TAG6
+    // USER_TAG7
 
-// IBUTTON
-//=============================================
-// === в остальных просто убрать последнее ====
-// ========== нижнее подчёркивание ============
-//=============================================
+    // IBUTTON
+    //=============================================
+    // === в остальных просто убрать последнее ====
+    // ========== нижнее подчёркивание ============
+    //=============================================
 
-Diagnostics(const message[], ...)
-/*Вывод строчки в Диагностику алгоритмов
-message Сообщение для вывода, например "Var1=%d, Var2=%d" (см. printf)
-... Можно указывать два дополнительных параметра для вставки в сообщение: "%d" вывод целого числа
-Старайтесь выводить диагностику короткими строчками
-Например: Diagnostics("Dev. Req.: %d", REQUEST_SIZE)
-Это уменьшит размер скрипта и скорость вывода диагностики*/
+// Встроенные функции
+    Diagnostics(const message[], ...)
+    /*Вывод строчки в Диагностику алгоритмов
+    message Сообщение для вывода, например "Var1=%d, Var2=%d" (см. printf)
+    ... Можно указывать два дополнительных параметра для вставки в сообщение: "%d" вывод целого числа
+    Старайтесь выводить диагностику короткими строчками
+    Например: Diagnostics("Dev. Req.: %d", REQUEST_SIZE)
+    Это уменьшит размер скрипта и скорость вывода диагностики*/
 
-Delay(const value)
-/*Задержка работы алгоритма
-value время задержки в миллисекундах*/
+    Delay(const value)
+    /*Задержка работы алгоритма
+    value время задержки в миллисекундах*/
 
-DisablePulseCounting(const inputNum, const disabled)
-/*Отключение подсчёта импульсов на входе
-inputNum номер входа, на котором будет произведено обнуление счётчика
-disabled true - отключить подсчёт импульсов
-disabled false - включить подсчёт импульсов*/
+    DisablePulseCounting(const inputNum, const disabled)
+    /*Отключение подсчёта импульсов на входе
+    inputNum номер входа, на котором будет произведено обнуление счётчика
+    disabled true - отключить подсчёт импульсов
+    disabled false - включить подсчёт импульсов*/
 
-NullInput(const inputNum)
-/*Обнуление счётчика на входе
-inputNum номер входа, на котором будет произведено обнуление счётчика*/
+    NullInput(const inputNum)
+    /*Обнуление счётчика на входе
+    inputNum номер входа, на котором будет произведено обнуление счётчика*/
 
-SetOutputValue(const outputNum, const value)
-/*Установить состояние выхода
-outputNum номер выхода
-value устанавливаемое состояние*/
+    SetOutputValue(const outputNum, const value)
+    /*Установить состояние выхода
+    outputNum номер выхода
+    value устанавливаемое состояние*/
 
-SavePoint()
-/*Сохранение точки в архиве*/
+    SavePoint()
+    /*Сохранение точки в архиве*/
 
-GetVar(const name)
-/*Получение значения глобальной или системной переменной
-name Имя переменной
-\return значение указанной переменной*/
+    GetVar(const name)
+    /*Получение значения глобальной или системной переменной
+    name Имя переменной
+    \return значение указанной переменной*/
 
-SetVar(const name, const value)
-/*Установка значения глобальной или системной переменной
-name Имя переменной
-value устанавливаемое значение*/
+    SetVar(const name, const value)
+    /*Установка значения глобальной или системной переменной
+    name Имя переменной
+    value устанавливаемое значение*/
 
-PortInit(const index, const speed, const bufSize)
-/*Инициализация порта
-index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-speed port speed: 19200
-bufSize size of input buffer
-stopBits количество стоповых бит:
-    0 - 1 стоповый бит (по умолчанию)
-    1 - 2 стоповых бита
-parity контроль по чётности:
-    0 - без контроля чётности (по умолчанию)
-    1 - контроль по нечётности - odd
-    2 - контроли по чётности - even
-packetMode контроль по чётности:
-    0 - без разделения на пакеты (по умолчанию)
-    1 - с разделением на пакеты, временной интервал между пакетами составляет 729 мс*/
+    PortInit(const index, const speed, const bufSize)
+    /*Инициализация порта
+    index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
+    speed port speed: 19200
+    bufSize size of input buffer
+    stopBits количество стоповых бит:
+        0 - 1 стоповый бит (по умолчанию)
+        1 - 2 стоповых бита
+    parity контроль по чётности:
+        0 - без контроля чётности (по умолчанию)
+        1 - контроль по нечётности - odd
+        2 - контроли по чётности - even
+    packetMode контроль по чётности:
+        0 - без разделения на пакеты (по умолчанию)
+        1 - с разделением на пакеты, временной интервал между пакетами составляет 729 мс*/
 
-PortRead(const index, &char, const timeout)
-/*Чтение символа из порта
-index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-\param[out] char received character
-timeout wait timeout of the next character
-\retval 0 - символ не прочитан по истечении тайм-аута
-\retval !=0 - символ прочитан*/
+    PortRead(const index, &char, const timeout)
+    /*Чтение символа из порта
+    index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
+    \param[out] char received character
+    timeout wait timeout of the next character
+    \retval 0 - символ не прочитан по истечении тайм-аута
+    \retval !=0 - символ прочитан*/
 
-PortWrite(const index, const buf[], const size)
-/*Запись данных из буфера в порт
-index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-buf buffer to send
-size buffer size*/
+    PortWrite(const index, const buf[], const size)
+    /*Запись данных из буфера в порт
+    index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
+    buf buffer to send
+    size buffer size*/
 
-TagWriteValue(const index, const value)
-/*Запись значения в тег пользователя
-index индекс тега пользователя
-Индеск может принимать значения из диапазона `0x62` - `0x69`
-value записываемой значение*/
+    TagWriteValue(const index, const value)
+    /*Запись значения в тег пользователя
+    index индекс тега пользователя
+    Индеск может принимать значения из диапазона `0x62` - `0x69`
+    value записываемой значение*/
 
-TagWriteArray(const index, ...)
-/*Запись буфера данных в массив пользователя
-index индекс массива пользователя.
-Индекс должен быть равен `0x6A`
-size размер буфера данных
-buf буфер данных*/
+    TagWriteArray(const index, ...)
+    /*Запись буфера данных в массив пользователя
+    index индекс массива пользователя.
+    Индекс должен быть равен `0x6A`
+    size размер буфера данных
+    buf буфер данных*/
 
-CRC16(const buf[], const size, const crcinit)  // CRC-16-CCITT см. ниже
-/*Подсчёт CRC-16
-buf буфер для подсчёта
-size размер буфера
-crcinit начальное значение CRC, по умолчанию 0xFFFF
-\return посчитанное значение CRC16*/
+    CRC16(const buf[], const size, const crcinit)  // CRC-16-CCITT см. ниже
+    /*Подсчёт CRC-16
+    buf буфер для подсчёта
+    size размер буфера
+    crcinit начальное значение CRC, по умолчанию 0xFFFF
+    \return посчитанное значение CRC16*/
 
-CRC8(const crcInit], const buf[], const size)
-/*Подсчёт CRC-8 по полиному x^8 + x^7 + x^4 + x^0 (0x91)
-//!
-Посчёт CRC-8 буфера \a buf длиной \a size.
-Начальное значение CRC8 устанавливается в \a crcInit.
-Значение CRC-8 вычисляется, как разность 0xFF и результата данной функции CRC8()
-crcInit начальное значение CRC
-buf[] буфер для подсчёта
-size размер буфера
-\return посчитанное значение CRC8*/
+    CRC8(const crcInit], const buf[], const size)
+    /*Подсчёт CRC-8 по полиному x^8 + x^7 + x^4 + x^0 (0x91)
+    //!
+    Посчёт CRC-8 буфера \a buf длиной \a size.
+    Начальное значение CRC8 устанавливается в \a crcInit.
+    Значение CRC-8 вычисляется, как разность 0xFF и результата данной функции CRC8()
+    crcInit начальное значение CRC
+    buf[] буфер для подсчёта
+    size размер буфера
+    \return посчитанное значение CRC8*/
 
-CRC8_D5(const buf[], const size)
-/*Подсчёт CRC-8 по полиному 0xD5
-//!
-Посчёт CRC-8 буфера \a buf длиной \a size.
-buf[] буфер для подсчёта
-size размер буфера
-\return посчитанное значение CRC8*/
+    CRC8_D5(const buf[], const size)
+    /*Подсчёт CRC-8 по полиному 0xD5
+    //!
+    Посчёт CRC-8 буфера \a buf длиной \a size.
+    buf[] буфер для подсчёта
+    size размер буфера
+    \return посчитанное значение CRC8*/
 
-SendAnswer(const connectionId, const commandIndex, const answerBuf[], const answerSize, const dataBuf[], const dataSize)
-/*Послать ответ на команду полученную от сервера мониторинга
-connectionId идентификатор соединения
-commandIndex номер команды, получаемый в теге `0xE0`
-answerBuf буфер ответа, содержащий ответ на команду. Подразумевается ответ в виде текста, передаваемый в теге `0xE1`
-answerSize размер буфера ответа
-dataBuf буфер данных, содержащий двоичные данные. Передаются в теге `0xEB`
-dataSize размер буфера данных. Если равен нулю, то тег с данными в ответе не передаётся*/
+    SendAnswer(const connectionId, const commandIndex, const answerBuf[], const answerSize, const dataBuf[], const dataSize)
+    /*Послать ответ на команду полученную от сервера мониторинга
+    connectionId идентификатор соединения
+    commandIndex номер команды, получаемый в теге `0xE0`
+    answerBuf буфер ответа, содержащий ответ на команду. Подразумевается ответ в виде текста, передаваемый в теге `0xE1`
+    answerSize размер буфера ответа
+    dataBuf буфер данных, содержащий двоичные данные. Передаются в теге `0xEB`
+    dataSize размер буфера данных. Если равен нулю, то тег с данными в ответе не передаётся*/
 
-DiagnosticsHex(const buf[], const size)
-/*Вывод массива в Диагностику алгоритмов в шестнадцатеричном виде
-buf[] буфер выводимого массива
-size размер буфера*/
+    DiagnosticsHex(const buf[], const size)
+    /*Вывод массива в Диагностику алгоритмов в шестнадцатеричном виде
+    buf[] буфер выводимого массива
+    size размер буфера*/
 
-getIntFromBuf(const buf{}, const index)
-/*Получить число (4-х-байтовый int) из буфера по позиции
-//!
-Число в буфере извлечено в формате LittleEndian
-buf{} буфер, из которого будет извлекаться число
-index индекс байта, начиная с которого располагается число в массиве
-\return число, извлечённое из буфера*/
+    getIntFromBuf(const buf{}, const index)
+    /*Получить число (4-х-байтовый int) из буфера по позиции
+    //!
+    Число в буфере извлечено в формате LittleEndian
+    buf{} буфер, из которого будет извлекаться число
+    index индекс байта, начиная с которого располагается число в массиве
+    \return число, извлечённое из буфера*/
 
-swapBuf(buf{}, const size)
-/*Инвертировать каждые 4 байта массива
-//!
-Преобразование LittleEndiang<->BigEndian
-\param[inout] buf{} буфер для преобразования
-size размер буфера*/
+    swapBuf(buf{}, const size)
+    /*Инвертировать каждые 4 байта массива
+    //!
+    Преобразование LittleEndiang<->BigEndian
+    \param[inout] buf{} буфер для преобразования
+    size размер буфера*/
 
-min(const value1, const value2)
-/*Получить минимум из двух значений
-value1 значение 1
-value2 значение 2
-\return минимум из двух значений*/
+    min(const value1, const value2)
+    /*Получить минимум из двух значений
+    value1 значение 1
+    value2 значение 2
+    \return минимум из двух значений*/
 
-FileSize(const filename[])
-/*Получить размер файла
-filename полное имя файла
-\return размер файла, -1 - если файл не найден*/
+    FileSize(const filename[])
+    /*Получить размер файла
+    filename полное имя файла
+    \return размер файла, -1 - если файл не найден*/
 
-FileRead(const filename[], buf[], const bufSize, const offset = 0)
-/*Прочитать со смещением из файла в массив
-filename полное имя файла
-buf массив-приёмник
-bufSize размер массива-приемника
-offset смещение в файле, указывающее откуда начинать чтение
-\return фактическое количество прочитанных байт*/
+    FileRead(const filename[], buf[], const bufSize, const offset = 0)
+    /*Прочитать со смещением из файла в массив
+    filename полное имя файла
+    buf массив-приёмник
+    bufSize размер массива-приемника
+    offset смещение в файле, указывающее откуда начинать чтение
+    \return фактическое количество прочитанных байт*/
 
-FileWrite(const filename[], const buf[], const bufSize, const offset = -1)
-/*Записать массив в файл со смещением
-filename полное имя файла
-buf массив-источник
-bufSize размер массива-источника
-offset смещение в файле, указывающее откуда начинать запись. -1 - записывать в конец файла
-\return фактическое количество записа байт*/
+    FileWrite(const filename[], const buf[], const bufSize, const offset = -1)
+    /*Записать массив в файл со смещением
+    filename полное имя файла
+    buf массив-источник
+    bufSize размер массива-источника
+    offset смещение в файле, указывающее откуда начинать запись. -1 - записывать в конец файла
+    \return фактическое количество записа байт*/
 
-FileDelete(const filename[])
-/*Удалить файл
-filename полное имя файла
-\return логическое значение операции удаления файла*/
+    FileDelete(const filename[])
+    /*Удалить файл
+    filename полное имя файла
+    \return логическое значение операции удаления файла*/
 
-PortReadPackage(const index, &char, const timeout)
-/*Чтение пакетов из порта, разделённых по временной задержке
-index port index: 2 - RS485 (пока реализовано только для RS485)
-buf указатель на буфер под полученный пакет
-\param[in] bufSize размер переданного буфера
-\param[in] firstByteTimeout время ожидания первого байта, мс
-\param[in] nextByteTimeout время ожидания последующего байта, мс
-\return количество прочитанных символов в пакете*/
+    PortReadPackage(const index, &char, const timeout)
+    /*Чтение пакетов из порта, разделённых по временной задержке
+    index port index: 2 - RS485 (пока реализовано только для RS485)
+    buf указатель на буфер под полученный пакет
+    \param[in] bufSize размер переданного буфера
+    \param[in] firstByteTimeout время ожидания первого байта, мс
+    \param[in] nextByteTimeout время ожидания последующего байта, мс
+    \return количество прочитанных символов в пакете*/
 
-PlayAudio(const filename[])
-/*Воспроизвести аудио файл
-filename полное имя файла*/
+    PlayAudio(const filename[])
+    /*Воспроизвести аудио файл
+    filename полное имя файла*/
 
-NewPhoto(const filename[])
-/*Оповещение прошивки, что сделан новый снимок фотокамерой
-filename полное имя файла*/
+    NewPhoto(const filename[])
+    /*Оповещение прошивки, что сделан новый снимок фотокамерой
+    filename полное имя файла*/
 
-InZone(const lat, const lon, const angle, const delta, const radExt, const radInt)
-/*Проверим находимся ли мы сейчас в геозоне автоинформатора*/
+    InZone(const lat, const lon, const angle, const delta, const radExt, const radInt)
+    /*Проверим находимся ли мы сейчас в геозоне автоинформатора*/
 
-NextDir(const rootDir[], const lastDir[], res[], const resSize)
-/*Ищем следующий каталог за заданным*/
+    NextDir(const rootDir[], const lastDir[], res[], const resSize)
+    /*Ищем следующий каталог за заданным*/
 
-GetIMEI(res[], const resSize)
-/*Получим IMEI*/
+    GetIMEI(res[], const resSize)
+    /*Получим IMEI*/
 
-setAutoinformerRoute(Dir[])
-/*Переключаем маршрут в Автоинформаторе*/
+    setAutoinformerRoute(Dir[])
+    /*Переключаем маршрут в Автоинформаторе*/
 
-GetUnsentPackets()
-/*Получить количество еще не отправленных пакетов. Работает только при отправке пакетов в хронологическом порядке*/
+    GetUnsentPackets()
+    /*Получить количество еще не отправленных пакетов. Работает только при отправке пакетов в хронологическом порядке*/
 
-ExecCommand(Cmd[])
-/*Выполнить команду*/
+    ExecCommand(Cmd[])
+    /*Выполнить команду*/
 
-CANInit(speed, active)
-/*Инициализировать CAN шину*/
+    CANInit(speed, active)
+    /*Инициализировать CAN шину*/
 
-CANEnableReception(enable)
-/*Включить приём сообщений*/
+    CANEnableReception(enable)
+    /*Включить приём сообщений*/
 
-CANSetFilter(id, mask, type)
-/*Установить фильтр*/
+    CANSetFilter(id, mask, type)
+    /*Установить фильтр*/
 
-CANSend(const msg[CANMSG])
-/*Послать сообщений*/
+    CANSend(const msg[CANMSG])
+    /*Послать сообщений*/
 
-CANReceive(msg[CANMSG])
-/*Принять сообщение*/
+    CANReceive(msg[CANMSG])
+    /*Принять сообщение*/
 
-GetBinaryDataFromCommand(buf[], const bufSize)
-/*получить бинарные данные из принятой команды
-buf массив-приемник
-bufSize размер массива-приемника*/
+    GetBinaryDataFromCommand(buf[], const bufSize)
+    /*получить бинарные данные из принятой команды
+    buf массив-приемник
+    bufSize размер массива-приемника*/
 
-SocketOpen(const address[], const port, const timeout)
-/*Открыть сокет и подключиться к серверу
-const address[]
-const port
-const timeout*/
+    SocketOpen(const address[], const port, const timeout)
+    /*Открыть сокет и подключиться к серверу
+    const address[]
+    const port
+    const timeout*/
 
-SocketSend(const src[], const bytesToSend, &bytesSent, const timeout)
-/*Отправить данные в ранее открытый сокет
-const src[]
-const bytesToSend
-&bytesSent
-const timeout*/
+    SocketSend(const src[], const bytesToSend, &bytesSent, const timeout)
+    /*Отправить данные в ранее открытый сокет
+    const src[]
+    const bytesToSend
+    &bytesSent
+    const timeout*/
 
-SocketRecv(const dest[], const bufSize, &bytesRcvd, const timeout)
-/*Получить данные из ранее открытого сокета
-dest[]
-const bufSize
-&bytesRcvd
-const timeout*/
+    SocketRecv(const dest[], const bufSize, &bytesRcvd, const timeout)
+    /*Получить данные из ранее открытого сокета
+    dest[]
+    const bufSize
+    &bytesRcvd
+    const timeout*/
 
-SocketClose()
-/*Отключиться от сервера и закрыть сокет*/
-
-
+    SocketClose()
+    /*Отключиться от сервера и закрыть сокет*/
 
 // ===========================================================================
 //{ Библиотека вспомогательных функций GalileoSky ============================
 // ===========================================================================
-
     /* Возведение в степень */
     GS_pow(num, p)
-    {
+     {
         new buf1 = num
         new buf2 = num
 
@@ -457,12 +448,12 @@ SocketClose()
             return buf1
 
         for (new i = 0; i < p-1; ++i)
-        {
+         {
             buf1 *= buf2
-        }
+         }
 
         return buf1
-    }
+     }
 
     /*! вставить символ в массив, обрабатываемого как строка, 
         и "перевести каретку вперед" (инкрементировать указатель позиции)
@@ -471,15 +462,15 @@ SocketClose()
         \param d_len длина массива 
         \param c переменная (символ) для вставки
         \retval не забудьте, что аргумент d_pos будет инкрементирован
-    */
+        */
     GS_appendC(dst{}, &d_pos, d_len, c)
-    {
+     {
         if(d_pos < d_len)
-        {
+         {
             dst{d_pos} = c
             ++d_pos
-        }
-    }
+         }
+     }
 
     /*! вставить массив в другой массив (присоединить строку) 
         и "перевести каретку" (инкрементировать указатель позиции)
@@ -489,49 +480,49 @@ SocketClose()
         \param src{} массив для вставки
         \param s_len длина массива для вставки
         \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива
-    */
+        */
     GS_append(dst{}, &d_pos, d_len, src{}, s_len)
-    {
+     {
         new s_pos = 0
         while(s_pos < s_len)
         {
             GS_appendC(dst, d_pos, d_len, src{s_pos})
             ++s_pos
         }
-    }
+     }
 
     GS_appendHexHalfByte(dst{}, &d_pos, d_len, number)
-    {
+     {
         if(d_pos < d_len)
         {
             number = number & 0x0F
             dst{d_pos} = (number < 10) ? (number + 0x30) : (number + 0x41 - 10)
             ++d_pos
         }
-    }
+     }
 
     GS_appendHexByte(dst{}, &d_pos, d_len, number)
-    {
+     {
         GS_appendHexHalfByte(dst, d_pos, d_len, number >> 4)
         GS_appendHexHalfByte(dst, d_pos, d_len, number) 
-    }
+     }
 
     GS_extractByte(number, byte_index)
-    {
+     {
         return ( (number >> (8 * byte_index)) & 0xFF )
-    }
+     }
 
     GS_appendHex(dst{}, &d_pos, d_len, number, byte_count)
-    {
+     {
         while(byte_count)
-        {
+         {
             GS_appendHexByte(dst, d_pos, d_len, GS_extractByte(number, byte_count-1))
             --byte_count
-        }
-    }
+         }
+     }
 
     GS_appendN(dst{}, &d_pos, d_len, value)
-    {
+     {
         if(value==0)
         {
             GS_appendC(dst, d_pos, d_len, '0')
@@ -556,18 +547,26 @@ SocketClose()
             value -= c*divider
             divider = divider/10
         }
-    }
+     }
 
+    /*! Возвращает длину строки */
     GS_strlen(buf{})
-    {
+     {
         new i = 0
         while(buf{i}!=0)
             ++i
         return i
-    }
+     }
 
+    /*! Возвращает строку из файла
+        \\param file имя файла
+        \\param pos номер байта начала строки
+        \\param dst буфер строки
+        \\param buf_size размер буфера строки
+        \\return length строки
+        */
     GS_readLine(file{}, pos, dst{}, dst_size)
-    {
+     {
         const cr_symbol = 0x0D; // CR
         const lf_symbol = 0x0A; // LF
 
@@ -591,7 +590,7 @@ SocketClose()
         }
         dst{counter - 1} = 0
         return counter
-    }
+     }
 
     /*! сравнить строки побайтово
         \param str1{} первая строка

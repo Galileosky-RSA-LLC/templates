@@ -559,11 +559,11 @@ BB  порт 21177
      }
 
     /*! Возвращает строку из файла
-        \\param file имя файла
-        \\param pos номер байта начала строки
-        \\param dst буфер строки
-        \\param buf_size размер буфера строки
-        \\return length строки
+        \param file имя файла
+        \param pos номер байта начала строки
+        \param dst буфер строки
+        \param buf_size размер буфера строки
+        \return length строки
         */
     GS_readLine(file{}, pos, dst{}, dst_size)
      {
@@ -597,9 +597,9 @@ BB  порт 21177
         \param str2{} вторая строка
         \param len длина строк (должна быть одинаковой, конечно)
         \retval 0 - строки не равны, 1 - строки равны
-    */
+        */
     GS_stringEquals(str1{}, str2{}, len)
-    {
+     {
         for(new i = 0; i < len; i++)
         {
             if(str1{i} != str2{i})
@@ -607,7 +607,7 @@ BB  порт 21177
         }
         
         return 1;
-    }
+     }
 
     /*! копировать строки побайтово
         \param dest{} куда копировать
@@ -615,38 +615,39 @@ BB  порт 21177
         \param len длина строк (должна быть одинаковой, конечно)
         \param destPos смещение
         \param sourcePos смещение
-    */
+        */
     GS_copyArray(dest{}, source{}, len, destPos, sourcePos)
-    {
+     {
         for (new i = 0; i < len; ++i)
         {
             dest{i + destPos} = source{i + sourcePos}
         }
         return
-    }
+     }
 
     GS_isDigit(byte)
-    {
+     {
         return ((byte >= '0') && (byte <= '9'))
-    }
+     }
 
     GS_isHex(byte)
-    {
+     {
         new isDigit = GS_isDigit(byte)
         new isHex = byte >= 'A' && byte <= 'F'
         new ishex = byte >= 'a' && byte <= 'f'
         new hex = isHex || ishex
 
         return ( hex || isDigit)
-    }
+     }
 
     GS_getDigit(byte)
-    {
+     {
         return byte - 0x30
-    }
+     }
 
+    /*! Возвращает int */
     GS_getHex(byte)
-    {
+     {
         if (GS_isDigit(byte))
             return GS_getDigit(byte)
 
@@ -655,14 +656,14 @@ BB  порт 21177
 
         if (byte >= 'a' && byte <= 'f')
             return (byte - 0x60) + 9
-    }
+     }
 
     /*! Алгоритм прямого поиска 
-      / string1 - где искать
-      / string2 - что искать
-    */
+        / string1 - где искать
+        / string2 - что искать
+        */
     GS_strstr(string1{}, str1Len, string2{}, str2Len)
-    {
+     {
         if ( str2Len > str1Len )
             return -1
 
@@ -689,11 +690,11 @@ BB  порт 21177
         }
 
         return -1
-    }
+     }
 
     /*! Собирает число из строки */
     GS_atoi(str{}, &pos)  // arr to Int
-    {
+     {
         new value = 0
         new is_minus = false
 
@@ -716,10 +717,10 @@ BB  порт 21177
             return -value
 
         return value
-    }
+     }
 
     GS_arrToFloat(str{}, &pos, precision) 
-    {
+     {
         new value = 0
         new is_minus = false
         value = GS_atoi(str, pos)
@@ -745,10 +746,10 @@ BB  порт 21177
             ++pos
 
         return value
-    }
+     }
 
     GS_strToHex(strAscii{}, lenStrAscii, arr{})  // TODO
-    {
+     {
         new pos = 0
         
         while( pos < lenStrAscii )
@@ -765,27 +766,28 @@ BB  порт 21177
             GS_offsetArrRight8(arr, pos, 4)
         
         return pos / 2
-    }
+     }
 
     GS_swapValue(value, value_size)
-    {
+     {
       new temp_buf[1] = 0
       temp_buf[0] = value
       swapBuf(temp_buf, 4)
       value = temp_buf[0]
       value = value >> (4 - value_size) * 8
       return value
-    }
+     }
 
+    /*! Очистка массива */
     GS_clearArr(arr{}, arrSize)
-    {
+     {
         for (new i = 0; i < arrSize; ++i)
             arr{i} = 0x00
-    }
+     }
 
     /*! смещает массив вправо максимум на 8 бит */
     GS_offsetArrRight8(arr{}, arrLenByte, bitOffsetRight)  // TODO УПРОСТИТЬ!!!
-    {
+     {
         Diagnost("\nStart GS_offsetArrRight8")
 
         if (!bitOffsetRight) return OK
@@ -818,13 +820,13 @@ BB  порт 21177
         Diagnost("result Array:")
         DiagnostHex(arr, arrLenByte)
         Diagnost("End GS_offsetArrRight8")
-    }
+     }
 
     /*! смещает массив вправо
         использует GS_offsetArrRight8()
-    */
+        */
     GS_offsetArrRight(arr{}, arrLenByte, bitOffsetRight)
-    {
+     {
         Diagnost("\nStart GS_offsetArrRight")
 
         const byteLen = 8
@@ -841,11 +843,11 @@ BB  порт 21177
         GS_offsetArrRight8(arr, arrLenByte, (bitOffsetRight % byteLen))
 
         return OK
-    }
+     }
 
     /*! собирает INT32 из байт массива. Максимум на 32 бита */
     GS_getInt(arr{}, startInd, stopInd)
-    {
+     {
         const byteLen = 8
         new res = 0
         new countByte = stopInd - startInd + 1
@@ -859,15 +861,15 @@ BB  порт 21177
         }
 
         return res
-    }
+     }
 
     /*! WeightIndicator 
         WeightIndicator::packWeight(weight, &w1, &w2);
         RS232::setValue(_port, w1);
         RS232::setTemperature(_port, w2);
-    */
+        */
     packWeight(weight)
-    {
+     {
         const RS232_0_2B = 0x58
         const RS232_0_1B = 0x88
         new t1
@@ -886,7 +888,7 @@ BB  порт 21177
 
         TagWriteValue( RS232_0_2B, (t1 &= 0xFFFF) )
         TagWriteValue( RS232_0_1B, (t2 &= 0xFF) )
-    }
+     }
 
     //======================================================================
     //============================== CRC ===================================
@@ -903,7 +905,7 @@ BB  порт 21177
         Example 2:
         53000900046100C066
         C066 is the CRC here (in Little endian format)
-    */
+        */
     new const Crc16Table[256] = [
             0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
             0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
@@ -937,10 +939,10 @@ BB  порт 21177
             0x7C26, 0x6C07, 0x5C64, 0x4C45, 0x3CA2, 0x2C83, 0x1CE0, 0x0CC1,
             0xEF1F, 0xFF3E, 0xCF5D, 0xDF7C, 0xAF9B, 0xBFBA, 0x8FD9, 0x9FF8,
             0x6E17, 0x7E36, 0x4E55, 0x5E74, 0x2E93, 0x3EB2, 0x0ED1, 0x1EF0
-        ]
+            ]
 
     GS_Crc16CCITT(pcBlock{}, len)
-    {
+     {
         const crcMask = 0xFFFF0000
         new i = 0
         new crc = 0x1D0F
@@ -951,10 +953,10 @@ BB  порт 21177
         }
 
         return crc
-    }
+     }
 
     GS_CRC8XOR(arr{}, len)
-    {
+     {
         new crc8 = 0
         new i = 0
 
@@ -964,10 +966,10 @@ BB  порт 21177
         }
 
         return crc8
-    }
-// ===========================================================================
-//} Конец библиотеки вспомогательных функций GalileoSky ======================
-// ===========================================================================
+     }
+    // ===========================================================================
+    //} Конец библиотеки вспомогательных функций GalileoSky ======================
+    // ===========================================================================
 
 
 //!*************************************************************
@@ -1009,94 +1011,100 @@ BB  порт 21177
 
     //! Инициализация шины Modbus
     modbusInit()
-    {
+     {
         PortInit(MB_PORT_INDEX, MB_PORT_SPEED, MB_BUF_SIZE , MB_PORT_STOP);
-    }
+     }
 
-    //! Запись значения 16-битного регистра в буфер в формате Modbus
-    //! \param[in] mbBuf Буфер, куда производится запись
-    //! \param[in] offset Смещение указателя записи от начала буфера
-    //! \param[in] value Значение записываемого регистра
+    /*! Запись значения 16-битного регистра в буфер в формате Modbus
+        \param[in] mbBuf Буфер, куда производится запись
+        \param[in] offset Смещение указателя записи от начала буфера
+        \param[in] value Значение записываемого регистра
+        */
     setReg(mbBuf{}, offset, value)
-    {
+     {
         mbBuf{offset} = value >> 8 //Старший байт вперед
         mbBuf{offset + 1} = value //Младший байт
-    }
+     }
 
-    //! Функция возвращает значения 16-битного регистра Modbus из буфера
-    //! \param[in] mbBuf Буфер, откуда производится чтение
-    //! \param[in] offset Смещение указателя чтения от начала буфера
-    //! \return Конвертированное значение регистра
+    /*! Функция возвращает значения 16-битного регистра Modbus из буфера
+        \param[in] mbBuf Буфер, откуда производится чтение
+        \param[in] offset Смещение указателя чтения от начала буфера
+        \return Конвертированное значение регистра
+        */
     getReg(mbBuf{}, offset)
-    {
+     {
         return mbBuf{offset} * 256 + mbBuf{offset + 1}
-    }
+     }
 
-    //! Функция возвращает значения 32-битного регистра Modbus из буфера
-    //! \param[in] mbBuf Буфер, откуда производится чтение
-    //! \param[in] offset Смещение указателя чтения от начала буфера
-    //! \return Конвертированное значение регистра
+    /*! Функция возвращает значения 32-битного регистра Modbus из буфера
+        \param[in] mbBuf Буфер, откуда производится чтение
+        \param[in] offset Смещение указателя чтения от начала буфера
+        \return Конвертированное значение регистра
+        */
     getReg32(mbBuf{}, offset)
-    {
+     {
         return (mbBuf{offset} << 24) + (mbBuf{offset + 1} << 16) + (mbBuf{offset + 2} << 8) + (mbBuf{offset + 3})
-    }
+     }
 
-    //! 0x03 - Функция чтение значений из нескольких регистров хранения (Read Holding Registers)
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-    //! \param[in] count Количество считываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    /*! 0x03 - Функция чтение значений из нескольких регистров хранения (Read Holding Registers)
+        \param[in] addr Адрес ведомого устройства
+        \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
+        \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
+        \param[in] count Количество считываемых элементов
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+        */
     readRegs(addr, mbBuf{}, fRegAddr, count)
-    {
+     {
         mbBuf{0} = addr
         mbBuf{1} = 0x03 //Код функции
         setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
         setReg(mbBuf, 4, count) //Количество считываемых элементов
         return transact(mbBuf, 6)
-    }
+     }
 
-    //! 0x04 - Функция чтение значений из нескольких регистров хранения (Read Input Registers)
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-    //! \param[in] count Количество считываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    /*! 0x04 - Функция чтение значений из нескольких регистров хранения (Read Input Registers)
+        \param[in] addr Адрес ведомого устройства
+        \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
+        \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
+        \param[in] count Количество считываемых элементов
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+        */
     readRegsIn(addr, mbBuf{}, fRegAddr, count)
-    {
+     {
         mbBuf{0} = addr
         mbBuf{1} = 0x04 //Код функции
         setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
         setReg(mbBuf, 4, count) //Количество считываемых элементов
         return transact(mbBuf, 6)
-    }
+     }
 
-    //! 0x10 - Функция записи значений в несколько регистров хранения (Preset Multiple Registers)
-    //!
-    //! Функция заполнит заголовок буфера и отправит его в шину, полезные данные требуется располагать
-    //! начиная с позиции \a MB_WRITE_START. Записываемые значения все 16-битные
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[in] mbBuf Буфер обмена, который будет отправлен
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется записать
-    //! \param[in] count Количество записываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    /*! 0x10 - Функция записи значений в несколько регистров хранения (Preset Multiple Registers)
+        Функция заполнит заголовок буфера и отправит его в шину, полезные данные требуется располагать
+        начиная с позиции \a MB_WRITE_START. Записываемые значения все 16-битные
+        \param[in] addr Адрес ведомого устройства
+        \param[in] mbBuf Буфер обмена, который будет отправлен
+        \param[in] fRegAddr Адрес первого элемента, значение которого требуется записать
+        \param[in] count Количество записываемых элементов
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+        */
     writeRegs(addr, mbBuf{}, fRegAddr, count)
-    {
+     {
         mbBuf{0} = addr
         mbBuf{1} = 0x10 //Код функции
         setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
         setReg(mbBuf, 4, count) //Количество считываемых элементов
         mbBuf{6} = count * 2
         return transact(mbBuf, 7 + count * 2)
-    }
+     }
 
     //!----------------- служебные функции MODBUS ------------------
-    //! Обмен с устройством данными по шине
-    //! \param[inout] mbBuf Буфер обмена, данные из него будут записаны с добавленной CRC, и в него будут считан ответ без CRC
-    //! \param[inout] size Размер буфера обмена
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    /*! Обмен с устройством данными по шине
+        \param[inout] mbBuf Буфер обмена, данные из него будут записаны с добавленной CRC, и в него будут считан ответ без CRC
+        \param[inout] size Размер буфера обмена
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+        */
     transact(mbBuf{}, size)
-    {    
+     {    
         //Добавляем CRC
         new c = CRC16(mbBuf, size)
         mbBuf{size} = c
@@ -1152,11 +1160,11 @@ BB  порт 21177
             return MB_ERR_CRC
         //Проверки пройдены, возвращаем код результата(ошибки)
         return err
-    }
+     }
 
     //! Функция вывода содержимого буфера \a buf длиной \a len
     printData(buf{}, len)
-    {
+     {
         // вывод по 2 байта в строке
         for(new i = 0; i < len / 2; i++)
         {
@@ -1166,11 +1174,11 @@ BB  порт 21177
         // вывод последнего байта при нечётной длине
         if (len % 2)
             Diagnostics("%02X", buf{len - 1})
-    }
+     }
 
     //! Функция записи значения регистра в тег
     readRegWriteTag(mbBuf{}, tag, valueName{}, regAdr)
-    {
+     {
         Diagnostics(valueName)
         new res = readRegs(ADDRESS, mbBuf, regAdr, 1)
         if (!res)
@@ -1181,11 +1189,11 @@ BB  порт 21177
         }
         else
             Diagnostics("Error code: %d in tag: %x", res, regAdr)
-    }
+     }
 
     //! Функция записи значения регистров в тег
     readReg32WriteTag(mbBuf{}, tag, valueName{}, regAdr)
-    {
+     {
         Diagnostics(valueName)
         new res = readRegs(ADDRESS, mbBuf, regAdr, 2)
         if (!res)
@@ -1196,7 +1204,7 @@ BB  порт 21177
         }
         else
             Diagnostics("Error code: %d in tag: %x", res, regAdr)
-    }
+     }
 //!*************************************************************
 //!-----------Конец библиотеки работы с Modbus------------------
 //!*************************************************************
@@ -1211,21 +1219,21 @@ BB  порт 21177
     #define PARITY 0  // no parity bits
 
     serialInit()
-    {
+     {
         Diagnost("serialInit()")
         PortInit(PORT_INDEX, BOUD_RATE, BUF_SIZE, STOP_BITS, PARITY)
-    }
+     }
 
     serialWrite(ioBuf{}, ioBufSize)
-    {
+     {
         Diagnost("Serial write:")
         DiagnostHex(ioBuf, ioBufSize)
         PortWrite(PORT_INDEX, ioBuf, ioBufSize)
-    }
+     }
 
     /*! чтение пакетов из порта, разделённых по временной задержке */
     serialRead(ioBuf{}, bufSize, firstByteTimeout, nextByteTimeout)
-    {
+     {
         Diagnost("serialRead()")
         new count = 0
 
@@ -1266,62 +1274,62 @@ BB  порт 21177
         Diagnost1("serialRead %d byts:", count)
         DiagnostHex(ioBuf, count)
         return count
-    }
+     }
 ///////////////// SERIAL END /////////////////
 //////////////////////////////////////////////
 
 ////////////////////////////////////////////////////
 ///////////////// DIAGNOSTICS //////////////////////
     Diagnost(text{})
-    {
+     {
         if (GetVar(diagnost))
             Diagnostics(text)
-    }
+     }
 
     Diagnost1(text{}, var)
-    {
+     {
         if (GetVar(diagnost))
             Diagnostics(text, var)
-    }
+     }
 
     Diagnost2(text{}, var1, var2)
-    {
+     {
         if (GetVar(diagnost))
             Diagnostics(text, var1, var2)
-    }
+     }
 
     DiagnostHex(array{}, array_size)
-    {
+     {
         if (GetVar(diagnost))
             DiagnosticsHex(array, array_size)
-    }
+     }
 ///////////////// DIAGNOSTICS END //////////////////
 ////////////////////////////////////////////////////
 
 /////////////////////////////////////
 //////////////// OUT ////////////////
     outputOn(outputNum)
-    {
+     {
         SetOutputValue(outputNum, 0)
         Diagnost1("Output %d ON", outputNum)
-    }
+     }
 
     outputOff(outputNum)
-    {
+     {
         SetOutputValue(outputNum, 1)
         Diagnost1("Output %d OFF", outputNum)
-    }
+     }
 ////////////// OUT END //////////////
 /////////////////////////////////////
 
 ////////////////////////////////////
 //////////////// IN ////////////////
     inputStatus(inputNum)
-    {
+     {
         new status
 
         switch (inputNum)
-        {
+         {
             case 0:
                 status = GetVar(STATUS_OF_IN0)
             case 1:
@@ -1344,10 +1352,10 @@ BB  порт 21177
                 status = GetVar(STATUS_OF_IN9)
             default:
                 Diagnostics("\"inputNum\" out of range! - %d", inputNum)
-        }
+         }
 
         Diagnost2("Input %d status: 0x%x", inputNum, status)
         return status
-    }
+     }
 ////////////// IN END //////////////
 ////////////////////////////////////

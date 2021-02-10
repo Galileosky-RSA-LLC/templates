@@ -164,7 +164,6 @@ BB  порт 21177
     #define CAN_A_1 0x6D
     #define CAN_B_0 0x6E
     #define CAN_B_1 0x6F
-
 //=============================================
 //============== тэги для чтения ==============
 //=============================================
@@ -971,7 +970,6 @@ BB  порт 21177
     //} Конец библиотеки вспомогательных функций GalileoSky ======================
     // ===========================================================================
 
-
 //!*************************************************************
 //!-----------------Библиотека работы с Modbus------------------
 //!*************************************************************
@@ -1220,28 +1218,28 @@ BB  порт 21177
 
     serialInit()
      {
-        Diagnost("serialInit()")
+        diagnost0("serialInit()")
         PortInit(PORT_INDEX, BOUD_RATE, BUF_SIZE, STOP_BITS, PARITY)
      }
 
     serialWrite(ioBuf{}, ioBufSize)
      {
-        Diagnost("Serial write:")
-        DiagnostHex(ioBuf, ioBufSize)
+        diagnost0("Serial write:")
+        diagnostHex(ioBuf, ioBufSize)
         PortWrite(PORT_INDEX, ioBuf, ioBufSize)
      }
 
     /*! чтение пакетов из порта, разделённых по временной задержке */
     serialRead(ioBuf{}, bufSize, firstByteTimeout, nextByteTimeout)
      {
-        Diagnost("serialRead()")
+        diagnost0("serialRead()")
         new count = 0
 
         if (2 == PORT_INDEX)  // пока реализовано только для RS485
         {
             count = PortReadPackage(PORT_INDEX, ioBuf, bufSize, firstByteTimeout, nextByteTimeout)
-            Diagnost1("serialRead %d byts", count)
-            DiagnostHex(ioBuf, count)
+            diagnost1("serialRead %d byts", count)
+            diagnostHex(ioBuf, count)
             return count
         }
 
@@ -1271,34 +1269,34 @@ BB  порт 21177
             }
         }
 
-        Diagnost1("serialRead %d byts:", count)
-        DiagnostHex(ioBuf, count)
+        diagnost1("serialRead %d byts:", count)
+        diagnostHex(ioBuf, count)
         return count
      }
-///////////////// SERIAL END /////////////////
-//////////////////////////////////////////////
+///////////////// SERIAL END /////////////
+//////////////////////////////////////////
 
 ////////////////////////////////////////////////////
 ///////////////// DIAGNOSTICS //////////////////////
-    Diagnost(text{})
+    diagnost0(text{})
      {
         if (GetVar(diagnost))
             Diagnostics(text)
      }
 
-    Diagnost1(text{}, var)
+    diagnost1(text{}, var)
      {
         if (GetVar(diagnost))
             Diagnostics(text, var)
      }
 
-    Diagnost2(text{}, var1, var2)
+    diagnost2(text{}, var1, var2)
      {
         if (GetVar(diagnost))
             Diagnostics(text, var1, var2)
      }
 
-    DiagnostHex(array{}, array_size)
+    diagnostHex(array{}, array_size)
      {
         if (GetVar(diagnost))
             DiagnosticsHex(array, array_size)
@@ -1311,13 +1309,13 @@ BB  порт 21177
     outputOn(outputNum)
      {
         SetOutputValue(outputNum, 0)
-        Diagnost1("Output %d ON", outputNum)
+        diagnost1("Output %d ON", outputNum)
      }
 
     outputOff(outputNum)
      {
         SetOutputValue(outputNum, 1)
-        Diagnost1("Output %d OFF", outputNum)
+        diagnost1("Output %d OFF", outputNum)
      }
 ////////////// OUT END //////////////
 /////////////////////////////////////
@@ -1354,7 +1352,7 @@ BB  порт 21177
                 Diagnostics("\"inputNum\" out of range! - %d", inputNum)
          }
 
-        Diagnost2("Input %d status: 0x%x", inputNum, status)
+        diagnost2("Input %d status: 0x%x", inputNum, status)
         return status
      }
 ////////////// IN END //////////////

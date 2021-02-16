@@ -434,6 +434,21 @@ BB  порт 21177
 // ===========================================================================
 //{ Библиотека вспомогательных функций GalileoSky ============================
 // ===========================================================================
+    /*! более точный */
+    delayTime(time)
+     {
+        const step = 10;
+
+        new startTime = GetVar(UPTIME)
+
+        while ( GetVar(UPTIME) - startTime <= time )
+         {
+            Delay(step)
+         }
+
+        diagnost1( "delay: %d ms", GetVar(UPTIME) - startTime );
+     }
+
     /* Возведение в степень */
     GS_pow(num, p)
      {
@@ -1354,6 +1369,40 @@ BB  порт 21177
 
         diagnost2("Input %d status: 0x%x", inputNum, status)
         return status
+     }
+
+    inputValue(inputNum)
+     {
+        new value
+
+        switch (inputNum)
+         {
+            case 0:
+                value = GetVar(IN_0)
+            case 1:
+                value = GetVar(IN_1)
+            case 2:
+                value = GetVar(IN_2)
+            case 3:
+                value = GetVar(IN_3)
+            case 4:
+                value = GetVar(IN_4)
+            case 5:
+                value = GetVar(IN_5)
+            case 6:
+                value = GetVar(IN_6)
+            case 7:
+                value = GetVar(IN_7)
+            case 8:
+                value = GetVar(IN_8)
+            case 9:
+                value = GetVar(IN_9)
+            default:
+                Diagnostics("\"inputNum\" out of range! - %d", inputNum)
+         }
+
+        diagnost2("Input %d value: %d", inputNum, value)
+        return value
      }
 ////////////// IN END //////////////
 ////////////////////////////////////

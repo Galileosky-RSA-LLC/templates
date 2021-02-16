@@ -1564,12 +1564,12 @@ main()
         //     SetVar(get_input_status, 0)
         // }
 
-        // if (GetVar(get_input))
-        // {
-        //     new inputV = getInput(GetVar(port_index))
-        //     SetVar(input_value, inputV)
-        //     SetVar(get_input, 0)
-        // }
+        if (GetVar(get_input))
+        {
+            new inputV = getInput(GetVar(port_index))
+            SetVar(input_value, inputV)
+            SetVar(get_input, 0)
+        }
 
         // if (GetVar(get_output_status))
         // {
@@ -1591,8 +1591,7 @@ main()
         // }
 
     // new outsFlags = GetVar(em_Outs_Cmd)
-    new outsFlagsFackt = getOutFlags()
-    
+    // new outsFlagsFackt = getOutFlags()
     // Diagnost1("outsFlags: 0x%X", outsFlags)
     // Diagnost1("outsFlagsFackt: 0x%X", outsFlagsFackt)
 

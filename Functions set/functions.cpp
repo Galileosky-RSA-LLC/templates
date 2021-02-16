@@ -1337,7 +1337,7 @@ BB  порт 21177
 
 ////////////////////////////////////
 //////////////// IN ////////////////
-    inputStatus(inputNum)
+    getInputStatus(inputNum)
      {
         new status
 
@@ -1371,7 +1371,7 @@ BB  порт 21177
         return status
      }
 
-    inputValue(inputNum)
+    getInputValue(inputNum)
      {
         new value
 

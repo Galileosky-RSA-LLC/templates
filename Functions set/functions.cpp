@@ -605,12 +605,23 @@ BB  порт 21177
         }
      }
 
-    /*! Возвращает длину строки */
-    GS_strlen(buf{})
+    /*! Возвращает длину строки заканчивающуюся нулевым байтом.
+        \param buf{} измеряемая строка
+        \param bufsize размер буфера с текстом
+        \retval количество байт до 0x00
+        */
+    GS_strlen(buf{}, bufsize)
      {
         new i = 0
-        while(buf{i}!=0)
-            ++i
+
+        while(buf{i++} != 0)
+        {
+            if(bufSize <= i)
+            {
+                return -1;
+            }
+        }
+        
         return i
      }
 
@@ -618,7 +629,7 @@ BB  порт 21177
         \param file имя файла
         \param pos номер байта начала строки
         \param dst буфер строки
-        \param buf_size размер буфера строки
+        \param dst_size размер буфера строки
         \return length строки
         */
     GS_readLine(file{}, pos, dst{}, dst_size)
@@ -627,23 +638,25 @@ BB  порт 21177
         const lf_symbol = 0x0A; // LF
 
         new len = FileRead(file, dst, dst_size, pos)
-        if(len <= 0)
+
+        if (len <= 0)
+        {
             return 0
+        }
 
         new counter = 0;
-        while(counter<dst_size)
+
+        while (counter < dst_size)
         {
-            if(dst{counter} == cr_symbol)
+            if ( (dst{counter} == cr_symbol) || (counter + 1 < dst_size) || (dst{counter + 1} == lf_symbol) )
             {
-                if(counter+1 < dst_size)
-                    if(dst{counter+1} == lf_symbol)
-                    {
-                        dst{counter} = 0
-                        return counter
-                    }
+                dst{counter} = 0
+                return counter
             }
+
             ++counter
         }
+
         dst{counter - 1} = 0
         return counter
      }
@@ -715,8 +728,10 @@ BB  порт 21177
      }
 
     /*! Алгоритм прямого поиска 
-        / string1 - где искать
-        / string2 - что искать
+        \param string1 - где искать
+        \param str1Len длина строки string1
+        \param string2 - что искать
+        \param str2Len длина строки string2
         */
     GS_strstr(string1{}, str1Len, string2{}, str2Len)
      {
@@ -748,14 +763,20 @@ BB  порт 21177
         return -1
      }
 
-    /*! Собирает число из строки */
-    GS_atoi(str{}, &pos)  // arr to Int
+    /*! Собирает число из строки
+        \param str{} строка символов
+        \param &pos индекс начала чтения строки
+        \return int
+        */
+    GS_atoi(str{}, &pos)
      {
         new value = 0
         new is_minus = false
 
         if(str{pos} == 0)
+        {
             return 0
+        }
 
         if (str{pos} == '-') 
         {
@@ -765,41 +786,58 @@ BB  порт 21177
 
         while(GS_isDigit(str{pos}))
         {
-            value = value * 10 + (str{pos} - '0')
+            value = value * 10 + GS_getDigit(str{pos})
             ++pos
         }
 
         if(is_minus)
+        {
             return -value
+        }
 
         return value
      }
 
-    GS_arrToFloat(str{}, &pos, precision) 
+    /*! Собирает число из строки
+        \param str{} строка символов
+        \param &pos индекс начала чтения строки
+        \param precision требуемая точность до Х хнака после запятой
+        \param sep символ разделитель. Например '.' или ','
+        \return int 
+        */
+    GS_atof(str{}, &pos, precision, sep) 
      {
-        new value = 0
-        new is_minus = false
-        value = GS_atoi(str, pos)
+        new value = GS_atoi(str, pos)
         new i = 0
 
-        if(str{pos} == '.')
+        if(str{pos} == sep)
         {
-            ++pos       
+            ++pos
+
             for(; i < precision; ++i)
             {
                 if(GS_isDigit(str{pos}))
-                    value = value*10 + GS_getDigit(str{pos})
+                {
+                    value = value * 10 + GS_getDigit(str{pos})
+                }
                 else
+                {
                     break;
+                }
+
                 ++pos
             }       
         }
 
         for(; i < precision; ++i)
+        {
             value = value * 10
+        }
 
         while(GS_isDigit(str{pos}))
+        {
             ++pos
+        }
 
         return value
      }

@@ -1350,8 +1350,6 @@
                     return 0xFFFFFFFF
                 }
             }
-
-            return 1
         }
         else if(inputNum - MAX_IN - 1 <= MAX_IN_SLAVE)
         {
@@ -1398,7 +1396,10 @@ getSlaveAll(bufAll{})
         // setReg(mbBuf, 4, count)      // Количество считываемых элементов
         err = transact(ioBuf, 2)
 
-        if(!err) break
+        if(!err)
+        {
+            break
+        }
 
         // Delay(100)
     }
@@ -1422,7 +1423,7 @@ getSlaveAll(bufAll{})
         SetVar(em_inStat6, (status & (0x01 << input++)) ? 1 : 0)
         SetVar(em_inStat7, (status & (0x01 << input++)) ? 1 : 0)
         SetVar(em_inStat8, (status & (0x01 << input++)) ? 1 : 0)
-        SetVar(em_inStat9, (status & (0x01 << input)) ? 1 : 0)
+        SetVar(em_inStat9, (status & (0x01 << input))   ? 1 : 0)
 
     // статусы выходов
         new out = 16
@@ -1511,7 +1512,9 @@ getOutFlags()
 setOuts(outsFlags, outsFlagsFackt)
  {
     if (outsFlags == outsFlagsFackt)
+    {
         return MB_ERR_OK
+    }
     
     new portStatus0 = ( outsFlags & (0x01 << 0) ) ? 1 : 0
     new portStatus1 = ( outsFlags & (0x01 << 1) ) ? 1 : 0
@@ -1538,10 +1541,13 @@ setOuts(outsFlags, outsFlagsFackt)
         err = transact(mbBuf, 15)
 
         if(!err)
+        {
             break
+        }
 
         // Delay(100)
      }
+
     return err
  }
 
@@ -1564,11 +1570,11 @@ main()
         //     SetVar(get_input_status, 0)
         // }
 
-        if (GetVar(get_input))
+        if ( (GetVar(port_index) > 0) && GetVar(flag_getInputValue) )
         {
             new inputV = getInput(GetVar(port_index))
             SetVar(input_value, inputV)
-            SetVar(get_input, 0)
+            SetVar(flag_getInputValue, 0)
         }
 
         // if (GetVar(get_output_status))

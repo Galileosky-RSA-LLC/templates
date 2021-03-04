@@ -1376,25 +1376,33 @@ BB  порт 21177
     diagnost0(text{})
      {
         if (GetVar(diagnost))
+        {
             Diagnostics(text)
+        }
      }
 
     diagnost1(text{}, var)
      {
         if (GetVar(diagnost))
+        {
             Diagnostics(text, var)
+        }
      }
 
     diagnost2(text{}, var1, var2)
      {
         if (GetVar(diagnost))
+        {
             Diagnostics(text, var1, var2)
+        }
      }
 
     diagnostHex(array{}, array_size)
      {
         if (GetVar(diagnost))
+        {
             DiagnosticsHex(array, array_size)
+        }
      }
 ///////////////// DIAGNOSTICS END //////////////////
 ////////////////////////////////////////////////////

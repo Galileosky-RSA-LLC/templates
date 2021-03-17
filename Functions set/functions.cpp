@@ -113,7 +113,7 @@ BB  порт 21177
             _ACC            , //24
             _SPUTNIK        , //25
             _USER_SPACE     , //26
-            _USER_SPACE_DIAG, //27
+            _USER_SPACE_DIAG, //27 == 134217728
             _RS485          , //28
             _BT               //29
     */
@@ -694,6 +694,10 @@ BB  порт 21177
         return
      }
 
+    /*! Проверяет является ли символ цифрой в формате ASCII
+        \param byte предполагаемый символ цифры в ASCII
+        \return bool
+        */
     GS_isDigit(byte)
      {
         return ((byte >= '0') && (byte <= '9'))
@@ -709,6 +713,10 @@ BB  порт 21177
         return ( hex || isDigit)
      }
 
+    /*! Возвращает int из цифры в формате ASCII
+        \param byte символ цифры в ASCII
+        \return int
+        */
     GS_getDigit(byte)
      {
         return byte - 0x30
@@ -1065,6 +1073,27 @@ BB  порт 21177
     //} Конец библиотеки вспомогательных функций GalileoSky ======================
     // ===========================================================================
 
+// Таймер и его функции
+    /*! закончился таймер или нет */
+    isTimerExpired()
+     {
+        return (GetVar(glTimer) <= GetVar(UNIX_TIME))
+     }
+
+    /*! запустить таймер на value секунд
+        \param value секунды
+        */
+    setTimer(value)
+     {
+        SetVar(glTimer, GetVar(UNIX_TIME) + value)
+     }
+
+    /*! сбросить таймер */
+    unsetTimer()
+     {
+        SetVar(glTimer, 0)
+     }
+
 //!*************************************************************
 //!-----------------Библиотека работы с Modbus------------------
 //!*************************************************************
@@ -1311,12 +1340,17 @@ BB  порт 21177
     #define STOP_BITS 0 // 0 - 1 stop bit
     #define PARITY 0  // no parity bits
 
+    /*! инициализация порта */
     serialInit()
      {
         diagnost0("serialInit()")
-        PortInit(PORT_INDEX, BOUD_RATE, BUF_SIZE, STOP_BITS, PARITY)
+        PortInit(PORT_INDEX, BAUDRATE, BUF_SIZE, STOP_BITS, PARITY)
      }
 
+    /*! запись в порт
+        \param ioBuf{} буфер с данными для отправки в порт
+        \param ioBufSize количество байт для отправки в порт
+        */
     serialWrite(ioBuf{}, ioBufSize)
      {
         diagnost0("Serial write:")
@@ -1324,7 +1358,13 @@ BB  порт 21177
         PortWrite(PORT_INDEX, ioBuf, ioBufSize)
      }
 
-    /*! чтение пакетов из порта, разделённых по временной задержке */
+    /*! чтение пакетов из порта, разделённых по временной задержке
+        \param ioBuf{} буфер для полученных данных
+        \param bufSize размер буфера
+        \param firstByteTimeout время ожидания первого байта
+        \param nextByteTimeout время ожидания остальных байт
+        \return int количество прочитанных байт
+        */
     serialRead(ioBuf{}, bufSize, firstByteTimeout, nextByteTimeout)
      {
         diagnost0("serialRead()")
@@ -1373,6 +1413,9 @@ BB  порт 21177
 
 ////////////////////////////////////////////////////
 ///////////////// DIAGNOSTICS //////////////////////
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
+        \param text{} строка сообщения
+        */
     diagnost0(text{})
      {
         if (GetVar(diagnost))
@@ -1381,6 +1424,10 @@ BB  порт 21177
         }
      }
 
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
+        \param text{} строка сообщения
+        \param var значение для вставки в строку
+        */
     diagnost1(text{}, var)
      {
         if (GetVar(diagnost))
@@ -1389,6 +1436,11 @@ BB  порт 21177
         }
      }
 
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
+        \param text{} строка сообщения
+        \param var1 значение для вставки в строку
+        \param var2 значение для вставки в строку
+        */
     diagnost2(text{}, var1, var2)
      {
         if (GetVar(diagnost))
@@ -1397,6 +1449,10 @@ BB  порт 21177
         }
      }
 
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
+        \param array{} массив данных
+        \param array_size количество байт для вывода в диагностику
+        */
     diagnostHex(array{}, array_size)
      {
         if (GetVar(diagnost))

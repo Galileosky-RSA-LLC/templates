@@ -42,7 +42,7 @@
 ////////////////////////////////////////////////////
 
 /////////////////////////////////////
-//////////////// OUT ////////////////
+//////////////// OUT ////////////////  // TODO: outputGlobalOn, outputGlobalOff
     outputOn(output)
      {
         SetOutputValue(output, 0)
@@ -57,36 +57,46 @@
 
     getGlobalOutputStatus(output)
      {
-     	if(output <= MAX_OUT)
-     	{
-     		switch ( output )
+        if(output <= MAX_OUT)
+        {
+            switch ( output )
             {
                 case 0: return GetVar(OUT_0)
                 case 1: return GetVar(OUT_1)
                 case 2: return GetVar(OUT_2)
                 case 3: return GetVar(OUT_3)
             }
-     	}
+        }
 
-     	if( output <= (MAX_OUT + MAX_OUT_SLAVE + 1) )
-     	{
-     		switch ( output - (MAX_IN + 1) )
+        if( output <= (MAX_OUT + MAX_OUT_SLAVE + 1) )
+        {
+            switch ( output - (MAX_IN + 1) )
             {
                 case 0: return GetVar(em_outStat0)
                 case 1: return GetVar(em_outStat1)
                 case 2: return GetVar(em_outStat2)
                 case 3: return GetVar(em_outStat3)
             }
-     	}
+        }
 
-     	Diagnostics("ERROR argument: getGlobalOutputStatus(arg: %d)", output)
+        Diagnostics("ERROR argument: getGlobalOutputStatus(arg: %d)", output)
         return 0xFFFFFFFF
      }
 
     makeGlobalPulse(output, delayPulse)
      {
-     	SetVar(delay_pulse, delayPulse)
-     	SetVar(out_pulse, output)
+        SetVar(delay_pulse, delayPulse)
+        SetVar(out_pulse, output)
+     }
+
+    outputGlobalOn()
+     {
+        //
+     }
+
+    outputGlobalOff()
+     {
+        //
      }
 ////////////// OUT END //////////////
 /////////////////////////////////////
@@ -164,13 +174,13 @@
     getGlobalInputStatus(inputNum)
      {
         if(inputNum <= MAX_IN)
-     	{
-     		return getInputStatus(inputNum)
-     	}
+        {
+            return getInputStatus(inputNum)
+        }
 
-     	if( inputNum <= (MAX_IN_SLAVE + MAX_IN + 1) )
-     	{
-     		switch ( inputNum - (MAX_IN + 1) )
+        if( inputNum <= (MAX_IN_SLAVE + MAX_IN + 1) )
+        {
+            switch ( inputNum - (MAX_IN + 1) )
             {
                 case 0: return GetVar(em_inStat0)
                 case 1: return GetVar(em_inStat1)
@@ -183,7 +193,7 @@
                 case 8: return GetVar(em_inStat8)
                 case 9: return GetVar(em_inStat9)
             }
-     	}
+        }
 
         Diagnostics("ERROR argument: getGlobalInputStatus(arg: %d)", inputNum)
         return 0xFFFFFFFF
@@ -191,14 +201,14 @@
 
     getGlobalInputValue(inputNum)
      {
-     	if(inputNum <= MAX_IN)
-     	{
-     		return getInputValue(inputNum)
-     	}
+        if(inputNum <= MAX_IN)
+        {
+            return getInputValue(inputNum)
+        }
 
-     	if( inputNum <= (MAX_IN_SLAVE + MAX_IN + 1) )
-     	{
-     		switch ( inputNum - (MAX_IN + 1) )
+        if( inputNum <= (MAX_IN_SLAVE + MAX_IN + 1) )
+        {
+            switch ( inputNum - (MAX_IN + 1) )
             {
                 case 0: return GetVar(em_inp0)
                 case 1: return GetVar(em_inp1)
@@ -211,7 +221,7 @@
                 case 8: return GetVar(em_inp8)
                 case 9: return GetVar(em_inp9)
             }
-     	}
+        }
 
         Diagnostics("ERROR argument: getGlobalInputValue(arg: %d)", inputNum)
         return 0xFFFFFFFF

@@ -1063,6 +1063,108 @@ BB  порт 21177
         return res
      }
 
+    /*! Запись значения в BLUETOOTH_тег
+        \param index номер тега от 0 до 63
+        \param value записываемое значение
+        \return boolean
+        */
+    GS_tagBluetoothWriteValue(index, value)
+     {
+        if (index < 0 || index > 63)
+         {
+            return false;
+         }
+
+        TagWriteValue(0x70 + index, value);
+        return true;
+     }
+
+    /*! Чтение значения из BLUETOOTH_тега
+        \param index номер тега от 0 до 63
+        \return boolean
+        */
+    GS_tagBluetoothReadValue(index)
+     {
+        if (index < 0 || index > 63)
+         {
+            return false;
+         }
+
+        switch (index)
+         {
+            case 0: { GetVar(BLUETOOTH_0) }
+            case 1: { GetVar(BLUETOOTH_1) }
+            case 2: { GetVar(BLUETOOTH_2) }
+            case 3: { GetVar(BLUETOOTH_3) }
+            case 4: { GetVar(BLUETOOTH_4) }
+            case 5: { GetVar(BLUETOOTH_5) }
+            case 6: { GetVar(BLUETOOTH_6) }
+            case 7: { GetVar(BLUETOOTH_7) }
+            case 8: { GetVar(BLUETOOTH_8) }
+            case 9: { GetVar(BLUETOOTH_9) }
+
+            case 10: { GetVar(BLUETOOTH_10) }
+            case 11: { GetVar(BLUETOOTH_11) }
+            case 12: { GetVar(BLUETOOTH_12) }
+            case 13: { GetVar(BLUETOOTH_13) }
+            case 14: { GetVar(BLUETOOTH_14) }
+            case 15: { GetVar(BLUETOOTH_15) }
+            case 16: { GetVar(BLUETOOTH_16) }
+            case 17: { GetVar(BLUETOOTH_17) }
+            case 18: { GetVar(BLUETOOTH_18) }
+            case 19: { GetVar(BLUETOOTH_19) }
+
+            case 20: { GetVar(BLUETOOTH_20) }
+            case 21: { GetVar(BLUETOOTH_21) }
+            case 22: { GetVar(BLUETOOTH_22) }
+            case 23: { GetVar(BLUETOOTH_23) }
+            case 24: { GetVar(BLUETOOTH_24) }
+            case 25: { GetVar(BLUETOOTH_25) }
+            case 26: { GetVar(BLUETOOTH_26) }
+            case 27: { GetVar(BLUETOOTH_27) }
+            case 28: { GetVar(BLUETOOTH_28) }
+            case 29: { GetVar(BLUETOOTH_29) }
+
+            case 30: { GetVar(BLUETOOTH_30) }
+            case 31: { GetVar(BLUETOOTH_31) }
+            case 32: { GetVar(BLUETOOTH_32) }
+            case 33: { GetVar(BLUETOOTH_33) }
+            case 34: { GetVar(BLUETOOTH_34) }
+            case 35: { GetVar(BLUETOOTH_35) }
+            case 36: { GetVar(BLUETOOTH_36) }
+            case 37: { GetVar(BLUETOOTH_37) }
+            case 38: { GetVar(BLUETOOTH_38) }
+            case 39: { GetVar(BLUETOOTH_39) }
+
+            case 40: { GetVar(BLUETOOTH_40) }
+            case 41: { GetVar(BLUETOOTH_41) }
+            case 42: { GetVar(BLUETOOTH_42) }
+            case 43: { GetVar(BLUETOOTH_43) }
+            case 44: { GetVar(BLUETOOTH_44) }
+            case 45: { GetVar(BLUETOOTH_45) }
+            case 46: { GetVar(BLUETOOTH_46) }
+            case 47: { GetVar(BLUETOOTH_47) }
+            case 48: { GetVar(BLUETOOTH_48) }
+            case 49: { GetVar(BLUETOOTH_49) }
+
+            case 50: { GetVar(BLUETOOTH_50) }
+            case 51: { GetVar(BLUETOOTH_51) }
+            case 52: { GetVar(BLUETOOTH_52) }
+            case 53: { GetVar(BLUETOOTH_53) }
+            case 54: { GetVar(BLUETOOTH_54) }
+            case 55: { GetVar(BLUETOOTH_55) }
+            case 56: { GetVar(BLUETOOTH_56) }
+            case 57: { GetVar(BLUETOOTH_57) }
+            case 58: { GetVar(BLUETOOTH_58) }
+            case 59: { GetVar(BLUETOOTH_59) }
+
+            case 60: { GetVar(BLUETOOTH_60) }
+            case 61: { GetVar(BLUETOOTH_61) }
+            case 62: { GetVar(BLUETOOTH_62) }
+            case 63: { GetVar(BLUETOOTH_63) }
+         }
+     }
+
     /*! WeightIndicator 
         WeightIndicator::packWeight(weight, &w1, &w2);
         RS232::setValue(_port, w1);

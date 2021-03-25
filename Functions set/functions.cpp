@@ -206,6 +206,78 @@ BB  порт 21177
     #define CAN_A_1 0x6D
     #define CAN_B_0 0x6E
     #define CAN_B_1 0x6F
+
+    // BLUETOOTH
+    #define BLUE_TOOTH_0 0x70
+    #define BLUE_TOOTH_1 0x71
+    #define BLUE_TOOTH_2 0x72
+    #define BLUE_TOOTH_3 0x73
+    #define BLUE_TOOTH_4 0x74
+    #define BLUE_TOOTH_5 0x75
+    #define BLUE_TOOTH_6 0x76
+    #define BLUE_TOOTH_7 0x77
+    #define BLUE_TOOTH_8 0x78
+    #define BLUE_TOOTH_9 0x79
+
+    #define BLUE_TOOTH_10 0x7A
+    #define BLUE_TOOTH_11 0x7B
+    #define BLUE_TOOTH_12 0x7C
+    #define BLUE_TOOTH_13 0x7D
+    #define BLUE_TOOTH_14 0x7E
+    #define BLUE_TOOTH_15 0x7F
+    #define BLUE_TOOTH_16 0x80
+    #define BLUE_TOOTH_17 0x81
+    #define BLUE_TOOTH_18 0x82
+    #define BLUE_TOOTH_19 0x83
+
+    #define BLUE_TOOTH_20 0x84
+    #define BLUE_TOOTH_21 0x85
+    #define BLUE_TOOTH_22 0x86
+    #define BLUE_TOOTH_23 0x87
+    #define BLUE_TOOTH_24 0x88
+    #define BLUE_TOOTH_25 0x89
+    #define BLUE_TOOTH_26 0x8A
+    #define BLUE_TOOTH_27 0x8B
+    #define BLUE_TOOTH_28 0x8C
+    #define BLUE_TOOTH_29 0x8D
+
+    #define BLUE_TOOTH_30 0x8E
+    #define BLUE_TOOTH_31 0x8F
+    #define BLUE_TOOTH_32 0x90
+    #define BLUE_TOOTH_33 0x91
+    #define BLUE_TOOTH_34 0x92
+    #define BLUE_TOOTH_35 0x93
+    #define BLUE_TOOTH_36 0x94
+    #define BLUE_TOOTH_37 0x95
+    #define BLUE_TOOTH_38 0x96
+    #define BLUE_TOOTH_39 0x97
+    
+    #define BLUE_TOOTH_40 0x98
+    #define BLUE_TOOTH_41 0x99
+    #define BLUE_TOOTH_42 0x9A
+    #define BLUE_TOOTH_43 0x9B
+    #define BLUE_TOOTH_44 0x9C
+    #define BLUE_TOOTH_45 0x9D
+    #define BLUE_TOOTH_46 0x9E
+    #define BLUE_TOOTH_47 0x9F
+    #define BLUE_TOOTH_48 0xA0
+    #define BLUE_TOOTH_49 0xA1
+    
+    #define BLUE_TOOTH_50 0xA2
+    #define BLUE_TOOTH_51 0xA3
+    #define BLUE_TOOTH_52 0xA4
+    #define BLUE_TOOTH_53 0xA5
+    #define BLUE_TOOTH_54 0xA6
+    #define BLUE_TOOTH_55 0xA7
+    #define BLUE_TOOTH_56 0xA8
+    #define BLUE_TOOTH_57 0xA9
+    #define BLUE_TOOTH_58 0xAA
+    #define BLUE_TOOTH_59 0xAB
+
+    #define BLUE_TOOTH_60 0xAC
+    #define BLUE_TOOTH_61 0xAD
+    #define BLUE_TOOTH_62 0xAE
+    #define BLUE_TOOTH_63 0xAF
 //=============================================
 //============== тэги для чтения ==============
 //=============================================
@@ -219,13 +291,19 @@ BB  порт 21177
     // USER_TAG7
 
     // IBUTTON
+
+    // BLUETOOTH_0
+    // BLUETOOTH_1
+    // BLUETOOTH_№..
+    // BLUETOOTH_62
+    // BLUETOOTH_63
     //=============================================
     // === в остальных просто убрать последнее ====
     // ========== нижнее подчёркивание ============
     //=============================================
 
 // Встроенные функции
-    Diagnostics(const message[], ...)
+    Diagnostics(const message[], ...);
     /*Вывод строчки в Диагностику алгоритмов
     message Сообщение для вывода, например "Var1=%d, Var2=%d" (см. printf)
     ... Можно указывать два дополнительных параметра для вставки в сообщение: "%d" вывод целого числа
@@ -233,122 +311,31 @@ BB  порт 21177
     Например: Diagnostics("Dev. Req.: %d", REQUEST_SIZE)
     Это уменьшит размер скрипта и скорость вывода диагностики*/
 
-    Delay(const value)
-    /*Задержка работы алгоритма
-    value время задержки в миллисекундах*/
-
-    DisablePulseCounting(const inputNum, const disabled)
-    /*Отключение подсчёта импульсов на входе
-    inputNum номер входа, на котором будет произведено обнуление счётчика
-    disabled true - отключить подсчёт импульсов
-    disabled false - включить подсчёт импульсов*/
-
-    NullInput(const inputNum)
-    /*Обнуление счётчика на входе
-    inputNum номер входа, на котором будет произведено обнуление счётчика*/
-
-    SetOutputValue(const outputNum, const value)
-    /*Установить состояние выхода
-    outputNum номер выхода
-    value устанавливаемое состояние*/
-
-    SavePoint()
-    /*Сохранение точки в архиве*/
-
-    GetVar(const name)
-    /*Получение значения глобальной или системной переменной
-    name Имя переменной
-    \return значение указанной переменной*/
-
-    SetVar(const name, const value)
-    /*Установка значения глобальной или системной переменной
-    name Имя переменной
-    value устанавливаемое значение*/
-
-    PortInit(const index, const speed, const bufSize)
-    /*Инициализация порта
-    index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-    speed port speed: 19200
-    bufSize size of input buffer
-    stopBits количество стоповых бит:
-        0 - 1 стоповый бит (по умолчанию)
-        1 - 2 стоповых бита
-    parity контроль по чётности:
-        0 - без контроля чётности (по умолчанию)
-        1 - контроль по нечётности - odd
-        2 - контроли по чётности - even
-    packetMode контроль по чётности:
-        0 - без разделения на пакеты (по умолчанию)
-        1 - с разделением на пакеты, временной интервал между пакетами составляет 729 мс*/
-
-    PortRead(const index, &char, const timeout)
-    /*Чтение символа из порта
-    index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-    \param[out] char received character
-    timeout wait timeout of the next character
-    \retval 0 - символ не прочитан по истечении тайм-аута
-    \retval !=0 - символ прочитан*/
-
-    PortWrite(const index, const buf[], const size)
-    /*Запись данных из буфера в порт
-    index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-    buf buffer to send
-    size buffer size*/
-
-    TagWriteValue(const index, const value)
-    /*Запись значения в тег пользователя
-    index индекс тега пользователя
-    Индеск может принимать значения из диапазона `0x62` - `0x69`
-    value записываемой значение*/
-
-    TagWriteArray(const index, ...)
-    /*Запись буфера данных в массив пользователя
-    index индекс массива пользователя.
-    Индекс должен быть равен `0x6A`
-    size размер буфера данных
-    buf буфер данных*/
-
-    CRC16(const buf[], const size, const crcinit)  // CRC-16-CCITT см. ниже
-    /*Подсчёт CRC-16
-    buf буфер для подсчёта
-    size размер буфера
-    crcinit начальное значение CRC, по умолчанию 0xFFFF
-    \return посчитанное значение CRC16*/
-
-    CRC8(const crcInit], const buf[], const size)
-    /*Подсчёт CRC-8 по полиному x^8 + x^7 + x^4 + x^0 (0x91)
-    //!
-    Посчёт CRC-8 буфера \a buf длиной \a size.
-    Начальное значение CRC8 устанавливается в \a crcInit.
-    Значение CRC-8 вычисляется, как разность 0xFF и результата данной функции CRC8()
-    crcInit начальное значение CRC
-    buf[] буфер для подсчёта
-    size размер буфера
-    \return посчитанное значение CRC8*/
-
-    CRC8_D5(const buf[], const size)
-    /*Подсчёт CRC-8 по полиному 0xD5
-    //!
-    Посчёт CRC-8 буфера \a buf длиной \a size.
-    buf[] буфер для подсчёта
-    size размер буфера
-    \return посчитанное значение CRC8*/
-
-    SendAnswer(const connectionId, const commandIndex, const answerBuf[], const answerSize, const dataBuf[], const dataSize)
-    /*Послать ответ на команду полученную от сервера мониторинга
-    connectionId идентификатор соединения
-    commandIndex номер команды, получаемый в теге `0xE0`
-    answerBuf буфер ответа, содержащий ответ на команду. Подразумевается ответ в виде текста, передаваемый в теге `0xE1`
-    answerSize размер буфера ответа
-    dataBuf буфер данных, содержащий двоичные данные. Передаются в теге `0xEB`
-    dataSize размер буфера данных. Если равен нулю, то тег с данными в ответе не передаётся*/
-
-    DiagnosticsHex(const buf[], const size)
+    DiagnosticsHex(const buf[], const size);
     /*Вывод массива в Диагностику алгоритмов в шестнадцатеричном виде
     buf[] буфер выводимого массива
     size размер буфера*/
 
-    getIntFromBuf(const buf{}, const index)
+    Delay(const value);
+    /*Задержка работы алгоритма
+    value время задержки в миллисекундах*/
+
+    min(const value1, const value2);
+    /*Получить минимум из двух значений
+    value1 значение 1
+    value2 значение 2
+    \return минимум из двух значений*/
+
+    Rand(const min, const max);
+
+    swapBuf(buf{}, const size);
+    /*Инвертировать каждые 4 байта массива
+    //!
+    Преобразование LittleEndiang<->BigEndian
+    \param[inout] buf{} буфер для преобразования
+    size размер буфера*/
+
+    getIntFromBuf(const buf{}, const index);
     /*Получить число (4-х-байтовый int) из буфера по позиции
     //!
     Число в буфере извлечено в формате LittleEndian
@@ -356,122 +343,232 @@ BB  порт 21177
     index индекс байта, начиная с которого располагается число в массиве
     \return число, извлечённое из буфера*/
 
-    swapBuf(buf{}, const size)
-    /*Инвертировать каждые 4 байта массива
-    //!
-    Преобразование LittleEndiang<->BigEndian
-    \param[inout] buf{} буфер для преобразования
-    size размер буфера*/
+    // Inputs
+        DisablePulseCounting(const inputNum, const disabled);
+        /*Отключение подсчёта импульсов на входе
+        inputNum номер входа, на котором будет произведено обнуление счётчика
+        disabled true - отключить подсчёт импульсов
+        disabled false - включить подсчёт импульсов*/
 
-    min(const value1, const value2)
-    /*Получить минимум из двух значений
-    value1 значение 1
-    value2 значение 2
-    \return минимум из двух значений*/
+        NullInput(const inputNum);
+        /*Обнуление счётчика на входе
+        inputNum номер входа, на котором будет произведено обнуление счётчика*/
 
-    FileSize(const filename[])
-    /*Получить размер файла
-    filename полное имя файла
-    \return размер файла, -1 - если файл не найден*/
+        SetOutputValue(const outputNum, const value);
+        /*Установить состояние выхода
+        outputNum номер выхода
+        value устанавливаемое состояние*/
 
-    FileRead(const filename[], buf[], const bufSize, const offset = 0)
-    /*Прочитать со смещением из файла в массив
-    filename полное имя файла
-    buf массив-приёмник
-    bufSize размер массива-приемника
-    offset смещение в файле, указывающее откуда начинать чтение
-    \return фактическое количество прочитанных байт*/
+    SavePoint();
+    /*Сохранение точки в архиве*/
 
-    FileWrite(const filename[], const buf[], const bufSize, const offset = -1)
-    /*Записать массив в файл со смещением
-    filename полное имя файла
-    buf массив-источник
-    bufSize размер массива-источника
-    offset смещение в файле, указывающее откуда начинать запись. -1 - записывать в конец файла
-    \return фактическое количество записа байт*/
+    GetIMEI(res[], const resSize);
+    /*Получим IMEI*/
 
-    FileDelete(const filename[])
-    /*Удалить файл
-    filename полное имя файла
-    \return логическое значение операции удаления файла*/
+    setAutoinformerRoute(Dir[]);
+    /*Переключаем маршрут в Автоинформаторе*/
 
-    PortReadPackage(const index, &char, const timeout)
-    /*Чтение пакетов из порта, разделённых по временной задержке
-    index port index: 2 - RS485 (пока реализовано только для RS485)
-    buf указатель на буфер под полученный пакет
-    \param[in] bufSize размер переданного буфера
-    \param[in] firstByteTimeout время ожидания первого байта, мс
-    \param[in] nextByteTimeout время ожидания последующего байта, мс
-    \return количество прочитанных символов в пакете*/
+    GetUnsentPackets();
+    /*Получить количество еще не отправленных пакетов. Работает только при отправке пакетов в хронологическом порядке*/
 
-    PlayAudio(const filename[])
+    PlayAudio(const filename[]);
     /*Воспроизвести аудио файл
     filename полное имя файла*/
 
-    NewPhoto(const filename[])
+    NewPhoto(const filename[]);
     /*Оповещение прошивки, что сделан новый снимок фотокамерой
     filename полное имя файла*/
 
-    InZone(const lat, const lon, const angle, const delta, const radExt, const radInt)
-    /*Проверим находимся ли мы сейчас в геозоне автоинформатора*/
+    GetVar(const name);
+    /*Получение значения глобальной или системной переменной
+    name Имя переменной
+    \return значение указанной переменной*/
 
-    NextDir(const rootDir[], const lastDir[], res[], const resSize)
-    /*Ищем следующий каталог за заданным*/
+    SetVar(const name, const value);
+    /*Установка значения глобальной или системной переменной
+    name Имя переменной
+    value устанавливаемое значение*/
 
-    GetIMEI(res[], const resSize)
-    /*Получим IMEI*/
+    // Digital ports
+        PortInit(const index, const speed, const bufSize);
+        /*Инициализация порта
+        index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
+        speed port speed: 19200
+        bufSize size of input buffer
+        stopBits количество стоповых бит:
+            0 - 1 стоповый бит (по умолчанию)
+            1 - 2 стоповых бита
+        parity контроль по чётности:
+            0 - без контроля чётности (по умолчанию)
+            1 - контроль по нечётности - odd
+            2 - контроли по чётности - even
+        packetMode контроль по чётности:
+            0 - без разделения на пакеты (по умолчанию)
+            1 - с разделением на пакеты, временной интервал между пакетами составляет 729 мс*/
 
-    setAutoinformerRoute(Dir[])
-    /*Переключаем маршрут в Автоинформаторе*/
+        PortRead(const index, &char, const timeout);
+        /*Чтение символа из порта
+        index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
+        \param[out] char received character
+        timeout wait timeout of the next character
+        \retval 0 - символ не прочитан по истечении тайм-аута
+        \retval !=0 - символ прочитан*/
 
-    GetUnsentPackets()
-    /*Получить количество еще не отправленных пакетов. Работает только при отправке пакетов в хронологическом порядке*/
+        PortWrite(const index, const buf[], const size);
+        /*Запись данных из буфера в порт
+        index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
+        buf buffer to send
+        size buffer size*/
 
-    ExecCommand(Cmd[])
-    /*Выполнить команду*/
+        PortReadPackage(const index, &char, const timeout);
+        /*Чтение пакетов из порта, разделённых по временной задержке
+        index port index: 2 - RS485 (пока реализовано только для RS485)
+        buf указатель на буфер под полученный пакет
+        \param[in] bufSize размер переданного буфера
+        \param[in] firstByteTimeout время ожидания первого байта, мс
+        \param[in] nextByteTimeout время ожидания последующего байта, мс
+        \return количество прочитанных символов в пакете*/
 
-    CANInit(speed, active)
-    /*Инициализировать CAN шину*/
+    // Tags
+        TagWriteValue(const index, const value)
+        /*Запись значения в тег пользователя
+        index индекс тега пользователя
+        Индеск может принимать значения из диапазона `0x62` - `0x69`
+        value записываемой значение*/
 
-    CANEnableReception(enable)
-    /*Включить приём сообщений*/
+        TagWriteArray(const index, ...)
+        /*Запись буфера данных в массив пользователя
+        index индекс массива пользователя.
+        Индекс должен быть равен `0x6A`
+        size размер буфера данных
+        buf буфер данных*/
 
-    CANSetFilter(id, mask, type)
-    /*Установить фильтр*/
+    // CRC
+        CRC16(const buf[], const size, const crcinit)  // CRC-16-CCITT см. ниже
+        /*Подсчёт CRC-16
+        buf буфер для подсчёта
+        size размер буфера
+        crcinit начальное значение CRC, по умолчанию 0xFFFF
+        \return посчитанное значение CRC16*/
 
-    CANSend(const msg[CANMSG])
-    /*Послать сообщений*/
+        CRC8(const crcInit], const buf[], const size)
+        /*Подсчёт CRC-8 по полиному x^8 + x^7 + x^4 + x^0 (0x91)
+        //!
+        Посчёт CRC-8 буфера \a buf длиной \a size.
+        Начальное значение CRC8 устанавливается в \a crcInit.
+        Значение CRC-8 вычисляется, как разность 0xFF и результата данной функции CRC8()
+        crcInit начальное значение CRC
+        buf[] буфер для подсчёта
+        size размер буфера
+        \return посчитанное значение CRC8*/
 
-    CANReceive(msg[CANMSG])
-    /*Принять сообщение*/
+        CRC8_D5(const buf[], const size)
+        /*Подсчёт CRC-8 по полиному 0xD5
+        //!
+        Посчёт CRC-8 буфера \a buf длиной \a size.
+        buf[] буфер для подсчёта
+        size размер буфера
+        \return посчитанное значение CRC8*/
 
-    GetBinaryDataFromCommand(buf[], const bufSize)
-    /*получить бинарные данные из принятой команды
-    buf массив-приемник
-    bufSize размер массива-приемника*/
 
-    SocketOpen(const address[], const port, const timeout)
-    /*Открыть сокет и подключиться к серверу
-    const address[]
-    const port
-    const timeout*/
+    // CD-card
+        NextDir(const rootDir[], const lastDir[], res[], const resSize);
+        /*Ищем следующий каталог за заданным*/
 
-    SocketSend(const src[], const bytesToSend, &bytesSent, const timeout)
-    /*Отправить данные в ранее открытый сокет
-    const src[]
-    const bytesToSend
-    &bytesSent
-    const timeout*/
+        FileSize(const filename[]);
+        /*Получить размер файла
+        filename полное имя файла
+        \return размер файла, -1 - если файл не найден*/
 
-    SocketRecv(const dest[], const bufSize, &bytesRcvd, const timeout)
-    /*Получить данные из ранее открытого сокета
-    dest[]
-    const bufSize
-    &bytesRcvd
-    const timeout*/
+        FileRead(const filename[], buf[], const bufSize, const offset = 0);
+        /*Прочитать со смещением из файла в массив
+        filename полное имя файла
+        buf массив-приёмник
+        bufSize размер массива-приемника
+        offset смещение в файле, указывающее откуда начинать чтение
+        \return фактическое количество прочитанных байт*/
 
-    SocketClose()
-    /*Отключиться от сервера и закрыть сокет*/
+        FileWrite(const filename[], const buf[], const bufSize, const offset = -1);
+        /*Записать массив в файл со смещением
+        filename полное имя файла
+        buf массив-источник
+        bufSize размер массива-источника
+        offset смещение в файле, указывающее откуда начинать запись. -1 - записывать в конец файла
+        \return фактическое количество записа байт*/
+
+        FileDelete(const filename[]);
+        /*Удалить файл
+        filename полное имя файла
+        \return логическое значение операции удаления файла*/
+
+    // Coordinates
+        InZone(const lat, const lon, const angle, const delta, const radExt, const radInt);
+        /*Проверим находимся ли мы сейчас в геозоне автоинформатора*/
+        
+        SetFlagOfInvalidCoordinates(const enable);
+
+    // Command
+        ExecCommand(Cmd[]);
+        /*Выполнить команду*/
+
+        GetBinaryDataFromCommand(buf[], const bufSize);
+        /*получить бинарные данные из принятой команды
+        buf массив-приемник
+        bufSize размер массива-приемника*/
+
+        SendAnswer(const connectionId, const commandIndex, const answerBuf[], const answerSize, const dataBuf[], const dataSize);
+        /*Послать ответ на команду полученную от сервера мониторинга
+        connectionId идентификатор соединения
+        commandIndex номер команды, получаемый в теге `0xE0`
+        answerBuf буфер ответа, содержащий ответ на команду. Подразумевается ответ в виде текста, передаваемый в теге `0xE1`
+        answerSize размер буфера ответа
+        dataBuf буфер данных, содержащий двоичные данные. Передаются в теге `0xEB`
+        dataSize размер буфера данных. Если равен нулю, то тег с данными в ответе не передаётся*/
+
+    // CAN
+        CANInit(speed, active);
+        /*Инициализировать CAN шину*/
+
+        CANEnableReception(enable);
+        /*Включить приём сообщений*/
+
+        CANSetFilter(id, mask, type);
+        /*Установить фильтр*/
+
+        CANSend(const msg[CANMSG]);
+        /*Послать сообщений*/
+
+        CANReceive(msg[CANMSG]);
+        /*Принять сообщение*/
+
+    // TCP
+        SocketOpen(const address[], const port, const timeout);
+        /*Открыть сокет и подключиться к серверу
+        const address[]
+        const port
+        const timeout*/
+
+        SocketSend(const src[], const bytesToSend, &bytesSent, const timeout);
+        /*Отправить данные в ранее открытый сокет
+        const src[]
+        const bytesToSend
+        &bytesSent
+        const timeout*/
+
+        SocketRecv(const dest[], const bufSize, &bytesRcvd, const timeout);
+        /*Получить данные из ранее открытого сокета
+        dest[]
+        const bufSize
+        &bytesRcvd
+        const timeout*/
+
+        SocketClose();
+        /*Отключиться от сервера и закрыть сокет*/
+
+    // BLUETOOTH
+        BTInit();
+
+        BTReceive(msg[BTMSG], const timeout);
 
 // ===========================================================================
 //{ Библиотека вспомогательных функций GalileoSky ============================

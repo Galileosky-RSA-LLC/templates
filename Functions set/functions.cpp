@@ -589,6 +589,11 @@ BB  порт 21177
         diagnost1( "delay: %d ms", GetVar(UPTIME) - startTime );
      }
 
+    GS_abs(num)
+     {
+        return (num >= 0) ? num : -num
+     }
+
     /* Возведение в степень */
     GS_pow(num, p)
      {
@@ -601,7 +606,7 @@ BB  порт 21177
         if ( 1 == p )
             return buf1
 
-        for (new i = 0; i < p-1; ++i)
+        for (new i = 0; i < (p - 1); ++i)
          {
             buf1 *= buf2
          }
@@ -609,6 +614,36 @@ BB  порт 21177
         return buf1
      }
 
+    /*! Возвращает int из цифры в формате float32 стандарта IEEE754
+        \param numFloat число в формате float32 стандарта IEEE754
+        \return int
+        */
+    GS_floatToInt(numFloat)
+     {
+        new sign = (numFloat >> 31) ? -1 : 1;  /* Знак */
+        // Diagnostics("sign: %d", sign)
+
+        new exponent = (numFloat >> 23) & 0xFF;  /* Порядок */
+        // Diagnostics("exponent: %d", exponent)
+
+        new mantissa = (exponent) ? (numFloat & 0x7FFFFF) | 0x800000 : (numFloat & 0x7FFFFF) << 1  /* Мантисса */
+        // Diagnostics("mantissa: %d", mantissa >> 23)
+
+        new result = mantissa;
+        new p = exponent - 150;
+
+        if (p > 0)
+        {
+            result <<= p
+        }
+        if (p < 0)
+        {
+            result >>= -p
+        }
+
+        return result * sign;
+     }
+    
     /*! вставить символ в массив, обрабатываемого как строка, 
         и "перевести каретку вперед" (инкрементировать указатель позиции)
         \param dst{} массив, обрабатываемый как строка

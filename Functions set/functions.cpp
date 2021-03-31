@@ -614,34 +614,42 @@ BB  порт 21177
         return buf1
      }
 
-    /*! Возвращает int из цифры в формате float32 стандарта IEEE754 -- отбрасывает дробную часть
+    /*! Возвращает int из цифры в формате float32 стандарта IEEE754
         \param numFloat число в формате float32 стандарта IEEE754
+        \param definition точность после запятой - кол-во знаков
         \return int
         */
-    GS_floatToInt(numFloat)
+    GS_floatToInt(numFloat, definition)
      {
         new sign = (numFloat >> 31) ? -1 : 1;  /* Знак */
-        // Diagnostics("sign: %d", sign)
-
         new exponent = (numFloat >> 23) & 0xFF;  /* Порядок */
-        // Diagnostics("exponent: %d", exponent)
-
         new mantissa = (exponent) ? (numFloat & 0x7FFFFF) | 0x800000 : (numFloat & 0x7FFFFF) << 1  /* Мантисса */
-        // Diagnostics("mantissa: %d", mantissa >> 23)
+        new offset = exponent - 150;
+        new mult = 1
 
-        new result = mantissa;
-        new p = exponent - 150;
-
-        if (p > 0)
+        if (definition > 2)
         {
-            result <<= p
-        }
-        if (p < 0)
-        {
-            result >>= -p
+            definition = 2  // максимальное значение из-за ограничения размера мантиссы
         }
 
-        return result * sign;
+        while (definition > 0)
+        {
+            mult *= 10
+            definition--
+        }
+
+        mantissa *= mult;
+
+        if (offset > 0)
+        {
+            mantissa <<= offset
+        }
+        if (offset < 0)
+        {
+            mantissa >>= -offset
+        }
+
+        return sign * mantissa;
      }
 
     /*! вставить символ в массив, обрабатываемого как строка, 

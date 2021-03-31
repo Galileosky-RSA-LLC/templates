@@ -618,6 +618,7 @@ BB  порт 21177
         \param numFloat число в формате float32 стандарта IEEE754
         \param definition точность после запятой - кол-во знаков
         \return int
+        \example: Diagnostics("result: %d,%d", GS_floatToInt(num, 0), (GS_floatToInt(num, 2) % 100 + 5) / 10)
         */
     GS_floatToInt(numFloat, definition)
      {

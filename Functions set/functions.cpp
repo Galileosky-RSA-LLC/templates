@@ -614,7 +614,7 @@ BB  порт 21177
         return buf1
      }
 
-    /*! Возвращает int из цифры в формате float32 стандарта IEEE754
+    /*! Возвращает int из числа в формате float32 стандарта IEEE754
         \param numFloat число в формате float32 стандарта IEEE754
         \param definition точность после запятой - кол-во знаков
         \return int

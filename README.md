@@ -9,7 +9,7 @@
 - tag access (read / write)
 - access to graphical algorithm variables (read / write) used to run the script
 - access to global variables (read only)
-- orking with SD card files
+- working with SD card files
 
 It supports writing functional and imperative style code.
 

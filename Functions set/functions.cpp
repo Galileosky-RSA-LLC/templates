@@ -1,59 +1,59 @@
 193.193.165.165
-GS7 порт 21423 
-BB  порт 21177
+GS7 порт 21423 ---- GS7 21423 port
+BB  порт 21177 ---- BB 21177 port 
 
-/*! Теги Виалон (Идентификаторы пользовательского массива):"
-    0x01 зарезервирован
-    0x02 данные счетчика Меркурий
-    0x03 данные тахографа
-    0x04 устройство СЕНС
-    0x05 устройство СКВТ-М (в разработке)
-    0x06 Система измерения давления в шинах (TPMS) датчик TD5300A-X-04
-    0x07 Расходомер Eurosens Delta
-    0x08 Частота с ДУТ
-    0x09 данные с электросчетчиков
-    0x0A датчики пассажиропотока
-    0x0B адаптер ЛИН-RS485 для устройств СЕНС
-    0x0C Информация от VIMS
-    0x0D Maple (ответы на команды)
-    0x0E зарезервирован
-    0x0F зарезервирован
-    0xEE Текстовые данные
+/*! Теги Виалон (Идентификаторы пользовательского массива):" ---- Wialon Tags (User Array Identifiers):"
+    0x01 зарезервирован ---- reserved
+    0x02 данные счетчика Меркурий ---- Mercury meter data
+    0x03 данные тахографа ---- tachograph data
+    0x04 устройство СЕНС ---- SENS device
+    0x05 устройство СКВТ-М (в разработке) ---- SCVT-M device ( in progress)
+    0x06 Система измерения давления в шинах (TPMS) датчик TD5300A-X-04 ---- Tyre Pressure Monitoring System (TPMS) sensor TD5300A-X-04
+    0x07 Расходомер Eurosens Delta ---- Eurosens Delta flowmeter
+    0x08 Частота с ДУТ ---- Frequency from FLS
+    0x09 данные с электросчетчиков ---- Electric meter data
+    0x0A датчики пассажиропотока ---- Passenger counting sensors
+    0x0B адаптер ЛИН-RS485 для устройств СЕНС ---- LIN-RS485 adapter for SENS devices
+    0x0C Информация от VIMS ---- VIMS information
+    0x0D Maple (ответы на команды) ---- Maple (command responses)
+    0x0E зарезервирован ---- reserved
+    0x0F зарезервирован ---- reserved
+    0xEE Текстовые данные ---- Text data
     */
 
-/*! номера ошибок в ИЗИ ЛОДЖИК
+/*! номера ошибок в ИЗИ ЛОДЖИК ---- error codes in Easy Logic
     AMX_ERR_NONE,
-    // reserve the first 15 error codes for exit codes of the abstract machine
-    AMX_ERR_EXIT,         // forced exit /
-    AMX_ERR_ASSERT,       // assertion failed /
-    AMX_ERR_STACKERR,     // stack/heap collision /
-    AMX_ERR_BOUNDS,       // index out of bounds /
-    AMX_ERR_MEMACCESS,    // invalid memory access /
-    AMX_ERR_INVINSTR,     // invalid instruction /
-    AMX_ERR_STACKLOW,     // stack underflow /
-    AMX_ERR_HEAPLOW,      // heap underflow /
-    AMX_ERR_CALLBACK,     // no callback, or invalid callback /
-    AMX_ERR_NATIVE,       // native function failed /
-    AMX_ERR_DIVIDE,       // divide by zero /
-    AMX_ERR_SLEEP,        // go into sleepmode - code can be restarted /
-    AMX_ERR_INVSTATE,     // no implementation for this state, no fall-back /
+    // reserve the first 15 error codes for exit codes of the abstract machine ---- 
+    AMX_ERR_EXIT,         // forced exit ---- принудительный выход /
+    AMX_ERR_ASSERT,       // assertion failed ---- подтверждение не выполнено /
+    AMX_ERR_STACKERR,     // stack/heap collision ---- столкновение heap и стека /
+    AMX_ERR_BOUNDS,       // index out of bounds ---- выход массива за пределы диапазона /
+    AMX_ERR_MEMACCESS,    // invalid memory access ----  недопустимое обращение к памяти /
+    AMX_ERR_INVINSTR,     // invalid instruction ---- недопустимая инструкция /
+    AMX_ERR_STACKLOW,     // stack underflow ---- обращение к несуществующей области стека /
+    AMX_ERR_HEAPLOW,      // heap underflow ---- обращение к несуществующей области heap /
+    AMX_ERR_CALLBACK,     // no callback, or invalid callback ---- нет обратного вызова, или некорректный обратный вызов /
+    AMX_ERR_NATIVE,       // native function failed ---- платформенно-ориентированная функция не выполнена /
+    AMX_ERR_DIVIDE,       // divide by zero ---- деление на ноль /
+    AMX_ERR_SLEEP,        // go into sleepmode - code can be restarted ---- переход в спящий режим - код может быть возобновлен /
+    AMX_ERR_INVSTATE,     // no implementation for this state, no fall-back ---- нет реализации для этого состояния, нет запасного варианта /
 
-    AMX_ERR_MEMORY = 16,  // out of memory /
-    AMX_ERR_FORMAT,       // invalid file format /
-    AMX_ERR_VERSION,      // file is for a newer version of the AMX /
-    AMX_ERR_NOTFOUND,     // function not found /
-    AMX_ERR_INDEX,        // invalid index parameter (bad entry point) /
-    AMX_ERR_DEBUG,        // debugger cannot run /
-    AMX_ERR_INIT,         // AMX not initialized (or doubly initialized) /
-    AMX_ERR_USERDATA,     // unable to set user data field (table full) /
-    AMX_ERR_INIT_JIT,     // cannot initialize the JIT /
-    AMX_ERR_PARAMS,       // parameter error /
-    AMX_ERR_DOMAIN,       // domain error, expression result does not fit in range /
-    AMX_ERR_GENERAL,      // general error (unknown or unspecific error) /
-    AMX_ERR_OVERLAY,      // overlays are unsupported (JIT) or uninitialized
+    AMX_ERR_MEMORY = 16,  // out of memory ---- недостаточно памяти /
+    AMX_ERR_FORMAT,       // invalid file format ---- некорректный формат файла /
+    AMX_ERR_VERSION,      // file is for a newer version of the AMX ---- файл для более новой версии AMX /
+    AMX_ERR_NOTFOUND,     // function not found ---- функция не найдена/
+    AMX_ERR_INDEX,        // invalid index parameter (bad entry point) ---- недопустимый параметр индекса (некорректная точка входа) /
+    AMX_ERR_DEBUG,        // debugger cannot run ---- отладчик не может быть запущен /
+    AMX_ERR_INIT,         // AMX not initialized (or doubly initialized) ---- AMX не инициализирован (или дважды инициализирован) /
+    AMX_ERR_USERDATA,     // unable to set user data field (table full) ---- невозможно установить поле данных пользователя (таблица заполнена) /
+    AMX_ERR_INIT_JIT,     // cannot initialize the JIT---- невозможно инициализировать JIT /
+    AMX_ERR_PARAMS,       // parameter error ---- ошибка параметра /
+    AMX_ERR_DOMAIN,       // domain error, expression result does not fit in range ---- ошибка домена, результат выражения не вписывается в диапазон /
+    AMX_ERR_GENERAL,      // general error (unknown or unspecific error) ---- общая ошибка (неизвестная или неспецифическая ошибка) /
+    AMX_ERR_OVERLAY,      // overlays are unsupported (JIT) or uninitialized ---- оверлеи не поддерживаются (JIT) или не инициализированы
     */
 
-/*! Частые команды:
+/*! Частые команды: ---- Frequent Commands:
     fslist /Pic
 
     reset
@@ -76,24 +76,24 @@ BB  порт 21177
     erasecfg
 
     log
-        битовые флаги:
+        битовые флаги: ---- bit flags:
             _CRERR = 0      , //0
-            _TEST_O         , //1  тест прибора включен
+            _TEST_O         , //1  тест прибора включен ---- device test is on
             _RESERV0        , //2
             _RESERV1        , //3
             _RESERV2        , //4
             //---------------
-            _STAR           , //5  выводится всегда звезда
-            _TIME           , //6  периодический вывод времени (период 10 секунд)
+            _STAR           , //5  выводится всегда звезда ---- star is always output
+            _TIME           , //6  периодический вывод времени (период 10 секунд) ---- intermittent time output (period of 10 seconds)
             //---------------
-            _GPS            , //7  обычная диагностика GPS
-            _GPS_F          , //8  полная диагностика GPS
+            _GPS            , //7  обычная диагностика GPS ---- idle GPS diagnostics
+            _GPS_F          , //8  полная диагностика GPS ---- full GPS diagnostics
             //---------------
-            _GPRS           , //9  обычная диагностика GPRS
-            _GPRS_F         , //10 полная диагностика GPRS
+            _GPRS           , //9  обычная диагностика GPRS ---- idle GPRS diagnostics
+            _GPRS_F         , //10 полная диагностика GPRS ---- full GPRS diagnostics
             //---------------
-            _MEM            , //11 обычная диагностика памяти треков
-            _MEM_F          , //12 полная диагностика памяти треков
+            _MEM            , //11 обычная диагностика памяти треков ---- idle track memory diagnostics
+            _MEM_F          , //12 полная диагностика памяти треков ---- full track memory diagnostics
             //---------------
             _AUTOINF        , //13
             _WIFI           , //14
@@ -107,8 +107,8 @@ BB  порт 21177
             _RS232_1        , //19
             _RS232_1_F      , //20
             //---------------
-            _GPS_O          , //21 только диагностика GPS
-            _GPRS_O         , //22 только диагностика GPRS
+            _GPS_O          , //21 только диагностика GPS ---- only GPS diagnostics
+            _GPRS_O         , //22 только диагностика GPRS ---- only GPRS diagnostics
             _1WIRE          , //23
             _ACC            , //24
             _SPUTNIK        , //25
@@ -118,9 +118,10 @@ BB  порт 21177
             _BT               //29
     */
 
-//=============================================
-//============== тэги для записи ==============
-//=============================================
+//=======================================================
+//============== тэги для записи ========================
+//============== tags for writing =======================
+//=======================================================
     // CAN 8 BIT R ..
     #define CAN8BITR_0 0x02
     #define CAN8BITR_1 0x03
@@ -189,7 +190,7 @@ BB  порт 21177
     #define CAN32BITR_14 0x60
 
 
-    // Users Tags
+    // Users Tags ---- Пользовательские теги
     #define UserTag_0 0x62
     #define UserTag_1 0x63
     #define UserTag_2 0x64
@@ -278,9 +279,10 @@ BB  порт 21177
     #define BLUE_TOOTH_61 0xAD
     #define BLUE_TOOTH_62 0xAE
     #define BLUE_TOOTH_63 0xAF
-//=============================================
-//============== тэги для чтения ==============
-//=============================================
+//=======================================================
+//============== тэги для чтения ========================
+//============== tags for reading =======================
+//=======================================================
     // USER_TAG0
     // USER_TAG1
     // USER_TAG2
@@ -297,274 +299,274 @@ BB  порт 21177
     // BLUETOOTH_№..
     // BLUETOOTH_62
     // BLUETOOTH_63
-    //=============================================
-    // === в остальных просто убрать последнее ====
-    // ========== нижнее подчёркивание ============
-    //=============================================
+    //===============================================================
+    // == в остальных просто убрать последнее нижнее подчёркивание ==
+    // ==== other tags should just not have the last underscore =====
+    //===============================================================
 
-// Встроенные функции
+// Встроенные функции ---- Built-in functions
     Delay(const value);
-    /*Задержка работы алгоритма
-    value время задержки в миллисекундах*/
+    /*Задержка работы алгоритма ---- algorithm operation delay
+    value время задержки в миллисекундах ---- value delay time in milliseconds*/
 
     SavePoint();
-    /*Сохранение точки в архиве*/
+    /*Сохранение точки в архиве ---- Saving point in the archive*/
 
     min(const value1, const value2);
-    /*Получить минимум из двух значений
-    value1 значение 1
-    value2 значение 2
-    \return минимум из двух значений*/
+    /*Получить минимум из двух значений ---- Get the minimum of two values
+    value1 значение 1 ---- value 1
+    value2 значение 2 ---- value 2
+    \return минимум из двух значений ---- the minimum of two values*/
 
     Rand(const min, const max);
 
     swapBuf(buf{}, const size);
-    /*Инвертировать каждые 4 байта массива
+    /*Инвертировать каждые 4 байта массива ----- Invert every 4 bytes of the array
     //!
     Преобразование LittleEndiang<->BigEndian
-    \param[inout] buf{} буфер для преобразования
-    size размер буфера*/
+    \param[inout] buf{} буфер для преобразования ---- conversion buffer
+    size размер буфера ---- buffer size*/
 
     getIntFromBuf(const buf{}, const index);
-    /*Получить число (4-х-байтовый int) из буфера по позиции
+    /*Получить число (4-х-байтовый int) из буфера по позиции ----- Get a number (4-byte int) from the buffer by position
     //!
-    Число в буфере извлечено в формате LittleEndian
-    buf{} буфер, из которого будет извлекаться число
-    index индекс байта, начиная с которого располагается число в массиве
-    \return число, извлечённое из буфера*/
+    Число в буфере извлечено в формате LittleEndian ---- The number in the buffer is extracted in LittleEndian format
+    buf{} буфер, из которого будет извлекаться число ---- the buffer from which the number will be extracted
+    index индекс байта, начиная с которого располагается число в массиве ---- byte index starting from which the number in the array is located
+    \return число, извлечённое из буфера ---- number extracted from the buffer*/
 
     GetIMEI(res[], const resSize);
-    /*Получим IMEI*/
+    /*Получим IMEI ---- Getting IMEI*/
 
     GetUnsentPackets();
-    /*Получить количество еще не отправленных пакетов. Работает только при отправке пакетов в хронологическом порядке*/
+    /*Получить количество еще не отправленных пакетов. Работает только при отправке пакетов в хронологическом порядке ---- Get the unsent packets number. Works only when packets are sent in the chronological order*/
 
     NewPhoto(const filename[]);
-    /*Оповещение прошивки, что сделан новый снимок фотокамерой
-    filename полное имя файла*/
+    /*Оповещение прошивки, что сделан новый снимок фотокамерой ---- Firmware notification that a new photo was taken with the camera
+    filename полное имя файла --- file full name*/
 
     PlayAudio(const filename[]);
-    /*Воспроизвести аудио файл
-    filename полное имя файла*/
+    /*Воспроизвести аудио файл ---- Play Audio
+    filename полное имя файла ---- file full name*/
 
     setAutoinformerRoute(Dir[]);
-    /*Переключаем маршрут в Автоинформаторе*/
+    /*Переключаем маршрут в Автоинформаторе ---- Switching the route in the Autoinformer*/
 
-    // Diagnostics
+    // Diagnostics ---- Диагностика
         Diagnostics(const message[], ...);
-        /*Вывод строчки в Диагностику алгоритмов
-        message Сообщение для вывода, например "Var1=%d, Var2=%d" (см. printf)
-        ... Можно указывать два дополнительных параметра для вставки в сообщение: "%d" вывод целого числа
-        Старайтесь выводить диагностику короткими строчками
-        Например: Diagnostics("Dev. Req.: %d", REQUEST_SIZE)
-        Это уменьшит размер скрипта и скорость вывода диагностики*/
+        /*Вывод строчки в Диагностику алгоритмов ---- Line output in the Algorithm Diagnostics
+        message Сообщение для вывода, например "Var1=%d, Var2=%d" (см. printf) ---- Message to output, for example "Var1=%d, Var2=%d" (see printf)
+        ... Можно указывать два дополнительных параметра для вставки в сообщение: "%d" вывод целого числа ---- Two additional parameters can be specified for inserting into the message: "%d" the output of an integer
+        Старайтесь выводить диагностику короткими строчками ---- Try to display the diagnostics in short lines
+        Например/Example: Diagnostics("Dev. Req.: %d", REQUEST_SIZE)
+        Это уменьшит размер скрипта и скорость вывода диагностики ---- This will reduce the size of the script and the speed of the diagnostic output*/
 
         DiagnosticsHex(const buf[], const size);
-        /*Вывод массива в Диагностику алгоритмов в шестнадцатеричном виде
-        buf[] буфер выводимого массива
-        size размер буфера*/
+        /*Вывод массива в Диагностику алгоритмов в шестнадцатеричном виде ---- Output the array to the Algorithm Diagnostic in hexadecimal form
+        buf[] буфер выводимого массива ---- output array buffer
+        size размер буфера ---- buffer size*/
 
-    // Inputs
+    // Inputs --- Входы
         DisablePulseCounting(const inputNum, const disabled);
-        /*Отключение подсчёта импульсов на входе
-        inputNum номер входа, на котором будет произведено обнуление счётчика
-        disabled true - отключить подсчёт импульсов
-        disabled false - включить подсчёт импульсов*/
+        /*Отключение подсчёта импульсов на входе ---- Disable input pulse counting
+        inputNum номер входа, на котором будет произведено обнуление счётчика ---- the number of the input on which the counter will be reset
+        disabled true - отключить подсчёт импульсов ---- disable pulse counting
+        disabled false - включить подсчёт импульсов ---- enable pulse counting*/
 
         NullInput(const inputNum);
-        /*Обнуление счётчика на входе
-        inputNum номер входа, на котором будет произведено обнуление счётчика*/
+        /*Обнуление счётчика на входе ---- Reset the counter on the input
+        inputNum номер входа, на котором будет произведено обнуление счётчика ---- the number of the input on which the counter will be reset*/
 
         SetOutputValue(const outputNum, const value);
-        /*Установить состояние выхода
-        outputNum номер выхода
-        value устанавливаемое состояние*/
+        /*Установить состояние выхода ---- Set Output Value
+        outputNum номер выхода ---- output number
+        value устанавливаемое состояние ---- setting state*/
 
-    // Variables
+    // Variables - Переменные
         GetVar(const name);
-        /*Получение тега, значения глобальной или системной переменной
-        name Имя переменной
-        \return значение указанной переменной*/
+        /*Получение тега, значения глобальной или системной переменной ---- Getting a tag, global or system variable value
+        name Имя переменной ---- variable name 
+        \return значение указанной переменной ---- value of the specified variable*/
 
         SetVar(const name, const value);
-        /*Установка значения глобальной или системной переменной
-        name Имя переменной
-        value устанавливаемое значение*/
+        /*Установка значения глобальной или системной переменной ---- Set the value of a global or system variable
+        name Имя переменной ---- variable name
+        value устанавливаемое значение ---- setting value*/
 
-    // Tags write
+    // Tags write ---- Запись в теги
         TagWriteValue(const index, const value);
-        /*Запись значения в тег пользователя
-        index индекс тега пользователя
-        Индеск может принимать значения из диапазона `0x62` - `0x69`
-        value записываемой значение*/
+        /*Запись значения в тег пользователя ---- Writing a value to a user tag
+        index индекс тега пользователя ----- user tag index
+        Индекс может принимать значения из диапазона `0x62` - `0x69` ---- Index can take values ranging from `0x62` to `0x69`
+        value записываемой значение ---- recorded value*/
 
         TagWriteArray(const index, ...);
-        /*Запись буфера данных в массив пользователя
-        index индекс массива пользователя.
-        Индекс должен быть равен `0x6A`
-        size размер буфера данных
-        buf буфер данных*/
+        /*Запись буфера данных в массив пользователя ---- Writing a data buffer to a user array
+        index индекс массива пользователя. ---- user array index.
+        Индекс должен быть равен `0x6A` ---- The index must be equal to `0x6A`
+        size размер буфера данных ---- data buffer size
+        buf буфер данных ---- data buffer*/
 
-    // Digital ports
+    // Digital ports ---- Цифровые порты
         PortInit(const index, const speed, const bufSize);
-        /*Инициализация порта
+        /*Инициализация порта ---- Port initialization
         index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
         speed port speed: 19200
         bufSize size of input buffer
-        stopBits количество стоповых бит:
-            0 - 1 стоповый бит (по умолчанию)
-            1 - 2 стоповых бита
-        parity контроль по чётности:
-            0 - без контроля чётности (по умолчанию)
-            1 - контроль по нечётности - odd
-            2 - контроли по чётности - even
-        packetMode контроль по чётности:
-            0 - без разделения на пакеты (по умолчанию)
-            1 - с разделением на пакеты, временной интервал между пакетами составляет 729 мс*/
+        stopBits количество стоповых бит: ---- Stop bit number:
+            0 - 1 стоповый бит (по умолчанию) ---- 1 stop bit (default)
+            1 - 2 стоповых бита ---- 2 stop bits
+        parity контроль по чётности: ---- parity check:
+            0 - без контроля чётности (по умолчанию) ---- without parity check (default)
+            1 - контроль по нечётности - odd ---- odd parity check - odd
+            2 - контроли по чётности - even ---- even parity check - even
+        packetMode пакетный режим: ---- packet mode:
+            0 - без разделения на пакеты (по умолчанию) ---- without splitting into packets (default)
+            1 - с разделением на пакеты, временной интервал между пакетами составляет 729 мс ---- with packet split, the time interval between packets is 729 ms */
 
         PortRead(const index, &char, const timeout);
-        /*Чтение символа из порта
+        /*Чтение символа из порта ---- Reading a character from a port
         index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-        \param[out] char received character
-        timeout wait timeout of the next character
-        \retval 0 - символ не прочитан по истечении тайм-аута
-        \retval !=0 - символ прочитан*/
+        \param[out] char received character ---- полученный символ
+        timeout wait timeout of the next character ---- период ожидания следующего символа
+        \retval 0 - символ не прочитан по истечении тайм-аута ---- the symbol is not read after the timeout expires
+        \retval !=0 - символ прочитан ---- the symbol is read */
 
         PortWrite(const index, const buf[], const size);
-        /*Запись данных из буфера в порт
+        /*Запись данных из буфера в порт ---- Writing data from the buffer to the port
         index port index: 0 - RS232_0, 1 - RS232_1, 2 - RS485
-        buf buffer to send
-        size buffer size*/
+        buf buffer to send ---- отправляемый буфер
+        size buffer size ---- размер буфера*/
 
         PortReadPackage(const index, &char, const timeout);
-        /*Чтение пакетов из порта, разделённых по временной задержке
-        index port index: 2 - RS485 (пока реализовано только для RS485)
-        buf указатель на буфер под полученный пакет
-        \param[in] bufSize размер переданного буфера
-        \param[in] firstByteTimeout время ожидания первого байта, мс
-        \param[in] nextByteTimeout время ожидания последующего байта, мс
-        \return количество прочитанных символов в пакете*/
+        /*Чтение пакетов из порта, разделённых по временной задержке ---- Reading packets from a port split by time delay
+        index port index: 2 - RS485 (пока реализовано только для RS485) ---- (only for RS485 so far)
+        buf указатель на буфер под полученный пакет ---- pointer to the buffer under the received packet
+        \param[in] bufSize размер переданного буфера ---- transferred buffer size
+        \param[in] firstByteTimeout время ожидания первого байта, мс ---- waiting time of the first byte, ms
+        \param[in] nextByteTimeout время ожидания последующего байта, мс ---- waiting time for the next byte, ms
+        \return количество прочитанных символов в пакете ----- the number of read characters in the packet*/
 
     // CRC
-        CRC16(const buf[], const size, const crcinit);  // CRC-16-CCITT см. ниже
-        /*Подсчёт CRC-16
-        buf буфер для подсчёта
-        size размер буфера
-        crcinit начальное значение CRC, по умолчанию 0xFFFF
-        \return посчитанное значение CRC16*/
+        CRC16(const buf[], const size, const crcinit);  // CRC-16-CCITT см. ниже ---- see below
+        /*Подсчёт CRC-16 ---- CRC-16 Counting
+        buf буфер для подсчёта ---- counting buffer
+        size размер буфера ---- buffer size 
+        crcinit начальное значение CRC, по умолчанию 0xFFFF ---- Initial CRC value, default is 0xFFFFFF
+        \return посчитанное значение CRC16 ---- counted value of CRC16*/
 
         CRC8(const crcInit], const buf[], const size);
-        /*Подсчёт CRC-8 по полиному x^8 + x^7 + x^4 + x^0 (0x91)
+        /*Подсчёт CRC-8 по полиному x^8 + x^7 + x^4 + x^0 (0x91) ---- Counting of CRC-8 by polynomial x^8 + x^7 + x^4 + x^0 (0x91)
         //!
-        Посчёт CRC-8 буфера \a buf длиной \a size.
-        Начальное значение CRC8 устанавливается в \a crcInit.
-        Значение CRC-8 вычисляется, как разность 0xFF и результата данной функции CRC8()
-        crcInit начальное значение CRC
-        buf[] буфер для подсчёта
-        size размер буфера
-        \return посчитанное значение CRC8*/
+        Посчёт CRC-8 буфера \a buf длиной \a size. ---- CRC-8 counting of a buffer \a buf of length \a size.
+        Начальное значение CRC8 устанавливается в \a crcInit. ---- The initial value of CRC8 is set to \a crcInit.
+        Значение CRC-8 вычисляется, как разность 0xFF и результата данной функции CRC8() ---- The CRC-8 value is counted as the difference between 0xFF and the result of this function CRC8()
+        crcInit начальное значение CRC ---- initial CRC value
+        buf[] буфер для подсчёта ---- counting buffer
+        size размер буфера ---- buffer size
+        \return посчитанное значение CRC8 ---- counted value of CRC8*/
 
         CRC8_D5(const buf[], const size);
-        /*Подсчёт CRC-8 по полиному 0xD5
+        /*Подсчёт CRC-8 по полиному 0xD5 ---- Counting of CRC-8 by polynomial 0xD5
         //!
-        Посчёт CRC-8 буфера \a buf длиной \a size.
-        buf[] буфер для подсчёта
-        size размер буфера
-        \return посчитанное значение CRC8*/
+        Посчёт CRC-8 буфера \a buf длиной \a size. ---- CRC-8 counting of a buffer \a buf of length \a size.
+        buf[] буфер для подсчёта ---- counting buffer
+        size размер буфера ---- buffer size
+        \return посчитанное значение CRC8 ---- counted value of CRC8*/
 
     // CD-card
         NextDir(const rootDir[], const lastDir[], res[], const resSize);
-        /*Ищем следующий каталог за заданным*/
+        /*Ищем следующий каталог за заданным ---- Search for the next directory after the given one*/
 
         FileSize(const filename[]);
-        /*Получить размер файла
-        filename полное имя файла
-        \return размер файла, -1 - если файл не найден*/
+        /*Получить размер файла ---- Get file size
+        filename полное имя файла ---- full file name
+        \return размер файла, -1 - если файл не найден ---- file size, -1 If the file is not found*/
 
         FileRead(const filename[], buf[], const bufSize, const offset = 0);
-        /*Прочитать со смещением из файла в массив
-        filename полное имя файла
-        buf массив-приёмник
-        bufSize размер массива-приемника
-        offset смещение в файле, указывающее откуда начинать чтение
-        \return фактическое количество прочитанных байт*/
+        /*Прочитать со смещением из файла в массив ---- Read offset from a file to an array
+        filename полное имя файла ---- full file name
+        buf массив-приёмник ---- receiver array
+        bufSize размер массива-приемника ---- receiver array size
+        offset смещение в файле, указывающее откуда начинать чтение ---- file offset, indicating where to start reading from
+        \return фактическое количество прочитанных байт ---- actual number of bytes read*/
 
         FileWrite(const filename[], const buf[], const bufSize, const offset = -1);
-        /*Записать массив в файл со смещением
-        filename полное имя файла
-        buf массив-источник
-        bufSize размер массива-источника
-        offset смещение в файле, указывающее откуда начинать запись. -1 - записывать в конец файла
-        \return фактическое количество записа байт*/
+        /*Записать массив в файл со смещением ---- Write an array to the file with an offset
+        filename полное имя файла ---- full file name
+        buf массив-источник ---- source array
+        bufSize размер массива-источника ---- source array size
+        offset смещение в файле, указывающее откуда начинать запись. -1 - записывать в конец файла ---- offset in the file, indicating where to start writing. -1 - write to the end of the file
+        \return фактическое количество записа байт ---- actual number of written bytes*/
 
         FileDelete(const filename[]);
-        /*Удалить файл
-        filename полное имя файла
-        \return логическое значение операции удаления файла*/
+        /*Удалить файл ---- Delete File 
+        filename полное имя файла ---- full file name
+        \return логическое значение операции удаления файла ---- logical value of the file deletion operation*/
 
-    // Coordinates
+    // Coordinates ---- Координаты
         InZone(const lat, const lon, const angle, const delta, const radExt, const radInt);
-        /*Проверим находимся ли мы сейчас в геозоне автоинформатора*/
+        /*Проверим находимся ли мы сейчас в геозоне автоинформатора ---- Check if the device is now in the geofence of the autoinformer*/
         
         SetFlagOfInvalidCoordinates(const enable);
 
-    // Command
+    // Command ---- Команды
         ExecCommand(Cmd[]);
-        /*Выполнить команду*/
+        /*Выполнить команду ---- Execute a command*/
 
         GetBinaryDataFromCommand(buf[], const bufSize);
-        /*получить бинарные данные из принятой команды
-        buf массив-приемник
-        bufSize размер массива-приемника*/
+        /*получить бинарные данные из принятой команды ---- get the binary data from the received command
+        buf массив-приемник ---- receiver array
+        bufSize размер массива-приемника ---- receiver array size*/
 
         SendAnswer(const connectionId, const commandIndex, const answerBuf[], const answerSize, const dataBuf[], const dataSize);
-        /*Послать ответ на команду полученную от сервера мониторинга
-        connectionId идентификатор соединения
-        commandIndex номер команды, получаемый в теге `0xE0`
-        answerBuf буфер ответа, содержащий ответ на команду. Подразумевается ответ в виде текста, передаваемый в теге `0xE1`
-        answerSize размер буфера ответа
-        dataBuf буфер данных, содержащий двоичные данные. Передаются в теге `0xEB`
-        dataSize размер буфера данных. Если равен нулю, то тег с данными в ответе не передаётся*/
+        /*Послать ответ на команду полученную от сервера мониторинга ---- Send a response to a command received from the monitoring server
+        connectionId идентификатор соединения ---- connection identifier
+        commandIndex номер команды, получаемый в теге `0xE0` ---- command number received in the tag `0xE0`
+        answerBuf буфер ответа, содержащий ответ на команду. Подразумевается ответ в виде текста, передаваемый в теге `0xE1` ---- response buffer containing the response to the command. It is understood as a response in the text, which is transmitted in the tag `0xE1`
+        answerSize размер буфера ответа ---- response buffer size
+        dataBuf буфер данных, содержащий двоичные данные. Передаются в теге `0xEB` ---- data buffer containing binary data. Transmitted in the tag `0xEB`
+        dataSize размер буфера данных. Если равен нулю, то тег с данными в ответе не передаётся ---- data buffer size. If it is zero, the tag with the data in the response is not transmitted*/
 
     // CAN
         CANInit(speed, active);
-        /*Инициализировать CAN шину*/
+        /*Инициализировать CAN шину --- CAN bus initialization*/
 
         CANEnableReception(enable);
-        /*Включить приём сообщений*/
+        /*Включить приём сообщений ---- Enable message reception*/
 
         CANSetFilter(id, mask, type);
-        /*Установить фильтр*/
+        /*Установить фильтр ---- Set Filter*/
 
         CANSend(const msg[CANMSG]);
-        /*Послать сообщений*/
+        /*Послать сообщений ---- Send a message*/
 
         CANReceive(msg[CANMSG]);
-        /*Принять сообщение*/
+        /*Принять сообщение ---- Receive a message*/
 
     // TCP
         SocketOpen(const address[], const port, const timeout);
-        /*Открыть сокет и подключиться к серверу
+        /*Открыть сокет и подключиться к серверу ---- Open a socket and connect to the server
         const address[]
         const port
         const timeout*/
 
         SocketSend(const src[], const bytesToSend, &bytesSent, const timeout);
-        /*Отправить данные в ранее открытый сокет
+        /*Отправить данные в ранее открытый сокет ---- Send data to a previously opened socket
         const src[]
         const bytesToSend
         &bytesSent
         const timeout*/
 
         SocketRecv(const dest[], const bufSize, &bytesRcvd, const timeout);
-        /*Получить данные из ранее открытого сокета
+        /*Получить данные из ранее открытого сокета ---- get data from a previously opened socket
         dest[]
         const bufSize
         &bytesRcvd
         const timeout*/
 
         SocketClose();
-        /*Отключиться от сервера и закрыть сокет*/
+        /*Отключиться от сервера и закрыть сокет ---- Disconnect from the server and close the socket*/
 
     // BLUETOOTH
         BTInit();
@@ -573,8 +575,9 @@ BB  порт 21177
 
 // ===========================================================================
 //{ Библиотека вспомогательных функций GalileoSky ============================
+//{ GalileoSky auxiliary function library ====================================
 // ===========================================================================
-    /*! более точный */
+    /*! более точный ---- more accurate */
     delayTime(time)
      {
         const step = 10;
@@ -594,7 +597,7 @@ BB  порт 21177
         return (num >= 0) ? num : -num
      }
 
-    /* Возведение в степень */
+    /* Возведение в степень --- Exponentiation */
     GS_pow(num, p)
      {
         new buf1 = num
@@ -614,23 +617,23 @@ BB  порт 21177
         return buf1
      }
 
-    /*! Возвращает int из числа в формате float32 стандарта IEEE754
-        \param numFloat число в формате float32 стандарта IEEE754
-        \param definition точность после запятой - кол-во знаков
+    /*! Возвращает int из числа в формате float32 стандарта IEEE754 ---- Returning int from the IEEE754 standard float 32 format number
+        \param numFloat число в формате float32 стандарта IEEE754 ---- IEEE754 standard float 32 format number
+        \param definition точность после запятой - кол-во знаков ---- number of decimal places
         \return int
         \example: Diagnostics("result: %d,%d", GS_floatToInt(num, 0), (GS_floatToInt(num, 2) % 100 + 5) / 10)
         */
     GS_floatToInt(numFloat, definition)
      {
-        new sign = (numFloat >> 31) ? -1 : 1;  /* Знак */
-        new exponent = (numFloat >> 23) & 0xFF;  /* Порядок */
-        new mantissa = (exponent) ? (numFloat & 0x7FFFFF) | 0x800000 : (numFloat & 0x7FFFFF) << 1  /* Мантисса */
+        new sign = (numFloat >> 31) ? -1 : 1;  /* Знак ---- Sign*/
+        new exponent = (numFloat >> 23) & 0xFF;  /* Порядок ---- Exponent*/
+        new mantissa = (exponent) ? (numFloat & 0x7FFFFF) | 0x800000 : (numFloat & 0x7FFFFF) << 1  /* Мантисса ---- Mantissa*/
         new offset = exponent - 150;
         new mult = 1
 
         if (definition > 2)
         {
-            definition = 2  // максимальное значение из-за ограничения размера мантиссы
+            definition = 2  // максимальное значение из-за ограничения размера мантиссы ---- maximum value depending on the mantissa size restriction
         }
 
         while (definition > 0)
@@ -653,13 +656,13 @@ BB  порт 21177
         return sign * mantissa;
      }
 
-    /*! вставить символ в массив, обрабатываемого как строка, 
-        и "перевести каретку вперед" (инкрементировать указатель позиции)
-        \param dst{} массив, обрабатываемый как строка
-        \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-        \param d_len длина массива 
-        \param c переменная (символ) для вставки
-        \retval не забудьте, что аргумент d_pos будет инкрементирован
+    /*! вставить символ в массив, обрабатываемого как строка, ---- inserting a character into an array processed as a string
+        и "перевести каретку вперед" (инкрементировать указатель позиции) ---- and "moving the carriage forward" (incrementing the position pointer)
+        \param dst{} массив, обрабатываемый как строка ---- an array processed as a string
+        \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) ---- an array element where the symbol should be written (TRANSMITTED VIA THE LINK)
+        \param d_len длина массива ---- an array length
+        \param c переменная (символ) для вставки ---- a variable (symbol) to insert
+        \retval не забудьте, что аргумент d_pos будет инкрементирован ---- please note that the d_pos argument will be incremented
         */
     GS_appendC(dst{}, &d_pos, d_len, c)
      {
@@ -670,15 +673,15 @@ BB  порт 21177
          }
      }
 
-    /*! вставить массив в другой массив (присоединить строку) 
-        и "перевести каретку" (инкрементировать указатель позиции)
-        \param dst{} массив, куда копируется содержимое второго массива
-        \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-        \param d_len длина принимающего массива
-        \param src{} массив для вставки
-        \param s_len длина массива для вставки
-        \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива
-        */
+    /*! вставить массив в другой массив (присоединить строку) ---- inserting an array into a different array (attaching a line)
+        и "перевести каретку" (инкрементировать указатель позиции) ---- and "moving the carrier" (incrementing the position pointer)
+        \param dst{} массив, куда копируется содержимое второго массива ---- an array, where the contents of the second array are copied to
+        \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) ---- an element of a receiving array where the insert is started (TRANSMITTED VIA THE LINK)
+        \param d_len длина принимающего массива ---- a receiving array length
+        \param src{} массив для вставки ---- an array to be inserted
+        \param s_len длина массива для вставки ---- an inserted array length
+        \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива ---- please note that the d_pos argument will be incremented the number of times corresponding to the inserted array length
+    */
     GS_append(dst{}, &d_pos, d_len, src{}, s_len)
      {
         new s_pos = 0
@@ -747,10 +750,10 @@ BB  порт 21177
         }
      }
 
-    /*! Возвращает длину строки заканчивающуюся нулевым байтом.
-        \param buf{} измеряемая строка
-        \param bufsize размер буфера с текстом
-        \retval количество байт до 0x00
+    /*! Возвращает длину строки заканчивающуюся нулевым байтом. ---- Returning the string length ending with a null byte
+        \param buf{} измеряемая строка ---- measured string
+        \param bufsize размер буфера с текстом ---- text array size
+        \retval количество байт до 0x00 ---- the number of bytes before 0x00
         */
     GS_strlen(buf{}, bufsize)
      {
@@ -767,12 +770,12 @@ BB  порт 21177
         return i
      }
 
-    /*! Возвращает строку из файла
-        \param file имя файла
-        \param pos номер байта начала строки
-        \param dst буфер строки
-        \param dst_size размер буфера строки
-        \return length строки
+    /*! Возвращает строку из файла ---- Returning a string from a file
+        \param file имя файла ---- file name
+        \param pos номер байта начала строки ---- number of the string start byte
+        \param dst буфер строки ---- string array
+        \param dst_size размер буфера строки ---- string array size
+        \return length строки ---- string length
         */
     GS_readLine(file{}, pos, dst{}, dst_size)
      {
@@ -803,11 +806,11 @@ BB  порт 21177
         return counter
      }
 
-    /*! сравнить строки побайтово
-        \param str1{} первая строка
-        \param str2{} вторая строка
-        \param len длина строк (должна быть одинаковой, конечно)
-        \retval 0 - строки не равны, 1 - строки равны
+    /*! сравнить строки побайтово ---- comparing lines byte for byte
+        \param str1{} первая строка ---- first line
+        \param str2{} вторая строка ---- second line
+        \param len длина строк (должна быть одинаковой, конечно) ---- lines length (lines should have similar length)
+        \retval 0 - строки не равны, 1 - строки равны ---- 0 - lines are equal, 1 - lines are inequal
         */
     GS_stringEquals(str1{}, str2{}, len)
      {
@@ -820,12 +823,12 @@ BB  порт 21177
         return 1;
      }
 
-    /*! копировать строки побайтово
-        \param dest{} куда копировать
-        \param source{} откуда копировать
-        \param len длина строк (должна быть одинаковой, конечно)
-        \param destPos смещение
-        \param sourcePos смещение
+    /*! копировать строки побайтово ---- copy lines byte for byte
+        \param dest{} куда копировать ---- where to copy
+        \param source{} откуда копировать ---- from where to copy
+        \param len длина строк (должна быть одинаковой, конечно) ---- lines length (lines should have similar length)
+        \param destPos смещение ---- offset
+        \param sourcePos смещение ---- offset
         */
     GS_copyArray(dest{}, source{}, len, destPos, sourcePos)
      {
@@ -836,8 +839,8 @@ BB  порт 21177
         return
      }
 
-    /*! Проверяет является ли символ цифрой в формате ASCII
-        \param byte предполагаемый символ цифры в ASCII
+    /*! Проверяет является ли символ цифрой в формате ASCII ---- Checking is a symbol is an ASCII number
+        \param byte предполагаемый символ цифры в ASCII ---- suggested symbol of an ASCII number
         \return bool
         */
     GS_isDigit(byte)
@@ -855,8 +858,8 @@ BB  порт 21177
         return ( hex || isDigit)
      }
 
-    /*! Возвращает int из цифры в формате ASCII
-        \param byte символ цифры в ASCII
+    /*! Возвращает int из цифры в формате ASCII ---- Returning int from an ASCII number
+        \param byte символ цифры в ASCII ---- a symbol of an ASCII number
         \return int
         */
     GS_getDigit(byte)
@@ -877,11 +880,11 @@ BB  порт 21177
             return (byte - 0x60) + 9
      }
 
-    /*! Алгоритм прямого поиска 
-        \param string1 - где искать
-        \param str1Len длина строки string1
-        \param string2 - что искать
-        \param str2Len длина строки string2
+    /*! Алгоритм прямого поиска ---- Direct search algorithm
+        \param string1 - где искать ---- where to search
+        \param str1Len длина строки string1 ---- string1 length
+        \param string2 - что искать ---- what to search for 
+        \param str2Len длина строки string2 ---- string2 length
         */
     GS_strstr(string1{}, str1Len, string2{}, str2Len)
      {
@@ -913,9 +916,9 @@ BB  порт 21177
         return -1
      }
 
-    /*! Собирает число из строки
-        \param str{} строка символов
-        \param &pos индекс начала чтения строки
+    /*! Собирает число из строки ---- Collecting a number from the string
+        \param str{} строка символов ---- symbol string
+        \param &pos индекс начала чтения строки ---- index of string reading start
         \return int
         */
     GS_atoi(str{}, &pos)
@@ -948,11 +951,11 @@ BB  порт 21177
         return value
      }
 
-    /*! Собирает число из строки
-        \param str{} строка символов
-        \param &pos индекс начала чтения строки
-        \param precision требуемая точность до Х хнака после запятой
-        \param sep символ разделитель. Например '.' или ','
+    /*! Собирает число из строки ---- Collecting a number from a string
+        \param str{} строка символов ---- symbol string
+        \param &pos индекс начала чтения строки ---- index of a string reading start
+        \param precision требуемая точность до Х знака после запятой ---- required precision to X decimal place
+        \param sep символ разделитель. Например '.' или ',' ---- divider symbol (e.g., '.' or ',')
         \return int 
         */
     GS_atof(str{}, &pos, precision, sep) 
@@ -1022,14 +1025,14 @@ BB  порт 21177
       return value
      }
 
-    /*! Очистка массива */
+    /*! Очистка массива ---- Clearing the array*/
     GS_clearArr(arr{}, arrSize)
      {
         for (new i = 0; i < arrSize; ++i)
             arr{i} = 0x00
      }
 
-    /*! смещает массив вправо максимум на 8 бит */
+    /*! смещает массив вправо максимум на 8 бит ---- array offset to the right by a maximum of 8 bits*/
     GS_offsetArrRight8(arr{}, arrLenByte, bitOffsetRight)  // TODO УПРОСТИТЬ!!!
      {
         Diagnost("\nStart GS_offsetArrRight8")
@@ -1066,8 +1069,8 @@ BB  порт 21177
         Diagnost("End GS_offsetArrRight8")
      }
 
-    /*! смещает массив вправо
-        использует GS_offsetArrRight8()
+    /*! смещает массив вправо ---- array offset to the right
+        использует GS_offsetArrRight8() ---- using GS_offsetArrRight8()
         */
     GS_offsetArrRight(arr{}, arrLenByte, bitOffsetRight)
      {
@@ -1089,7 +1092,7 @@ BB  порт 21177
         return OK
      }
 
-    /*! собирает INT32 из байт массива. Максимум на 32 бита */
+    /*! собирает INT32 из байт массива. Максимум на 32 бита ---- collecting INT32 from array bytes. 32 bits at maximum*/
     GS_getInt(arr{}, startInd, stopInd)
      {
         const byteLen = 8
@@ -1107,9 +1110,9 @@ BB  порт 21177
         return res
      }
 
-    /*! Запись значения в BLUETOOTH_тег
-        \param index номер тега от 0 до 63
-        \param value записываемое значение
+    /*! Запись значения в BLUETOOTH_тег ---- Writing values to a BLUETOOTH_tag
+        \param index номер тега от 0 до 63 ---- tag number 0 to 63
+        \param value записываемое значение ---- value to be written
         \return boolean
         */
     GS_tagBluetoothWriteValue(index, value)
@@ -1123,8 +1126,8 @@ BB  порт 21177
         return true;
      }
 
-    /*! Чтение значения из BLUETOOTH_тега
-        \param index номер тега от 0 до 63
+    /*! Чтение значения из BLUETOOTH_тега ---- Reading a value from a BLUETOOTH_tag
+        \param index номер тега от 0 до 63 ---- tag number 0 to 63
         \return int
         */
     GS_tagBluetoothReadValue(index)
@@ -1240,17 +1243,17 @@ BB  порт 21177
     //============================== CRC ===================================
     //======================================================================
     /* CRC-16 CCITT
-        Name  : CRC-16 CCITT
-        Poly  : 0x1021    x^16 + x^12 + x^5 + x^0
+        Name\Имя  : CRC-16 CCITT
+        Poly\Полином  : 0x1021    x^16 + x^12 + x^5 + x^0
         Init  : 0x1D0F
 
-        Example 1:
+        Example 1: ---- Пример 1
         537F0D00046E00802500006E38
-        6E38 is the CRC here (in Little endian format)
+        6E38 is the CRC here (in Little endian format) ----- 6E38 здесь CRC (в формате Little endian)
 
-        Example 2:
+        Example 2: ---- Пример 2
         53000900046100C066
-        C066 is the CRC here (in Little endian format)
+        C066 is the CRC here (in Little endian format) ---- C066 здесь CRC (в формате Little endian)
         */
     new const Crc16Table[256] = [
             0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
@@ -1315,24 +1318,25 @@ BB  порт 21177
      }
     // ===========================================================================
     //} Конец библиотеки вспомогательных функций GalileoSky ======================
+    //} The end of GalileoSky auxiliary function library =========================
     // ===========================================================================
 
-// Таймер и его функции
-    /*! закончился таймер или нет */
+// Таймер и его функции ---- Timer and its features
+    /*! закончился таймер или нет ---- checking if the timer is over or not*/
     isTimerExpired()
      {
         return (GetVar(glTimer) <= GetVar(UNIX_TIME))
      }
 
-    /*! запустить таймер на value секунд
-        \param value секунды
+    /*! запустить таймер на value секунд ---- set the timer for value seconds
+        \param value секунды ---- seconds
         */
     setTimer(value)
      {
         SetVar(glTimer, GetVar(UNIX_TIME) + value)
      }
 
-    /*! сбросить таймер */
+    /*! сбросить таймер ---- reset the timer*/
     unsetTimer()
      {
         SetVar(glTimer, 0)
@@ -1340,146 +1344,148 @@ BB  порт 21177
 
 //!*************************************************************
 //!-----------------Библиотека работы с Modbus------------------
+//!----------------------Modbus library-------------------------
 //!*************************************************************
-    //! Порт подключения шины Modbus
+    //! Порт подключения шины Modbus---Modbus connection port 
     #define MB_PORT_INDEX 2
 
-    //! Скорость подключения по шине Modbus
+    //! Скорость подключения по шине Modbus----Modbus connection speed
     #define MB_PORT_SPEED 19200    
 
-    //! Количество стопбит
+    //! Количество стопбит ---- Number of stop bits
     #define MB_PORT_STOP 0  
 
-    //! Размер буфера для обмена по шине Modbus
+    //! Размер буфера для обмена по шине Modbus----Buffer size for Modbus exchange
     #define MB_BUF_SIZE 256
 
-    //! Таймаут ожидания ответа слейва, мс
+    //! Таймаут ожидания ответа слейва, мс----Slave response timeout in ms
     #define MB_TIMEOUT 10000
 
-    //! Коды ошибок, возвращаемые функциями обмена по шине
-    #define MB_ERR_OK 0      //!< Успешный обмен данными
-    #define MB_ERR_CMD 1     //!< Принятый код функции не может быть обработан
-    #define MB_ERR_ADDR 2    //!< Адрес данных, указанный в запросе, недоступен
-    #define MB_ERR_VALUE 3   //!< Значение, содержащееся в поле данных запроса, является недопустимой величиной
-    #define MB_ERR_ERR 4     //!< Невосстанавливаемая ошибка имела место, пока ведомое устройство пыталось выполнить затребованное действие
-    #define MB_ERR_WAIT 5    //!< Ведомое устройство приняло запрос и обрабатывает его, но это требует много времени. Этот ответ предохраняет ведущее устройство от генерации ошибки тайм-аута
-    #define MB_ERR_BUSY 6    //!< Ведомое устройство занято обработкой команды. Ведущее устройство должно повторить сообщение позже, когда ведомое освободится
-    #define MB_ERR_CNTEXEC 7 //!< Ведомое устройство не может выполнить программную функцию, заданную в запросе
-    #define MB_ERR_PARITY 8  //!< Ведомое устройство при чтении расширенной памяти обнаружило ошибку паритета
-    #define MB_ERR_CRC 9     //!< Ошибка контрольной суммы
-    #define MB_ERR_SIZE 10   //!< Получен ответ некорректного размера
+    //! Коды ошибок, возвращаемые функциями обмена по шине----Error codes returned by bus exchange functions
+    #define MB_ERR_OK 0      //!< Успешный обмен данными----Successful data exchange
+    #define MB_ERR_CMD 1     //!< Принятый код функции не может быть обработан----Received function code cannot be processed
+    #define MB_ERR_ADDR 2    //!< Адрес данных, указанный в запросе, недоступен----The data address specified in the request is not available
+    #define MB_ERR_VALUE 3   //!< Значение, содержащееся в поле данных запроса, является недопустимой величиной----The value in the request data field is invalid
+    #define MB_ERR_ERR 4     //!< Невосстанавливаемая ошибка имела место, пока ведомое устройство пыталось выполнить затребованное действие----A unrecoverable error occurred while the slave device was trying to perform the requested action
+    #define MB_ERR_WAIT 5    //!< Ведомое устройство приняло запрос и обрабатывает его, но это требует много времени. Этот ответ предохраняет ведущее устройство от генерации ошибки тайм-аута----The request is accepted and being processed by the slave device, but this takes a long time. This response prevents the master device from generating a timeout error
+    #define MB_ERR_BUSY 6    //!< Ведомое устройство занято обработкой команды. Ведущее устройство должно повторить сообщение позже, когда ведомое освободится----The slave device is busy processing a command. The master must repeat the message later when the slave is free
+    #define MB_ERR_CNTEXEC 7 //!< Ведомое устройство не может выполнить программную функцию, заданную в запросе----The slave device cannot execute the program function specified in the request
+    #define MB_ERR_PARITY 8  //!< Ведомое устройство при чтении расширенной памяти обнаружило ошибку паритета----The slave device detected a parity error when reading extended memory
+    #define MB_ERR_CRC 9     //!< Ошибка контрольной суммы----Checksum error
+    #define MB_ERR_SIZE 10   //!< Получен ответ некорректного размера----A response of incorrect size is received
 
-    //! Начальная позиция полезных данных при команде "чтение"
+    //! Начальная позиция полезных данных при команде "чтение"----Initial position of useful data at the read command
     #define MB_READ_START 3
 
-    //! Начальная позиция полезных данных при команде "запись"
+    //! Начальная позиция полезных данных при команде "запись"----Initial position of useful data at the write command
     #define MB_WRITE_START 7
 
-    //! Инициализация шины Modbus
+    //! Инициализация шины Modbus----Modbus initialisation
     modbusInit()
      {
         PortInit(MB_PORT_INDEX, MB_PORT_SPEED, MB_BUF_SIZE , MB_PORT_STOP);
      }
 
-    /*! Запись значения 16-битного регистра в буфер в формате Modbus
-        \param[in] mbBuf Буфер, куда производится запись
-        \param[in] offset Смещение указателя записи от начала буфера
-        \param[in] value Значение записываемого регистра
+    /*! Запись значения 16-битного регистра в буфер в формате Modbus----Writing a 16-bit register value to the Modbus buffer
+        \param[in] mbBuf Буфер, куда производится запись----Buffer where the data is written
+        \param[in] offset Смещение указателя записи от начала буфера----Record pointer offset from the beginning of the buffer
+        \param[in] value Значение записываемого регистра----Written register value
         */
     setReg(mbBuf{}, offset, value)
      {
-        mbBuf{offset} = value >> 8 //Старший байт вперед
-        mbBuf{offset + 1} = value //Младший байт
+        mbBuf{offset} = value >> 8 //Старший байт вперед----High byte forward
+        mbBuf{offset + 1} = value //Младший байт----Low byte
      }
 
-    /*! Функция возвращает значения 16-битного регистра Modbus из буфера
-        \param[in] mbBuf Буфер, откуда производится чтение
+    /*! Функция возвращает значения 16-битного регистра Modbus из буфера----The function returns the values of the 16-bit Modbus register from the buffer
+        \param[in] mbBuf Буфер, откуда производится чтение----Buffer from which the reading is done
         \param[in] offset Смещение указателя чтения от начала буфера
-        \return Конвертированное значение регистра
+        \return Конвертированное значение регистра----Converted register value
         */
     getReg(mbBuf{}, offset)
      {
         return mbBuf{offset} * 256 + mbBuf{offset + 1}
      }
 
-    /*! Функция возвращает значения 32-битного регистра Modbus из буфера
-        \param[in] mbBuf Буфер, откуда производится чтение
+    /*! Функция возвращает значения 32-битного регистра Modbus из буфера----The function returns the values of the 32-bit Modbus register from the buffer
+        \param[in] mbBuf Буфер, откуда производится чтение----Buffer from which the reading is done
         \param[in] offset Смещение указателя чтения от начала буфера
-        \return Конвертированное значение регистра
+        \return Конвертированное значение регистра----Converted register value
         */
     getReg32(mbBuf{}, offset)
      {
         return (mbBuf{offset} << 24) + (mbBuf{offset + 1} << 16) + (mbBuf{offset + 2} << 8) + (mbBuf{offset + 3})
      }
 
-    /*! 0x03 - Функция чтение значений из нескольких регистров хранения (Read Holding Registers)
-        \param[in] addr Адрес ведомого устройства
-        \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-        \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-        \param[in] count Количество считываемых элементов
-        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    /*! 0x03 - Функция чтение значений из нескольких регистров хранения (Read Holding Registers)----Function for reading values from multiple storage registers (Read Holding Registers)
+        \param[in] addr Адрес ведомого устройства----Slave address
+        \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными----The clipboard will be overwritten with the read data
+        \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать----Address of the first element which value needs to be read
+        \param[in] count Количество считываемых элементов----Number of read elements
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно----MB_ERR_* error code. MB_ERR_OK if successful
         */
     readRegs(addr, mbBuf{}, fRegAddr, count)
      {
         mbBuf{0} = addr
-        mbBuf{1} = 0x03 //Код функции
-        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-        setReg(mbBuf, 4, count) //Количество считываемых элементов
+        mbBuf{1} = 0x03 //Код функции----Function code
+        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента----First element address
+        setReg(mbBuf, 4, count) //Количество считываемых элементов----Number of read elements
         return transact(mbBuf, 6)
      }
 
-    /*! 0x04 - Функция чтение значений из нескольких регистров хранения (Read Input Registers)
-        \param[in] addr Адрес ведомого устройства
-        \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-        \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-        \param[in] count Количество считываемых элементов
-        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    /*! 0x04 - Функция чтение значений из нескольких регистров хранения (Read Input Registers)----Function for reading values from multiple storage registers (Read Input Registers)
+        \param[in] addr Адрес ведомого устройства----Slave address
+        \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными----The clipboard will be overwritten with the read data
+        \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать----Address of the first element which value needs to be read
+        \param[in] count Количество считываемых элементов----Number of read elements
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно----MB_ERR_* error code. MB_ERR_OK if successful
         */
     readRegsIn(addr, mbBuf{}, fRegAddr, count)
      {
         mbBuf{0} = addr
-        mbBuf{1} = 0x04 //Код функции
-        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-        setReg(mbBuf, 4, count) //Количество считываемых элементов
+        mbBuf{1} = 0x04 //Код функции----Function code
+        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента----First element address
+        setReg(mbBuf, 4, count) //Количество считываемых элементов----Number of read elements
         return transact(mbBuf, 6)
      }
 
-    /*! 0x10 - Функция записи значений в несколько регистров хранения (Preset Multiple Registers)
-        Функция заполнит заголовок буфера и отправит его в шину, полезные данные требуется располагать
-        начиная с позиции \a MB_WRITE_START. Записываемые значения все 16-битные
-        \param[in] addr Адрес ведомого устройства
-        \param[in] mbBuf Буфер обмена, который будет отправлен
-        \param[in] fRegAddr Адрес первого элемента, значение которого требуется записать
-        \param[in] count Количество записываемых элементов
-        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    /*! 0x10 - Функция записи значений в несколько регистров хранения (Preset Multiple Registers)----Function for writing values to multiple storage registers (Preset Multiple Registers)
+        Функция заполнит заголовок буфера и отправит его в шину, полезные данные требуется располагать----The function fills the clipboard header and sends it to the bus, useful data should be placed
+        начиная с позиции \a MB_WRITE_START. Записываемые значения все 16-битные----starting with \a MB_WRITE_START position. All written values are 16-bit.
+        \param[in] addr Адрес ведомого устройства----Slave address
+        \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными----The clipboard will be overwritten with the read data
+        \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать----Address of the first element which value needs to be read
+        \param[in] count Количество считываемых элементов----Number of read elements
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно----MB_ERR_* error code. MB_ERR_OK if successful
         */
     writeRegs(addr, mbBuf{}, fRegAddr, count)
      {
         mbBuf{0} = addr
-        mbBuf{1} = 0x10 //Код функции
-        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-        setReg(mbBuf, 4, count) //Количество считываемых элементов
+        mbBuf{1} = 0x10 //Код функции----Function code
+        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента----First element address
+        setReg(mbBuf, 4, count) //Количество считываемых элементов----Number of read elements
         mbBuf{6} = count * 2
         return transact(mbBuf, 7 + count * 2)
      }
 
     //!----------------- служебные функции MODBUS ------------------
-    /*! Обмен с устройством данными по шине
-        \param[inout] mbBuf Буфер обмена, данные из него будут записаны с добавленной CRC, и в него будут считан ответ без CRC
-        \param[inout] size Размер буфера обмена
-        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //!----------------- MODBUS service functions ------------------
+    /*! Обмен с устройством данными по шине----Exchanging data with the device over the bus
+        \param[inout] mbBuf Буфер обмена, данные из него будут записаны с добавленной CRC, и в него будут считан ответ без CRC----Clipboard, the data from it will be written with CRC added, and the response without CRC will be read into it 
+        \param[inout] size Размер буфера обмена----Clipboard size
+        \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно----MB_ERR_* error code. MB_ERR_OK if successful
         */
     transact(mbBuf{}, size)
      {    
-        //Добавляем CRC
+        //Добавляем CRC----Adding CRC
         new c = CRC16(mbBuf, size)
         mbBuf{size} = c
         mbBuf{size + 1} = c >> 8
-        //Пишем в порт
+        //Пишем в порт----Writing to the port
         PortWrite(MB_PORT_INDEX, mbBuf, size + 2)
-        //Размер ответа, для записывающих команд размер известен из стандарта
+        //Размер ответа, для записывающих команд размер известен из стандарта----Response size, it is known from the standard for writing commands
         new ansSize = (mbBuf{1} > 4) ? 8 : MB_BUF_SIZE + 1
-        //Слушаем ответ
+        //Слушаем ответ----Listening to the response
         new err = 0
         new bytesRead = 0  
         c = 0    
@@ -1491,11 +1497,11 @@ BB  порт 21177
             if ((bytesRead >= MB_BUF_SIZE) || (bytesRead >= ansSize))
                 break
 
-            //Ошибка ли?
+            //Ошибка ли?----Checking for errors
             if (bytesRead == 2)
                 err = (c & 0x80 == 0x80)
 
-            //Определяем длину сообщения, либо код ошибки
+            //Определяем длину сообщения, либо код ошибки----Defining the message length or the error code
             if (bytesRead == 3)
             {
                 if (err)
@@ -1505,12 +1511,12 @@ BB  порт 21177
                 }
                 else 
                 {
-                    if (ansSize == MB_BUF_SIZE + 1) //Считываем размер только для операций чтения
+                    if (ansSize == MB_BUF_SIZE + 1) //Считываем размер только для операций чтения----Reading the size only for reading operations
                         ansSize = 3 + c + 2
                 }
             }
         }    
-        //Сверяем целевой и фактический размеры ответа
+        //Сверяем целевой и фактический размеры ответа----Comparing the target response size and the actual response size
         if (ansSize != bytesRead)
         {
             Diagnostics("Mer[%d]", MB_ERR_SIZE)
@@ -1524,25 +1530,25 @@ BB  порт 21177
         c = mbBuf{ansSize - 2} + mbBuf{ansSize - 1} * 256
         if (c != CRC16(mbBuf, ansSize - 2))
             return MB_ERR_CRC
-        //Проверки пройдены, возвращаем код результата(ошибки)
+        //Проверки пройдены, возвращаем код результата(ошибки)----Checks are passed, returning the result (error) code
         return err
      }
 
-    //! Функция вывода содержимого буфера \a buf длиной \a len
+    //! Функция вывода содержимого буфера \a buf длиной \a len---Function for showing the contents of the \a buf buffer of \a len length
     printData(buf{}, len)
      {
-        // вывод по 2 байта в строке
+        // вывод по 2 байта в строке----showing 2 bytes per line
         for(new i = 0; i < len / 2; i++)
         {
             Diagnostics("%02X %02X", buf{i * 2}, buf{i * 2 + 1})
             Delay(10)
         }
-        // вывод последнего байта при нечётной длине
+        // вывод последнего байта при нечётной длине----showing the last byte with the odd length
         if (len % 2)
             Diagnostics("%02X", buf{len - 1})
      }
 
-    //! Функция записи значения регистра в тег
+    //! Функция записи значения регистра в тег----Function for writing a register value to a tag
     readRegWriteTag(mbBuf{}, tag, valueName{}, regAdr)
      {
         Diagnostics(valueName)
@@ -1557,7 +1563,7 @@ BB  порт 21177
             Diagnostics("Error code: %d in tag: %x", res, regAdr)
      }
 
-    //! Функция записи значения регистров в тег
+    //! Функция записи значения регистров в тег----Function for writing registers values to a tag
     readReg32WriteTag(mbBuf{}, tag, valueName{}, regAdr)
      {
         Diagnostics(valueName)
@@ -1573,6 +1579,7 @@ BB  порт 21177
      }
 //!*************************************************************
 //!-----------Конец библиотеки работы с Modbus------------------
+//!---------------The end of Modbus library---------------------
 //!*************************************************************
 
 //////////////////////////////////////////
@@ -1584,16 +1591,17 @@ BB  порт 21177
     #define STOP_BITS 0 // 0 - 1 stop bit
     #define PARITY 0  // no parity bits
 
-    /*! инициализация порта */
+    /*! инициализация порта*/
+    /*! port initialization */
     serialInit()
      {
         diagnost0("serialInit()")
         PortInit(PORT_INDEX, BAUDRATE, BUF_SIZE, STOP_BITS, PARITY)
      }
 
-    /*! запись в порт
-        \param ioBuf{} буфер с данными для отправки в порт
-        \param ioBufSize количество байт для отправки в порт
+    /*! запись в порт ---- port recording
+        \param ioBuf{} буфер с данными для отправки в порт ---- buffer with data to send to the port
+        \param ioBufSize количество байт для отправки в порт ---- the number of bytes to send to the port
         */
     serialWrite(ioBuf{}, ioBufSize)
      {
@@ -1602,19 +1610,19 @@ BB  порт 21177
         PortWrite(PORT_INDEX, ioBuf, ioBufSize)
      }
 
-    /*! чтение пакетов из порта, разделённых по временной задержке
-        \param ioBuf{} буфер для полученных данных
-        \param bufSize размер буфера
-        \param firstByteTimeout время ожидания первого байта
-        \param nextByteTimeout время ожидания остальных байт
-        \return int количество прочитанных байт
+    /*! чтение пакетов из порта, разделённых по временной задержке ---- reading packets from a port separated by time delay
+        \param ioBuf{} буфер для полученных данных ---- buffer for received data
+        \param bufSize размер буфера ---- buffer size
+        \param firstByteTimeout время ожидания первого байта ---- first byte timeout
+        \param nextByteTimeout время ожидания остальных байт ---- remaining bytes timeout
+        \return int количество прочитанных байт ---- number of bytes read
         */
     serialRead(ioBuf{}, bufSize, firstByteTimeout, nextByteTimeout)
      {
         diagnost0("serialRead()")
         new count = 0
 
-        if (2 == PORT_INDEX)  // пока реализовано только для RS485
+        if (2 == PORT_INDEX)  // пока реализовано только для RS485 ---- only available for RS485 for now
         {
             count = PortReadPackage(PORT_INDEX, ioBuf, bufSize, firstByteTimeout, nextByteTimeout)
             diagnost1("serialRead %d byts", count)
@@ -1657,8 +1665,8 @@ BB  порт 21177
 
 ////////////////////////////////////////////////////
 ///////////////// DIAGNOSTICS //////////////////////
-    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
-        \param text{} строка сообщения
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost) ---- output additional diagnostics if the GetVar(diagnost) flag is set
+        \param text{} строка сообщения ---- message line
         */
     diagnost0(text{})
      {
@@ -1668,9 +1676,9 @@ BB  порт 21177
         }
      }
 
-    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
-        \param text{} строка сообщения
-        \param var значение для вставки в строку
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost) ---- output additional diagnostics if the GetVar(diagnost) flag is set
+        \param text{} строка сообщения ---- message line
+        \param var значение для вставки в строку ---- value to insert into the line
         */
     diagnost1(text{}, var)
      {
@@ -1680,10 +1688,10 @@ BB  порт 21177
         }
      }
 
-    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
-        \param text{} строка сообщения
-        \param var1 значение для вставки в строку
-        \param var2 значение для вставки в строку
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost) ---- output additional diagnostics if the GetVar(diagnost) flag is set
+        \param text{} строка сообщения ---- message line
+        \param var1 значение для вставки в строку ---- value to insert into the line
+        \param var2 значение для вставки в строку ---- value to insert into the line
         */
     diagnost2(text{}, var1, var2)
      {
@@ -1693,9 +1701,9 @@ BB  порт 21177
         }
      }
 
-    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost)
-        \param array{} массив данных
-        \param array_size количество байт для вывода в диагностику
+    /*! вывод доп. диагностики, если выставлен флаг GetVar(diagnost) ---- output additional diagnostics if the GetVar(diagnost) flag is set
+        \param array{} массив данных ---- data array
+        \param array_size количество байт для вывода в диагностику ---- number of bytes to output to the diagnostics
         */
     diagnostHex(array{}, array_size)
      {

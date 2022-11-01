@@ -2,9 +2,10 @@
 
 // ===========================================================================
 //{ Библиотека вспомогательных функций GalileoSky ============================
+//{ GalileoSky auxiliary function library ====================================
 // ===========================================================================
 
-    /* Возведение в степень */
+    /* Возведение в степень --- Exponentiation */
     GS_pow(num, p)
     {
         new buf1 = num
@@ -24,13 +25,13 @@
         return buf1
     }
 
-    /*! вставить символ в массив, обрабатываемого как строка, 
-        и "перевести каретку вперед" (инкрементировать указатель позиции)
-        \param dst{} массив, обрабатываемый как строка
-        \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-        \param d_len длина массива 
-        \param c переменная (символ) для вставки
-        \retval не забудьте, что аргумент d_pos будет инкрементирован
+    /*! вставить символ в массив, обрабатываемого как строка, ---- inserting a character into an array processed as a string
+        и "перевести каретку вперед" (инкрементировать указатель позиции) ---- and "moving the carriage forward" (incrementing the position pointer)
+        \param dst{} массив, обрабатываемый как строка ---- an array processed as a string
+        \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) ---- an array element where the symbol should be written (TRANSMITTED VIA THE LINK)
+        \param d_len длина массива ---- an array length
+        \param c переменная (символ) для вставки ---- a variable (symbol) to insert
+        \retval не забудьте, что аргумент d_pos будет инкрементирован ---- please note that the d_pos argument will be incremented
     */
     GS_appendC(dst{}, &d_pos, d_len, c)
     {
@@ -41,14 +42,14 @@
         }
     }
 
-    /*! вставить массив в другой массив (присоединить строку) 
-        и "перевести каретку" (инкрементировать указатель позиции)
-        \param dst{} массив, куда копируется содержимое второго массива
-        \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-        \param d_len длина принимающего массива
-        \param src{} массив для вставки
-        \param s_len длина массива для вставки
-        \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива
+    /*! вставить массив в другой массив (присоединить строку) ---- inserting an array into a different array (attaching a line)
+        и "перевести каретку" (инкрементировать указатель позиции) ---- and "moving the carrier" (incrementing the position pointer)
+        \param dst{} массив, куда копируется содержимое второго массива ---- an array, where the contents of the second array are copied to
+        \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) ---- an element of a receiving array where the insert is started (TRANSMITTED VIA THE LINK)
+        \param d_len длина принимающего массива ---- a receiving array length
+        \param src{} массив для вставки ---- an array to be inserted
+        \param s_len длина массива для вставки ---- an inserted array length
+        \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива ---- please note that the d_pos argument will be incremented the number of times corresponding to the inserted array length
     */
     GS_append(dst{}, &d_pos, d_len, src{}, s_len)
     {
@@ -153,11 +154,11 @@
         return counter
     }
 
-    /*! сравнить строки побайтово
-        \param str1{} первая строка
-        \param str2{} вторая строка
-        \param len длина строк (должна быть одинаковой, конечно)
-        \retval 0 - строки не равны, 1 - строки равны
+    /*! сравнить строки побайтово ---- comparing lines byte for byte
+        \param str1{} первая строка ---- first line
+        \param str2{} вторая строка ---- second line
+        \param len длина строк (должна быть одинаковой, конечно) ---- lines length (lines should have similar length)
+        \retval 0 - строки не равны, 1 - строки равны ---- 0 - lines are equal, 1 - lines are inequal
     */
     GS_stringEquals(str1{}, str2{}, len)
     {
@@ -170,12 +171,12 @@
         return 1;
     }
 
-    /*! копировать строки побайтово
-        \param dest{} куда копировать
-        \param source{} откуда копировать
-        \param len длина строк (должна быть одинаковой, конечно)
-        \param destPos смещение
-        \param sourcePos смещение
+    /*! копировать строки побайтово ---- copy lines byte for byte
+        \param dest{} куда копировать ---- where to copy
+        \param source{} откуда копировать ---- from where to copy
+        \param len длина строк (должна быть одинаковой, конечно) ---- lines length (lines should have similar length)
+        \param destPos смещение ---- offset
+        \param sourcePos смещение ---- offset
     */
     GS_copyArray(dest{}, source{}, len, destPos, sourcePos)
     {
@@ -218,9 +219,9 @@
             return (byte - 0x60) + 9
     }
 
-    /*! Алгоритм прямого поиска 
-      / string1 - где искать
-      / string2 - что искать
+    /*! Алгоритм прямого поиска ---- Direct search algorithm
+      / string1 - где искать ---- where to search
+      / string2 - что искать ---- what to search for
     */
     GS_strstr(string1{}, str1Len, string2{}, str2Len)
     {
@@ -252,7 +253,7 @@
         return -1
     }
 
-    /*! Собирает число из строки */
+    /*! Собирает число из строки ---- Collecting a number from the string*/ 
     GS_atoi(str{}, &pos)  // arr to Int
     {
         new value = 0
@@ -344,7 +345,7 @@
             arr{i} = 0x00
     }
 
-    /*! смещает массив вправо максимум на 8 бит */
+    /*! смещает массив вправо максимум на 8 бит ---- array offset to the right by a maximum of 8 bits*/
     GS_offsetArrRight8(arr{}, arrLenByte, bitOffsetRight)  // TODO УПРОСТИТЬ!!!
     {
         Diagnost("\nStart GS_offsetArrRight8")
@@ -381,8 +382,8 @@
         Diagnost("End GS_offsetArrRight8")
     }
 
-    /*! смещает массив вправо
-    *  использует GS_offsetArrRight8()
+    /*! смещает массив вправо ---- array offset to the right
+    *   использует GS_offsetArrRight8() ---- using GS_offsetArrRight8()
     */
     GS_offsetArrRight(arr{}, arrLenByte, bitOffsetRight)
     {
@@ -404,7 +405,7 @@
         return OK
     }
 
-    /*! собирает INT32 из байт массива. Максимум на 32 бита */
+    /*! собирает INT32 из байт массива. Максимум на 32 бита ---- collecting INT32 from array bytes. 32 bits at maximum*/
     GS_getInt(arr{}, startInd, stopInd)
     {
         const byteLen = 8
@@ -528,6 +529,7 @@
     }
 // ===========================================================================
 //} Конец библиотеки вспомогательных функций GalileoSky ======================
+//} The end of GalileoSky auxiliary function library =========================
 // ===========================================================================
 
 

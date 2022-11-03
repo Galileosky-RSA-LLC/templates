@@ -15,9 +15,10 @@
 
 // ===========================================================================
 //{ Библиотека вспомогательных функций GalileoSky ============================
+//{ GalileoSky auxiliary function library ====================================
 // ===========================================================================
 
-    /* Возведение в степень */
+    /* Возведение в степень --- Exponentiation */
     GS_pow(num, p)
     {
         new buf1 = num
@@ -37,13 +38,13 @@
         return buf1
     }
 
-    /*! вставить символ в массив, обрабатываемого как строка, 
-        и "перевести каретку вперед" (инкрементировать указатель позиции)
-        \param dst{} массив, обрабатываемый как строка
-        \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-        \param d_len длина массива 
-        \param c переменная (символ) для вставки
-        \retval не забудьте, что аргумент d_pos будет инкрементирован
+    /*! вставить символ в массив, обрабатываемого как строка,  ---- inserting a character into an array processed as a string
+        и "перевести каретку вперед" (инкрементировать указатель позиции) ---- and "moving the carriage forward" (incrementing the position pointer)
+        \param dst{} массив, обрабатываемый как строка ---- an array processed as a string
+        \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) ---- an array element where the symbol should be written (TRANSMITTED VIA THE LINK)
+        \param d_len длина массива ---- an array length
+        \param c переменная (символ) для вставки ---- a variable (symbol) to insert
+        \retval не забудьте, что аргумент d_pos будет инкрементирован ---- please note that the d_pos argument will be incremented
     */
     GS_appendC(dst{}, &d_pos, d_len, c)
     {
@@ -54,14 +55,14 @@
         }
     }
 
-    /*! вставить массив в другой массив (присоединить строку) 
-        и "перевести каретку" (инкрементировать указатель позиции)
-        \param dst{} массив, куда копируется содержимое второго массива
-        \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-        \param d_len длина принимающего массива
-        \param src{} массив для вставки
-        \param s_len длина массива для вставки
-        \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива
+    /*! вставить массив в другой массив (присоединить строку) ---- inserting an array into a different array (attaching a line)
+        и "перевести каретку" (инкрементировать указатель позиции) ---- and "moving the carrier" (incrementing the position pointer)
+        \param dst{} массив, куда копируется содержимое второго массива ---- an array, where the contents of the second array are copied to
+        \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) ---- an element of a receiving array where the insert is started (TRANSMITTED VIA THE LINK)
+        \param d_len длина принимающего массива ---- a receiving array length
+        \param src{} массив для вставки ---- an array to be inserted
+        \param s_len длина массива для вставки ---- an inserted array length
+        \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива ---- please note that the d_pos argument will be incremented the number of times corresponding to the inserted array length
     */
     GS_append(dst{}, &d_pos, d_len, src{}, s_len)
     {
@@ -166,11 +167,11 @@
         return counter
     }
 
-    /*! сравнить строки побайтово
-        \param str1{} первая строка
-        \param str2{} вторая строка
-        \param len длина строк (должна быть одинаковой, конечно)
-        \retval 0 - строки не равны, 1 - строки равны
+    /*! сравнить строки побайтово ---- comparing lines byte for byte
+        \param str1{} первая строка ---- first line
+        \param str2{} вторая строка ---- second line
+        \param len длина строк (должна быть одинаковой, конечно) ---- lines length (lines should have similar length)
+        \retval 0 - строки не равны, 1 - строки равны ---- 0 - lines are equal, 1 - lines are inequal
     */
     GS_stringEquals(str1{}, str2{}, len)
     {
@@ -183,12 +184,12 @@
         return 1;
     }
 
-    /*! копировать строки побайтово
-        \param dest{} куда копировать
-        \param source{} откуда копировать
-        \param len длина строк (должна быть одинаковой, конечно)
-        \param destPos смещение
-        \param sourcePos смещение
+    /*! копировать строки побайтово ---- copy lines byte for byte
+        \param dest{} куда копировать ---- where to copy
+        \param source{} откуда копировать ---- from where to copy
+        \param len длина строк (должна быть одинаковой, конечно) ---- lines length (lines should have similar length)
+        \param destPos смещение ---- offset
+        \param sourcePos смещение ---- offset
     */
     GS_copyArray(dest{}, source{}, len, destPos, sourcePos)
     {
@@ -231,9 +232,9 @@
             return (byte - 0x60) + 9
     }
 
-    /*! Алгоритм прямого поиска 
-      / string1 - где искать
-      / string2 - что искать
+    /*! Алгоритм прямого поиска ---- Direct search algorithm
+      / string1 - где искать ---- where to search
+      / string2 - что искать ---- what to search for
     */
     GS_strstr(string1{}, str1Len, string2{}, str2Len)
     {
@@ -265,7 +266,7 @@
         return -1
     }
 
-    /*! Собирает число из строки */
+    /*! Собирает число из строки ---- Collecting a number from the string*/ 
     GS_atoi(str{}, &pos)  // arr to Int
     {
         new value = 0
@@ -357,8 +358,8 @@
             arr{i} = 0x00
     }
 
-    /*! смещает массив вправо максимум на 8 бит */
-    GS_offsetArrRight8(arr{}, arrLenByte, bitOffsetRight)  // TODO УПРОСТИТЬ!!!
+    /*! смещает массив вправо максимум на 8 бит ---- array offset to the right by a maximum of 8 bits*/
+    GS_offsetArrRight8(arr{}, arrLenByte, bitOffsetRight)  // TODO
     {
         Diagnost("\nStart GS_offsetArrRight8")
 
@@ -394,8 +395,8 @@
         Diagnost("End GS_offsetArrRight8")
     }
 
-    /*! смещает массив вправо
-        использует GS_offsetArrRight8()
+    /*! смещает массив вправо ---- array offset to the right
+        использует GS_offsetArrRight8() ---- using GS_offsetArrRight8()
     */
     GS_offsetArrRight(arr{}, arrLenByte, bitOffsetRight)
     {
@@ -417,7 +418,7 @@
         return OK
     }
 
-    /*! собирает INT32 из байт массива. Максимум на 32 бита */
+    /*! собирает INT32 из байт массива. Максимум на 32 бита ---- collecting INT32 from array bytes. 32 bits at maximum*/
     GS_getInt(arr{}, startInd, stopInd)
     {
         const byteLen = 8
@@ -433,33 +434,6 @@
         }
 
         return res
-    }
-
-    /*! WeightIndicator 
-        WeightIndicator::packWeight(weight, &w1, &w2);
-        RS232::setValue(_port, w1);
-        RS232::setTemperature(_port, w2);
-    */
-    packWeight(weight)
-    {
-        const RS232_0_2B = 0x58
-        const RS232_0_1B = 0x88
-        new t1
-        new t2
-
-        if (weight >= 0)
-        {
-            t1 = weight % 65535
-            t2 = weight / 65535
-        }
-        else
-        {
-            t2 = (weight / 65535) - 1
-            t1 = weight - (t2 * 65535)
-        }
-
-        TagWriteValue( RS232_0_2B, (t1 &= 0xFFFF) )
-        TagWriteValue( RS232_0_1B, (t2 &= 0xFF) )
     }
 
     //======================================================================
@@ -541,66 +515,68 @@
     }
 // ===========================================================================
 //} Конец библиотеки вспомогательных функций GalileoSky ======================
+//} The end of GalileoSky auxiliary function library =========================
 // ===========================================================================
 
 
 //!*************************************************************
 //!-----------------Библиотека работы с Modbus------------------
+//!----------------------Modbus library-------------------------
 //!*************************************************************
-    //! Порт подключения шины Modbus
+    //! Порт подключения шины Modbus --- Modbus connection port
     #define MB_PORT_INDEX 2
 
-    //! Скорость подключения по шине Modbus
+    //! Скорость подключения по шине Modbus --- Modbus connection speed
     #define MB_PORT_SPEED 115200    
 
-    //! Количество стопбит
+    //! Количество стопбит ---- Number of stop bits
     #define MB_PORT_STOP 0  
 
-    //! Размер буфера для обмена по шине Modbus
+    //! Размер буфера для обмена по шине Modbus ---- Buffer size for Modbus exchange
     #define MB_BUF_SIZE 256
 
-    //! Таймаут ожидания ответа слейва, мс
+    //! Таймаут ожидания ответа слейва, мс ---- Slave response timeout in ms
     #define MB_TIMEOUT 120
 
-    //! Коды ошибок, возвращаемые функциями обмена по шине
-    #define MB_ERR_OK 0      //!< Успешный обмен данными
-    #define MB_ERR_CMD 1     //!< Принятый код функции не может быть обработан
-    #define MB_ERR_ADDR 2    //!< Адрес данных, указанный в запросе, недоступен
-    #define MB_ERR_VALUE 3   //!< Значение, содержащееся в поле данных запроса, является недопустимой величиной
-    #define MB_ERR_ERR 4     //!< Невосстанавливаемая ошибка имела место, пока ведомое устройство пыталось выполнить затребованное действие
-    #define MB_ERR_WAIT 5    //!< Ведомое устройство приняло запрос и обрабатывает его, но это требует много времени. Этот ответ предохраняет ведущее устройство от генерации ошибки тайм-аута
-    #define MB_ERR_BUSY 6    //!< Ведомое устройство занято обработкой команды. Ведущее устройство должно повторить сообщение позже, когда ведомое освободится
-    #define MB_ERR_CNTEXEC 7 //!< Ведомое устройство не может выполнить программную функцию, заданную в запросе
-    #define MB_ERR_PARITY 8  //!< Ведомое устройство при чтении расширенной памяти обнаружило ошибку паритета
-    #define MB_ERR_CRC 9     //!< Ошибка контрольной суммы
-    #define MB_ERR_SIZE 10   //!< Получен ответ некорректного размера
+    //! Коды ошибок, возвращаемые функциями обмена по шине ---- Error codes returned by bus exchange functions
+    #define MB_ERR_OK 0      //!< Успешный обмен данными ---- Successful data exchange
+    #define MB_ERR_CMD 1     //!< Принятый код функции не может быть обработан ---- Received function code cannot be processed
+    #define MB_ERR_ADDR 2    //!< Адрес данных, указанный в запросе, недоступен ---- The data address specified in the request is not available
+    #define MB_ERR_VALUE 3   //!< Значение, содержащееся в поле данных запроса, является недопустимой величиной ---- The value in the request data field is invalid
+    #define MB_ERR_ERR 4     //!< Невосстанавливаемая ошибка имела место, пока ведомое устройство пыталось выполнить затребованное действие ---- A unrecoverable error occurred while the slave device was trying to perform the requested action
+    #define MB_ERR_WAIT 5    //!< Ведомое устройство приняло запрос и обрабатывает его, но это требует много времени. Этот ответ предохраняет ведущее устройство от генерации ошибки тайм-аута ---- The request is accepted and being processed by the slave device, but this takes a long time. This response prevents the master device from generating a timeout error
+    #define MB_ERR_BUSY 6    //!< Ведомое устройство занято обработкой команды. Ведущее устройство должно повторить сообщение позже, когда ведомое освободится ---- The slave device is busy processing a command. The master must repeat the message later when the slave is free
+    #define MB_ERR_CNTEXEC 7 //!< Ведомое устройство не может выполнить программную функцию, заданную в запросе ---- The slave device cannot execute the program function specified in the request
+    #define MB_ERR_PARITY 8  //!< Ведомое устройство при чтении расширенной памяти обнаружило ошибку паритета ---- The slave device detected a parity error when reading extended memory
+    #define MB_ERR_CRC 9     //!< Ошибка контрольной суммы ---- Checksum error
+    #define MB_ERR_SIZE 10   //!< Получен ответ некорректного размера ---- A response of incorrect size is received
 
-    //! Начальная позиция полезных данных при команде "чтение"
+    //! Начальная позиция полезных данных при команде "чтение" --- Initial position of useful data at the read command
     #define MB_READ_START 3
 
-    //! Начальная позиция полезных данных при команде "запись"
+    //! Начальная позиция полезных данных при команде "запись" --- Initial position of useful data at the write command
     #define MB_WRITE_START 7
 
-    //! Инициализация шины Modbus
+    //! Инициализация шины Modbus ---- Modbus initialisation
     modbusInit()
     {
         PortInit(MB_PORT_INDEX, MB_PORT_SPEED, MB_BUF_SIZE , MB_PORT_STOP);
     }
 
-    //! Запись значения 16-битного регистра в буфер в формате Modbus
-    //! \param[in] mbBuf Буфер, куда производится запись
-    //! \param[in] offset Смещение указателя записи от начала буфера
-    //! \param[in] value Значение записываемого регистра
+    //! Запись значения 16-битного регистра в буфер в формате Modbus ---- Writing a 16-bit register value to the Modbus buffer
+    //! \param[in] mbBuf Буфер, куда производится запись ---- Buffer where the data is written
+    //! \param[in] offset Смещение указателя записи от начала буфера ---- Record pointer offset from the beginning of the buffer
+    //! \param[in] value Значение записываемого регистра ---- Written register value
     setReg(mbBuf{}, offset, value)
     {
-        mbBuf{offset} = value >> 8 //Старший байт вперед
-        mbBuf{offset + 1} = value //Младший байт
+        mbBuf{offset} = value >> 8 //Старший байт вперед ---- High byte forward
+        mbBuf{offset + 1} = value //Младший байт ---- Low byte
     }
 
-    //! Функция возвращает значения 16-битного регистра Modbus из буфера
-    //! \param[in] mbBuf Буфер, откуда производится чтение
-    //! \param[in] offset Смещение указателя чтения от начала буфера
-    //! \return Конвертированное значение регистра
+    //! Функция возвращает значения 16-битного регистра Modbus из буфера ---- The function returns the values of the 16-bit Modbus register from the buffer
+    //! \param[in] mbBuf Буфер, откуда производится чтение ---- Buffer from which the reading is done
+    //! \param[in] offset Смещение указателя чтения от начала буфера ---- Read pointer offset from the beginning of the buffer
+    //! \return Конвертированное значение регистра ---- Converted register value
     getReg(mbBuf{}, offset)
     {
         // return mbBuf{offset} * 256 + mbBuf{offset + 1}
@@ -611,85 +587,86 @@
         return res[0]
     }
 
-    //! Функция возвращает значения 32-битного регистра Modbus из буфера
-    //! \param[in] mbBuf Буфер, откуда производится чтение
-    //! \param[in] offset Смещение указателя чтения от начала буфера
-    //! \return Конвертированное значение регистра
+    //! Функция возвращает значения 32-битного регистра Modbus из буфера ---- The function returns the values of the 32-bit Modbus register from the buffer
+    //! \param[in] mbBuf Буфер, откуда производится чтение ---- Buffer from which the reading is done
+    //! \param[in] offset Смещение указателя чтения от начала буфера ---- Read pointer offset from the beginning of the buffer
+    //! \return Конвертированное значение регистра ---- Converted register value
     getReg32(mbBuf{}, offset)
     {
         return (mbBuf{offset} << 24) + (mbBuf{offset + 1} << 16) + (mbBuf{offset + 2} << 8) + (mbBuf{offset + 3})
     }
 
-    //! 0x03 - Функция чтение значений из нескольких регистров хранения (Read Holding Registers)
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-    //! \param[in] count Количество считываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //! 0x03 - Функция чтение значений из нескольких регистров хранения (Read Holding Registers) ---- Function for reading values from multiple storage registers (Read Holding Registers)
+    //! \param[in] addr Адрес ведомого устройства ---- Slave address
+    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными ---- The clipboard will be overwritten with the read data
+    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать ---- Address of the first element which value needs to be read
+    //! \param[in] count Количество считываемых элементов ---- Number of read elements
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     readRegs(addr, mbBuf{}, fRegAddr, count)
     {
         mbBuf{0} = addr
-        mbBuf{1} = 0x03 //Код функции
-        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-        setReg(mbBuf, 4, count) //Количество считываемых элементов
+        mbBuf{1} = 0x03 //Код функции ---- Function code
+        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента ---- First element address
+        setReg(mbBuf, 4, count) //Количество считываемых элементов ---- Number of read elements
         return transact(mbBuf, 6)
     }
 
-    //! 0x04 - Функция чтение значений из нескольких регистров хранения (Read Input Registers)
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-    //! \param[in] count Количество считываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //! 0x04 - Функция чтение значений из нескольких регистров хранения (Read Input Registers) ---- Function for reading values from multiple storage registers (Read Holding Registers)
+    //! \param[in] addr Адрес ведомого устройства ---- Slave address
+    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными ---- The clipboard will be overwritten with the read data
+    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать ---- Address of the first element which value needs to be read
+    //! \param[in] count Количество считываемых элементов --- Number of read elements
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     readRegsIn(addr, mbBuf{}, fRegAddr, count)
     {
         mbBuf{0} = addr
-        mbBuf{1} = 0x04 //Код функции
-        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-        setReg(mbBuf, 4, count) //Количество считываемых элементов
+        mbBuf{1} = 0x04 //Код функции ---- Function code
+        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента ---- First element address
+        setReg(mbBuf, 4, count) //Количество считываемых элементов ---- Number of read elements
         return transact(mbBuf, 6)
     }
 
-    //! 0x10 - Функция записи значений в несколько регистров хранения (Preset Multiple Registers)
+    //! 0x10 - Функция записи значений в несколько регистров хранения (Preset Multiple Registers) ---- Function for writing values to multiple storage registers (Preset Multiple Registers)
     //!
-    //! Функция заполнит заголовок буфера и отправит его в шину, полезные данные требуется располагать
-    //! начиная с позиции \a MB_WRITE_START. Записываемые значения все 16-битные
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[in] mbBuf Буфер обмена, который будет отправлен
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется записать
-    //! \param[in] count Количество записываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //! Функция заполнит заголовок буфера и отправит его в шину, полезные данные требуется располагать ---- The function fills the clipboard header and sends it to the bus, useful data should be placed
+    //! начиная с позиции \a MB_WRITE_START. Записываемые значения все 16-битные ---- starting with \a MB_WRITE_START position. All written values are 16-bit.
+    //! \param[in] addr Адрес ведомого устройства ---- Slave address
+    //! \param[in] mbBuf Буфер обмена, который будет отправлен ---- The clipboard that will be sent.
+    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется записать ---- Address of the first element which value needs to be written
+    //! \param[in] count Количество записываемых элементов ---- Number of read elements
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     writeRegs(addr, mbBuf{}, fRegAddr, count)
     {
         mbBuf{0} = addr
-        mbBuf{1} = 0x10 //Код функции
-        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-        setReg(mbBuf, 4, count) //Количество считываемых элементов
+        mbBuf{1} = 0x10 //Код функции ---- Function code
+        setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента ---- First element address
+        setReg(mbBuf, 4, count) //Количество считываемых элементов ---- Number of read elements
         mbBuf{6} = count * 2
         return transact(mbBuf, 7 + count * 2)
     }
 
     //!----------------- служебные функции MODBUS ------------------
-    //! Обмен с устройством данными по шине
-    //! \param[inout] mbBuf Буфер обмена, данные из него будут записаны с добавленной CRC, и в него будут считан ответ без CRC
-    //! \param[inout] size Размер буфера обмена
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //!----------------- MODBUS service functions ------------------
+    //! Обмен с устройством данными по шине ---- Exchanging data with the device over the bus
+    //! \param[inout] mbBuf Буфер обмена, данные из него будут записаны с добавленной CRC, и в него будут считан ответ без CRC ---- Clipboard, the data from it will be written with CRC added, and the response without CRC will be read into it 
+    //! \param[inout] size Размер буфера обмена ---- Clipboard size
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     transact(mbBuf{}, size)
     {    
-        //Добавляем CRC
+        //Добавляем CRC ---- Adding CRC
         new c = CRC16(mbBuf, size)
         mbBuf{size} = c
         mbBuf{size + 1} = c >> 8
 
-        //Пишем в порт
+        //Пишем в порт ---- Writing to the port
         Diagnost("PortWrite:")
         DiagnostHex(mbBuf, size + 2)
         PortWrite(MB_PORT_INDEX, mbBuf, size + 2)
 
-        //Размер ответа, для записывающих команд размер известен из стандарта
+        //Размер ответа, для записывающих команд размер известен из стандарта ---- Response size, it is known from the standard for writing commands
         new ansSize = (mbBuf{1} > 5) ? 8 : MB_BUF_SIZE + 1
 
-        //Слушаем ответ
+        //Слушаем ответ ---- Listening to the response
         new err = 0
         new bytesRead = 0
         c = 0
@@ -704,11 +681,11 @@
             if ((bytesRead >= MB_BUF_SIZE) || (bytesRead >= ansSize))
                 break
 
-            //Ошибка ли?
+            //Ошибка ли? ---- Checking for errors
             if (bytesRead == 2)
                 err = (c & 0x80 == 0x80)
 
-            //Определяем длину сообщения, либо код ошибки
+            //Определяем длину сообщения, либо код ошибки ---- Defining the message length or the error code
             if (bytesRead == 3)
             {
                 if (err)
@@ -718,7 +695,7 @@
                 }
                 else 
                 {
-                    if (ansSize == MB_BUF_SIZE + 1)  //Считываем размер только для операций чтения
+                    if (ansSize == MB_BUF_SIZE + 1)  //Считываем размер только для операций чтения ---- Reading the size only for reading operations
                         ansSize = 3 + c + 2
                 }
             }
@@ -735,7 +712,7 @@
         if (!bytesRead)
             return MB_ERR_SIZE
 
-        //Сверяем целевой и фактический размеры ответа
+        //Сверяем целевой и фактический размеры ответа ---- Comparing the target response size and the actual response size
         if (ansSize != bytesRead)
         {
             Diagnostics("Mer[%d]", MB_ERR_SIZE)
@@ -745,32 +722,32 @@
         }
 
         // printData(mbBuf, bytesRead)
-        //Проверяем CRC
+        // Проверяем CRC ---- checking CRC
         c = mbBuf{ansSize - 2} + mbBuf{ansSize - 1} * 256
         if (c != CRC16(mbBuf, ansSize - 2))
         {
             Diagnost("MB_ERR_CRC")
             return MB_ERR_CRC
         }
-        //Проверки пройдены, возвращаем код результата(ошибки)
+        //Проверки пройдены, возвращаем код результата(ошибки) ---- Checks are passed, returning the result (error) code
         return err
     }
 
-    //! Функция вывода содержимого буфера \a buf длиной \a len
+    //! Функция вывода содержимого буфера \a buf длиной \a len --- Function for showing the contents of the \a buf buffer of \a len length
     printData(buf{}, len)
     {
-        // вывод по 2 байта в строке
+        // вывод по 2 байта в строке ---- showing 2 bytes per line
         for(new i = 0; i < len / 2; i++)
         {
             Diagnostics("%02X %02X", buf{i * 2}, buf{i * 2 + 1})
             Delay(10)
         }
-        // вывод последнего байта при нечётной длине
+        // вывод последнего байта при нечётной длине ---- showing the last byte with the odd length
         if (len % 2)
             Diagnostics("%02X", buf{len - 1})
     }
 
-    //! Функция записи значения регистра в тег
+    //! Функция записи значения регистра в тег ---- Function for writing a register value to a tag
     readRegWriteTag(mbBuf{}, tag, valueName{}, regAdr)
     {
         Diagnostics(valueName)
@@ -785,7 +762,7 @@
             Diagnostics("Error code: %d in tag: %x", res, regAdr)
     }
 
-    //! Функция записи значения регистров в тег
+    //! Функция записи значения регистров в тег ---- Function for writing registers values to a tag
     readReg32WriteTag(mbBuf{}, tag, valueName{}, regAdr)
     {
         Diagnostics(valueName)
@@ -801,6 +778,7 @@
     }
 //!*************************************************************
 //!-----------Конец библиотеки работы с Modbus------------------
+//!---------------The end of Modbus library---------------------
 //!*************************************************************
 
 //////////////////////////////////////////
@@ -825,13 +803,13 @@
         PortWrite(PORT_INDEX, ioBuf, ioBufSize)
     }
 
-    /*! чтение пакетов из порта, разделённых по временной задержке */
+    /*! чтение пакетов из порта, разделённых по временной задержке ---- reading packets from a port separated by time delay*/
     serialRead(ioBuf{}, bufSize, firstByteTimeout, nextByteTimeout)
     {
         Diagnost("serialRead()")
         new count = 0
 
-        if (2 == PORT_INDEX)  // пока реализовано только для RS485
+        if (2 == PORT_INDEX)  // пока реализовано только для RS485 ----- only available for RS485 by now
         {
             count = PortReadPackage(PORT_INDEX, ioBuf, bufSize, firstByteTimeout, nextByteTimeout)
             Diagnost1("serialRead %d byts", count)
@@ -907,12 +885,12 @@
     // #define CMD_READ_OUT_STATUS 0x05
     // #define CMD_READ_IN_STATUS 0x02
 
-    //! CMD_READ_OUT_STATUS - Функция чтение значений из нескольких регистров хранения (Read Holding Registers)
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-    //! \param[in] count Количество считываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //! CMD_READ_OUT_STATUS - Функция чтение значений из нескольких регистров хранения (Read Holding Registers) ---- Function for reading values from several registers (Read Holding Registers)
+    //! \param[in] addr Адрес ведомого устройства ---- Slave address
+    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными ---- The clipboard will be overwritten with the read data
+    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать ---- Address of the first element which value needs to be read
+    //! \param[in] count Количество считываемых элементов ---- Number of read elements
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     readRegsOutStatus(addr, mbBuf{}, fRegAddr, count)
      {
         new err = 1
@@ -920,9 +898,9 @@
         for (new i = 0; i < 10; ++i)
         {
             mbBuf{0} = addr
-            mbBuf{1} = CMD_READ_OUT_STATUS  //Код функции
-            setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-            setReg(mbBuf, 4, count) //Количество считываемых элементов
+            mbBuf{1} = CMD_READ_OUT_STATUS  //Код функции ---- Function code
+            setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента ---- First element address
+            setReg(mbBuf, 4, count) //Количество считываемых элементов ---- Number of read elements
             err = transact(mbBuf, 6)
 
             if(!err)
@@ -934,13 +912,13 @@
         return err
      }
 
-     //! CMD_MAKE_PULSE - Функция чтение значений из нескольких регистров хранения (Read Holding Registers)
+     //! CMD_MAKE_PULSE - Функция чтение значений из нескольких регистров хранения (Read Holding Registers) ---- Function for reading values from multiple storage registers (Read Holding Registers)
    
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] outputNum Адрес порта
-    //! \param[in] delay Задержка импульса
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //! \param[in] addr Адрес ведомого устройства ---- Slave address
+    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными ---- The clipboard will be overwritten with the read data
+    //! \param[in] outputNum Адрес порта ---- Port address
+    //! \param[in] delay Задержка импульса ---- Pulse delay
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     sendMakePulse(addr, mbBuf{}, outputNum, delay)
      {
         new err = 1
@@ -948,9 +926,9 @@
         for (new i = 0; i < 10; ++i)
         {
             mbBuf{0} = addr
-            mbBuf{1} = CMD_MAKE_PULSE  // Код функции
-            setReg(mbBuf, 2, outputNum)  // Адрес порта
-            setReg(mbBuf, 4, delay)  // Количество считываемых элементов
+            mbBuf{1} = CMD_MAKE_PULSE  // Код функции ---- Function code
+            setReg(mbBuf, 2, outputNum)  // Адрес порта ---- Port address
+            setReg(mbBuf, 4, delay)  // Количество считываемых элементов ---- Number of read elements
             err = transact(mbBuf, 6)
 
             if(!err)
@@ -1038,25 +1016,25 @@
         return 0
      }
 
-    /*! Управление импульсными реле 
-        \param outputNum индекс выхода
-        \param delay продолжительность импульса
+    /*! Управление импульсными реле ---- Controlling pulse relay
+        \param outputNum индекс выхода ---- output index
+        \param delay продолжительность импульса ---- pulse length
         */
     makePulse()
      {
         if (GetVar(out_pulse) < 0 || GetVar(out_pulse) > MAX_OUT + MAX_OUT_SLAVE + 1)
             return 0
 
-        if(GetVar(out_pulse) <= MAX_OUT)  // выполняется на мастере
+        if(GetVar(out_pulse) <= MAX_OUT)  // выполняется на мастере ---- performed on master
          {
             const offOutput = 1
             const onOutput = 0
             new timeStart = GetVar(UPTIME)
 
             SetOutputValue(GetVar(out_pulse), onOutput)
-            // while (GetVar(UPTIME) - timeStart < GetVar(delay_pulse))  // блокирующий
+            // while (GetVar(UPTIME) - timeStart < GetVar(delay_pulse))  // блокирующий ---- blocking
             //  { }
-            Delay(GetVar(delay_pulse))  // не блокирующий
+            Delay(GetVar(delay_pulse))  // не блокирующий ---- non-blocking
             SetOutputValue(GetVar(out_pulse), offOutput)
             SetVar(out_pulse, -1)
             return 1
@@ -1142,11 +1120,11 @@
 ////////////////////////////////////
 //////////////// IN ////////////////
     //!  CMD_READ_IN 0x04
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
-    //! \param[in] count Количество считываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //! \param[in] addr Адрес ведомого устройства ---- Slave address
+    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными ---- The clipboard will be overwritten with the read data
+    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать ---- Address of the first element which value needs to be read
+    //! \param[in] count Количество считываемых элементов ---- Number of read elements
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     readRegsInput(addr, mbBuf{}, fRegAddr, count)
      {
         new err = 1
@@ -1154,9 +1132,9 @@
         for (new i = 0; i < 10; ++i)
         {
             mbBuf{0} = addr
-            mbBuf{1} = CMD_READ_IN //Код функции
-            setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-            setReg(mbBuf, 4, count) //Количество считываемых элементов
+            mbBuf{1} = CMD_READ_IN //Код функции ---- Function code
+            setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента ---- First element address
+            setReg(mbBuf, 4, count) //Количество считываемых элементов ---- Number of read elements
             err = transact(mbBuf, 6)
 
             if(!err)
@@ -1169,11 +1147,11 @@
      }
 
     //!  CMD_READ_IN_STATUS 0x02
-    //! \param[in] addr Адрес ведомого устройства
-    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными
-    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать
+    //! \param[in] addr Адрес ведомого устройства ---- Slave address
+    //! \param[out] mbBuf Буфер обмена, будет перезаписан считанными данными ---- The clipboard will be overwritten with the read data
+    //! \param[in] fRegAddr Адрес первого элемента, значение которого требуется прочитать  ---- Address of the first element which value needs to be read
     //! \param[in] count Количество считываемых элементов
-    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно
+    //! \return Код ошибки MB_ERR_*. MB_ERR_OK если транзакция прошла успешно ---- MB_ERR_* error code. MB_ERR_OK if successful
     readRegsInStatus(addr, mbBuf{}, fRegAddr, count)
      {
         new err = 1
@@ -1181,9 +1159,9 @@
         for (new i = 0; i < 10; ++i)
         {
             mbBuf{0} = addr
-            mbBuf{1} = CMD_READ_IN_STATUS //Код функции
-            setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента
-            setReg(mbBuf, 4, count) //Количество считываемых элементов
+            mbBuf{1} = CMD_READ_IN_STATUS //Код функции ---- Function code
+            setReg(mbBuf, 2, fRegAddr) //Адрес первого элемента ---- First element address
+            setReg(mbBuf, 4, count) //Количество считываемых элементов ---- Number of read elements
             err = transact(mbBuf, 6)
 
             if(!err) break
@@ -1350,6 +1328,8 @@
                     return 0xFFFFFFFF
                 }
             }
+
+            return 1
         }
         else if(inputNum - MAX_IN - 1 <= MAX_IN_SLAVE)
         {
@@ -1391,15 +1371,12 @@ getSlaveAll(bufAll{})
     for (new i = 0; i < 10; ++i)
     {
         ioBuf{0} = ADDRESS
-        ioBuf{1} = CMD_READ_ALL         // Код функции
-        // setReg(mbBuf, 2, fRegAddr)   // Адрес первого регистра
-        // setReg(mbBuf, 4, count)      // Количество считываемых элементов
+        ioBuf{1} = CMD_READ_ALL        // Код функции ---- Function code
+        // setReg(mbBuf, 2, fRegAddr)   // Адрес первого регистра ---- First register address
+        // setReg(mbBuf, 4, count)      // Количество считываемых элементов ---- Number of read elements
         err = transact(ioBuf, 2)
 
-        if(!err)
-        {
-            break
-        }
+        if(!err) break
 
         // Delay(100)
     }
@@ -1412,7 +1389,7 @@ getSlaveAll(bufAll{})
 
     new status = GS_getInt(ioBuf, 3, 6)
 
-    // статусы входов
+    // статусы входов ---- inputs statuses
         new input = 0
         SetVar(em_inStat0, (status & (0x01 << input++)) ? 1 : 0)
         SetVar(em_inStat1, (status & (0x01 << input++)) ? 1 : 0)
@@ -1423,9 +1400,9 @@ getSlaveAll(bufAll{})
         SetVar(em_inStat6, (status & (0x01 << input++)) ? 1 : 0)
         SetVar(em_inStat7, (status & (0x01 << input++)) ? 1 : 0)
         SetVar(em_inStat8, (status & (0x01 << input++)) ? 1 : 0)
-        SetVar(em_inStat9, (status & (0x01 << input))   ? 1 : 0)
+        SetVar(em_inStat9, (status & (0x01 << input)) ? 1 : 0)
 
-    // статусы выходов
+    // статусы выходов ---- outputs statuses
         new out = 16
 
         new bufOutStat = (status & (0x01 << out++)) ? 1 : 0
@@ -1440,7 +1417,7 @@ getSlaveAll(bufAll{})
         bufOutStat = (status & (0x01 << out++)) ? 1 : 0
         SetVar(em_outStat3, bufOutStat)
 
-    // напряжение на входах
+    // напряжение на входах ---- inputs voltage
         new count = 7
 
         for (new input = 0; input <= MAX_IN_SLAVE; ++input)
@@ -1512,9 +1489,7 @@ getOutFlags()
 setOuts(outsFlags, outsFlagsFackt)
  {
     if (outsFlags == outsFlagsFackt)
-    {
         return MB_ERR_OK
-    }
     
     new portStatus0 = ( outsFlags & (0x01 << 0) ) ? 1 : 0
     new portStatus1 = ( outsFlags & (0x01 << 1) ) ? 1 : 0
@@ -1530,9 +1505,9 @@ setOuts(outsFlags, outsFlagsFackt)
     for (new i = 0; i < 10; ++i)
      {
         mbBuf{0} = ADDRESS
-        mbBuf{1} = CMD_SET_OUT //Код функции
-        setReg(mbBuf, 2, 0) //Адрес первого порта
-        setReg(mbBuf, 4, portsCount) //Количество портов
+        mbBuf{1} = CMD_SET_OUT //Код функции ---- function code
+        setReg(mbBuf, 2, 0) //Адрес первого регистра ---- reg address
+        setReg(mbBuf, 4, portsCount) //Количество портов ---- quantity regs
         mbBuf{dataLenPos} = portsCount * 2
         setReg(mbBuf, 7, portStatus0)
         setReg(mbBuf, 9, portStatus1)
@@ -1541,13 +1516,10 @@ setOuts(outsFlags, outsFlagsFackt)
         err = transact(mbBuf, 15)
 
         if(!err)
-        {
             break
-        }
 
         // Delay(100)
      }
-
     return err
  }
 
@@ -1562,7 +1534,7 @@ main()
     getSlaveAll(getAllArr)
     Delay(10)
 
-    // отдельные команды
+    // отдельные команды ---- single commands
         // if (GetVar(get_input_status))
         // {
         //     new inputStatus = getInputStatus(GetVar(port_index))
@@ -1570,12 +1542,12 @@ main()
         //     SetVar(get_input_status, 0)
         // }
 
-        if ( (GetVar(port_index) > 0) && GetVar(flag_getInputValue) )
-        {
-            new inputV = getInput(GetVar(port_index))
-            SetVar(input_value, inputV)
-            SetVar(flag_getInputValue, 0)
-        }
+        // if (GetVar(get_input))
+        // {
+        //     new inputV = getInput(GetVar(port_index))
+        //     SetVar(input_value, inputV)
+        //     SetVar(get_input, 0)
+        // }
 
         // if (GetVar(get_output_status))
         // {
@@ -1597,7 +1569,8 @@ main()
         // }
 
     // new outsFlags = GetVar(em_Outs_Cmd)
-    // new outsFlagsFackt = getOutFlags()
+    new outsFlagsFackt = getOutFlags()
+    
     // Diagnost1("outsFlags: 0x%X", outsFlags)
     // Diagnost1("outsFlagsFackt: 0x%X", outsFlagsFackt)
 

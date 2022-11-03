@@ -1,49 +1,49 @@
-//! slaveModBusInOut2
+//! script_name
 
-#define ADDRESS 0xF7  // адерес устройства (slave)
-#define MAX_OUT 4  // максимальное количество выходов
-#define MAX_IN 6   // максимальное количество входов
-#define IMPULS_DELAY 100  // длина импульсов на выходы для управления импульсными реле
-// #define IMPULSE_RELAY 1
+#define ADDRESS 0xF7
+#define MAX_OUT 4  // максимальное количество выходов ---- maximum output number
+#define MAX_IN 6   // максимальное количество входов ---- maximum input number
+#define IMPULS_DELAY 100
+#define IMPULSE_RELAY 1
 
-//! Коды ошибок, возвращаемые функциями обмена по шине
-    #define MB_ERR_OK 0      //!< Успешный обмен данными
-    #define MB_ERR_CMD 1     //!< Принятый код функции не может быть обработан
-    #define MB_ERR_ADDR 2    //!< Адрес данных, указанный в запросе, недоступен
-    #define MB_ERR_VALUE 3   //!< Значение, содержащееся в поле данных запроса, является недопустимой величиной
-    #define MB_ERR_ERR 4     //!< Невосстанавливаемая ошибка имела место, пока ведомое устройство пыталось выполнить затребованное действие
-    #define MB_ERR_WAIT 5    //!< Ведомое устройство приняло запрос и обрабатывает его, но это требует много времени. Этот ответ предохраняет ведущее устройство от генерации ошибки тайм-аута
-    #define MB_ERR_BUSY 6    //!< Ведомое устройство занято обработкой команды. Ведущее устройство должно повторить сообщение позже, когда ведомое освободится
-    #define MB_ERR_CNTEXEC 7 //!< Ведомое устройство не может выполнить программную функцию, заданную в запросе
-    #define MB_ERR_PARITY 8  //!< Ведомое устройство при чтении расширенной памяти обнаружило ошибку паритета
-    #define MB_ERR_CRC 9     //!< Ошибка контрольной суммы
-    #define MB_ERR_SIZE 10   //!< Получен ответ некорректного размера
+//! Коды ошибок, возвращаемые функциями обмена по шине ---- Error codes returned by bus exchange functions
+    #define MB_ERR_OK 0      //!< Успешный обмен данными ---- Successful data exchange
+    #define MB_ERR_CMD 1     //!< Принятый код функции не может быть обработан ---- Received function code cannot be processed
+    #define MB_ERR_ADDR 2    //!< Адрес данных, указанный в запросе, недоступен ----The data address specified in the request is not available
+    #define MB_ERR_VALUE 3   //!< Значение, содержащееся в поле данных запроса, является недопустимой величиной ---- The value in the request data field is invalid
+    #define MB_ERR_ERR 4     //!< Невосстанавливаемая ошибка имела место, пока ведомое устройство пыталось выполнить затребованное действие ---- A unrecoverable error occurred while the slave device was trying to perform the requested action
+    #define MB_ERR_WAIT 5    //!< Ведомое устройство приняло запрос и обрабатывает его, но это требует много времени. Этот ответ предохраняет ведущее устройство от генерации ошибки тайм-аута ----The request is accepted and being processed by the slave device, but this takes a long time. This response prevents the master device from generating a timeout error
+    #define MB_ERR_BUSY 6    //!< Ведомое устройство занято обработкой команды. Ведущее устройство должно повторить сообщение позже, когда ведомое освободится ---- The slave device is busy processing a command. The master must repeat the message later when the slave is free
+    #define MB_ERR_CNTEXEC 7 //!< Ведомое устройство не может выполнить программную функцию, заданную в запросе ---- The slave device cannot execute the program function specified in the request
+    #define MB_ERR_PARITY 8  //!< Ведомое устройство при чтении расширенной памяти обнаружило ошибку паритета ---- The slave device detected a parity error when reading extended memory
+    #define MB_ERR_CRC 9     //!< Ошибка контрольной суммы ---- Checksum error
+    #define MB_ERR_SIZE 10   //!< Получен ответ некорректного размера ---- A response of incorrect size is received
 
 ////////////////////////////////////////////////////
 ///////////////// DIAGNOSTICS //////////////////////
     Diagnost(text{})
-     {
+    {
         if (GetVar(diagnost))
         	Diagnostics(text)
-     }
+    }
 
     Diagnost1(text{}, var)
-     {
+    {
         if (GetVar(diagnost))
         	Diagnostics(text, var)
-     }
+    }
 
     Diagnost2(text{}, var1, var2)
-     {
+    {
         if (GetVar(diagnost))
         	Diagnostics(text, var1, var2)
-     }
+    }
 
     DiagnostHex(array{}, array_size)
-     {
+    {
         if (GetVar(diagnost))
         	DiagnosticsHex(array, array_size)
-     }
+    }
 ///////////////// DIAGNOSTICS END //////////////////
 ////////////////////////////////////////////////////
 
@@ -57,23 +57,23 @@
     #define PARITY 0  // no parity bits
 
     serialInit()
-     {
+    {
         // Diagnost("serialInit()")
 
         PortInit(PORT_INDEX, BOUD_RATE, BUF_SIZE, STOP_BITS, PARITY)
-     }
+    }
 
     serialWrite(ioBuf{}, ioBufSize)
-     {
+    {
         Diagnost("Serial write:")
         DiagnostHex(ioBuf, ioBufSize)
 
         PortWrite(PORT_INDEX, ioBuf, ioBufSize)
-     }
+    }
 
-    /*! чтение пакетов из порта, разделённых по временной задержке */
+    /*! чтение пакетов из порта, разделённых по временной задержке ---- reading packets from a port separated by time delay*/
     serialRead(ioBuf{}, bufSize, firstByteTimeout, nextByteTimeout)
-     {
+    {
         new count = 0
         new byteBuf
 
@@ -107,26 +107,26 @@
         Diagnost1("serialRead %d byts:", count)
         DiagnostHex(ioBuf, count)
         return count
-     }
+    }
 ///////////////// SERIAL END /////////////
 //////////////////////////////////////////
 
 /////////////////////////////////////
 //////////////// OUT ////////////////
     outputOn(outputNum)
-     {
+    {
         SetOutputValue(outputNum, 0)
         Diagnost1("Output %d ON", outputNum)
-     }
+    }
 
     outputOff(outputNum)
-     {
+    {
         SetOutputValue(outputNum, 1)
         Diagnost1("Output %d OFF", outputNum)
-     }
+    }
 
     getOutputStatus(outputNum)
-     {
+    {
         switch (outputNum)
         {
             case 0: 
@@ -155,14 +155,14 @@
                 return 0xFFFFFFFF
             }
         }
-     }
+    }
 ////////////// OUT END //////////////
 /////////////////////////////////////
 
 ////////////////////////////////////
 //////////////// IN ////////////////
     getInputStatus(inputNum)
-     {
+    {
         switch (inputNum)
         {
             case 0: return GetVar(STATUS_OF_IN0)
@@ -181,10 +181,10 @@
                 return 0xFFFFFFFF
             }
         }
-     }
+    }
 
     getInput(inputNum)
-     {
+    {
         switch (inputNum)
         {
             case 0: 
@@ -243,22 +243,20 @@
                 return 0xFFFFFFFF
             }
         }
-     }
+    }
 ////////////// IN END //////////////
 ////////////////////////////////////
 
-// реализованные функции
-    #define CMD_READ_ALL 0x01
-    #define CMD_READ_IN 0x04
-    #define CMD_READ_OUT_STATUS 0x05
-    #define CMD_READ_IN_STATUS 0x02
-    #define CMD_SET_OUT 0x10
-    #define CMD_SET_VARS 0x03
-    #define CMD_MAKE_PULSE 0x30
+#define CMD_READ_ALL 0x01
+#define CMD_READ_IN 0x04
+#define CMD_READ_OUT_STATUS 0x05
+#define CMD_READ_IN_STATUS 0x02
+#define CMD_SET_OUT 0x10
+#define CMD_SET_VARS 0x03
+#define CMD_MAKE_PULSE 0x30
 
-// функция приёма команд
 readApplyCmd(ioBuf{})
- {
+{
     // Diagnost("readApplyCmd()")
     const addrPos = 0
     const cmdPos = 1
@@ -291,8 +289,8 @@ readApplyCmd(ioBuf{})
             return checkMsg(ioBuf, ansSize, count)
          }
 
-        new startReg = ioBuf{startRegPos + 1}  // регистр с которого начинается чтение
-        new countReg = ioBuf{countRegPos + 1}  // кол-во регистров для чтения
+        new startReg = ioBuf{startRegPos + 1}  // регистр с которого начинается чтение ---- register where the reading is started
+        new countReg = ioBuf{countRegPos + 1}  // кол-во регистров для чтения ---- Number of registers for reading
         new countByte = dataPos
 
         for (new out = startReg; out < (startReg + countReg); ++out)
@@ -386,12 +384,8 @@ readApplyCmd(ioBuf{})
      }
 
     return MB_ERR_OK
- }
+}
 
-/*! Управление импульсными реле 
-    \param out индекс выхода
-    \param delay продолжительность импульса
-    */
 impuls(out, delay)
  {
     outputOn(out)
@@ -399,15 +393,9 @@ impuls(out, delay)
     outputOff(out)
  }
 
-/*! Проверка сообщения 
-    \param ioBuf{} массив с сообщением
-    \param ansSize целевой размер сообщения
-    \param count размер принятого сообщения
-    \retval код ошибки
-    */
 checkMsg(ioBuf{}, ansSize, count)
  {
-    //Сверяем целевой и фактический размеры ответа
+    //Сверяем целевой и фактический размеры ответа ---- Checking the target response size and the actual response size
         if (ansSize != count)
         {
             Diagnostics("MB_ERR_SIZE:\nMer[%d]", MB_ERR_SIZE)
@@ -416,7 +404,7 @@ checkMsg(ioBuf{}, ansSize, count)
             return MB_ERR_SIZE
         }
 
-    // Проверяем CRC
+    // Проверяем CRC ---- Checking CRC
         new crc = ioBuf{ansSize - 2} + ioBuf{ansSize - 1} * 256
 
         if (crc != CRC16(ioBuf, ansSize - 2))
@@ -428,7 +416,6 @@ checkMsg(ioBuf{}, ansSize, count)
     return MB_ERR_OK
  }
 
-// отвечает на принятое сообщение
 respond(ioBuf{}, MB_ERR)
  {
     const addrPos = 0
@@ -465,8 +452,8 @@ respond(ioBuf{}, MB_ERR)
         const posDataLen = 2
 
         new posData = 3
-        new startReg = ioBuf{startRegPos + 1}  // регистр с которого начинается чтение
-        new countReg = ioBuf{countRegPos + 1}  // кол-во регистров для чтения
+        new startReg = ioBuf{startRegPos + 1}  // регистр с которого начинается чтение ---- register where the reading is started
+        new countReg = ioBuf{countRegPos + 1}  // кол-во регистров для чтения ---- Number of registers for reading
 
         ioBuf{posDataLen} = countReg * 2
 
@@ -535,25 +522,24 @@ respond(ioBuf{}, MB_ERR)
         }
      }
 
-    //Добавляем CRC
+    //Добавляем CRC ---- Adding CRC
     new crc = CRC16(ioBuf, answerLen)
     ioBuf{answerLen++} = crc
     ioBuf{answerLen++} = crc >> 8
 
-    //Пишем в порт
+    //Пишем в порт ---- Writing to the port
     PortWrite(PORT_INDEX, ioBuf, answerLen)
     Diagnost("PortWrite:")
     DiagnostHex(ioBuf, answerLen)
  }
 
-// выставляет флаги состояний
 setArrStatus(buf{})
  {
     buf[0] &= ~0xFFFFFFFF
 
     for (new input = 0; input < MAX_IN; ++input)
     {
-        if (16 == input)  // первые 2 байта статусы входов
+        if (16 == input)  // первые 2 байта статусы входов ---- the first 2 bytes are statuses of inputs
         {
             Diagnost("The maximum possible port value has been exceeded!")
             return 0
@@ -571,7 +557,7 @@ setArrStatus(buf{})
 
     for (new out = 0; out < MAX_OUT; ++out)
     {
-        if (16 == out)  // следующие 2 байта статусы выходов
+        if (16 == out)  // следующие 2 байта статусы выходов ---- the first 2 bytes are statuses of outputs
         {
             Diagnost("The maximum possible port value has been exceeded!")
             return 0
@@ -602,14 +588,14 @@ setArrStatus(buf{})
     return count
  }
 
-/*! вставить массив в другой массив (присоединить строку) 
-    и "перевести каретку" (инкрементировать указатель позиции)
-    \param dst{} массив, куда копируется содержимое второго массива
-    \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-    \param d_len длина принимающего массива
-    \param src{} массив для вставки
-    \param s_len длина массива для вставки
-    \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива
+/*! вставить массив в другой массив (присоединить строку) ---- inserting an array into a different array (attaching a line)
+    и "перевести каретку" (инкрементировать указатель позиции) ---- and "moving the carriage" (incrementing the position pointer)
+    \param dst{} массив, куда копируется содержимое второго массива ---- an array, where the contents of the second array are copied to
+    \param &d_pos начиная с какого элемента принимающего массива начнется вставка (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) ---- an element of a receiving array where the insert is started (TRANSMITTED VIA THE LINK)
+    \param d_len длина принимающего массива ---- a receiving array length
+    \param src{} массив для вставки ---- an array to be inserted
+    \param s_len длина массива для вставки ---- an inserted array length
+    \retval не забудьте, что аргумент d_pos будет инкрементирован количество раз, равное длине второго (вставляемого) массива ---- please note that the d_pos argument will be incremented the number of times corresponding to the inserted array length
     */
 GS_append(dst{}, &d_pos, d_len, src{}, s_len)
  {
@@ -622,13 +608,13 @@ GS_append(dst{}, &d_pos, d_len, src{}, s_len)
      }
  }
 
-/*! вставить символ в массив, обрабатываемого как строка, 
-    и "перевести каретку вперед" (инкрементировать указатель позиции)
-    \param dst{} массив, обрабатываемый как строка
-    \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!) 
-    \param d_len длина массива 
-    \param c переменная (символ) для вставки
-    \retval не забудьте, что аргумент d_pos будет инкрементирован
+/*! вставить символ в массив, обрабатываемого как строка, ---- inserting a character into an array processed as a string
+    и "перевести каретку вперед" (инкрементировать указатель позиции) ---- and "moving the carriage forward" (incrementing the position pointer)
+    \param dst{} массив, обрабатываемый как строка ---- an array processed as a string
+    \param &d_pos в какой элемент массива записать символ (ПЕРЕДАЕТСЯ ПО ССЫЛКЕ!)  ---- an array element where the symbol should be written (TRANSMITTED VIA THE LINK)
+    \param d_len длина массива ---- an array length
+    \param c переменная (символ) для вставки ---- a variable (symbol) to insert
+    \retval не забудьте, что аргумент d_pos будет инкрементирован ---- please note that the d_pos argument will be incremented
     */
 GS_appendC(dst{}, &d_pos, d_len, c)
  {

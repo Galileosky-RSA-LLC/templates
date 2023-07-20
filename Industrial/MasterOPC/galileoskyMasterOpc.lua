@@ -60,7 +60,7 @@ function OnBeforeReading()
         return;
     end;
     parseTags();
-    sendConfirm(); -- !!! пока после разбора на время отладки, потом поставить до разбора
+    sendConfirm();
     delPack();
 end;
 
@@ -307,7 +307,6 @@ function parseTags()
 end;
 
 function getRecTimeStamp(startRecPos, maxPos)
-    server.Message("getRecTimeStamp pos=", startRecPos);--!!!
     local dateTime;
     local ms;
     local pos = startRecPos;
@@ -356,7 +355,6 @@ function getRecTimeStamp(startRecPos, maxPos)
 end;
 
 function getTagId(pos, maxPos, extTag)
-    server.Message("getTagId pos=", pos, ",ext=", extTag);--!!!
     if extTag
     then
         return getValueNbytes(pos, maxPos, 2, false);
@@ -365,7 +363,6 @@ function getTagId(pos, maxPos, extTag)
 end;
 
 function getTagSize(id, extTag)
-    server.Message("getTagSize id=", id, ",ext=", extTag);--!!!
     local tagName = getRelativeTagName(id, extTag);
     local size = getValueType(tagName);
     if size ~= nil
@@ -397,7 +394,6 @@ function getTagSize(id, extTag)
 end;
 
 function getValueType(tagName)
-    server.Message("getValType name=", tagName);--!!!
     local noErr;
     local err;
     local attribute;
@@ -443,7 +439,6 @@ function getValueType(tagName)
 end;
 
 function getRelativeTagName(id, extTag)
-    server.Message("getRelativeTagName id=", id, ",ext=", extTag);--!!!
     if id == nil
     then
         return "";
@@ -456,7 +451,6 @@ function getRelativeTagName(id, extTag)
 end;
 
 function isTagMixed(id, extTag)
-    server.Message("isTagMixed id=", id, ",ext=", extTag);--!!!
     local tagName = getRelativeTagName(id, extTag);
     if isTagExist(tagName)
     then
@@ -466,11 +460,10 @@ function isTagMixed(id, extTag)
 end;
 
 function getTagComment(tagName)
-    server.Message("getTagComment name=", tagName);--!!!
     local noErr;
     local err;
     local attribute;
-    noErr, err, attribute = pcall(server.GetAttributeTagByRelativeName, tagName); -- без pcall будет ошибка скрипта при несуществующем теге, хотя по документации не должна
+    noErr, err, attribute = pcall(server.GetAttributeTagByRelativeName, tagName);
     if not noErr or err
     then
         return "";
@@ -482,12 +475,11 @@ function isTagExist(tagName)
     server.Message("isTagExist name=", tagName);--!!!
     local noErr;
     local err;
-    noErr, err = pcall(server.GetAttributeTagByRelativeName, tagName); -- без pcall будет ошибка скрипта при несуществующем теге, хотя по документации не должна
+    noErr, err = pcall(server.GetAttributeTagByRelativeName, tagName);
     return noErr and not err;
 end;
 
 function getSubTagsNames(id, extTag)
-    server.Message("getSubTagsNames id=", id, ",ext=", extTag);--!!!
     local tagNames = {};
     if (id == nil) or (extTag == nil)
     then
@@ -508,7 +500,6 @@ function getSubTagsNames(id, extTag)
 end;
 
 function getTagValue(pos, maxPos, tagName)
-    server.Message("getTagValue pos=", pos, ",name=", tagName);--!!!
     local size;
     local valType;
     local signed;
